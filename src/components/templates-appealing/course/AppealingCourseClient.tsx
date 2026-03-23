@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { CourseData } from '@/components/templates/course/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 
 interface Props {
   data: CourseData
@@ -160,60 +162,66 @@ export default function AppealingCourseClient({ data }: Props) {
             </div>
           </div>
 
-          {/* Right column — Dark glass info card */}
-          <div style={{
-            background: 'rgba(255,255,255,.04)',
-            border: '1px solid rgba(255,255,255,.1)',
-            borderTop: '4px solid #F9423A',
-            padding: '28px',
-          }}>
-            {[
-              { label: 'Duration', value: data.duration },
-              { label: 'Schedule', value: data.schedule },
-              { label: 'Price', value: data.price },
-              { label: 'Location', value: data.location },
-              { label: 'Machines', value: data.machines.join(', ') },
-            ].map((row, i, arr) => (
-              <div key={row.label} style={{
-                padding: '12px 0',
-                borderBottom: i < arr.length - 1 ? '1px solid rgba(255,255,255,.06)' : 'none',
-              }}>
-                <div style={{
-                  fontSize: '10px',
-                  fontWeight: 600,
-                  letterSpacing: '1px',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,.4)',
-                  marginBottom: '4px',
-                }}>
-                  {row.label}
-                </div>
-                <div style={{
-                  fontSize: '14px',
-                  color: '#fff',
-                }}>
-                  {row.value}
-                </div>
-              </div>
-            ))}
-
-            <button style={{
-              marginTop: '20px',
-              width: '100%',
-              padding: '12px',
-              background: '#F9423A',
-              color: '#fff',
-              border: 'none',
-              fontFamily: '"Barlow Condensed", sans-serif',
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '1.5px',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              animation: 'pulse 2.5s infinite',
+          {/* Right column — Image panel + Dark glass info card */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ position: 'relative', height: '200px', overflow: 'hidden', borderRadius: '2px' }}>
+              <Image src={IMAGES.training} alt="Training environment" fill style={{ objectFit: 'cover' }} priority />
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,.25)' }} />
+            </div>
+            <div style={{
+              background: 'rgba(255,255,255,.04)',
+              border: '1px solid rgba(255,255,255,.1)',
+              borderTop: '4px solid #F9423A',
+              padding: '28px',
             }}>
-              Enroll Now
-            </button>
+              {[
+                { label: 'Duration', value: data.duration },
+                { label: 'Schedule', value: data.schedule },
+                { label: 'Price', value: data.price },
+                { label: 'Location', value: data.location },
+                { label: 'Machines', value: data.machines.join(', ') },
+              ].map((row, i, arr) => (
+                <div key={row.label} style={{
+                  padding: '12px 0',
+                  borderBottom: i < arr.length - 1 ? '1px solid rgba(255,255,255,.06)' : 'none',
+                }}>
+                  <div style={{
+                    fontSize: '10px',
+                    fontWeight: 600,
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,.4)',
+                    marginBottom: '4px',
+                  }}>
+                    {row.label}
+                  </div>
+                  <div style={{
+                    fontSize: '14px',
+                    color: '#fff',
+                  }}>
+                    {row.value}
+                  </div>
+                </div>
+              ))}
+
+              <button style={{
+                marginTop: '20px',
+                width: '100%',
+                padding: '12px',
+                background: '#F9423A',
+                color: '#fff',
+                border: 'none',
+                fontFamily: '"Barlow Condensed", sans-serif',
+                fontSize: '11px',
+                fontWeight: 700,
+                letterSpacing: '1.5px',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                animation: 'pulse 2.5s infinite',
+              }}>
+                Enroll Now
+              </button>
+            </div>
           </div>
         </div>
       </section>

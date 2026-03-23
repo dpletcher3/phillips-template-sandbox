@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 import { LocationData } from '@/components/templates/location/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
@@ -11,6 +13,7 @@ interface Props {
 
 export default function AppealingLocationClient({ data }: Props) {
   const [hoveredService, setHoveredService] = useState<number | null>(null)
+  const serviceImages = [IMAGES.engineer, IMAGES.machineShop, IMAGES.machine5axis, IMAGES.training, IMAGES.cnc3, IMAGES.precision]
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff' }}>
@@ -127,15 +130,8 @@ export default function AppealingLocationClient({ data }: Props) {
         </div>
 
         {/* Right — map placeholder */}
-        <div style={{
-          background: '#F2F4F6',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '13px',
-          color: '#647883',
-        }}>
-          Map
+        <div style={{ position: 'relative', overflow: 'hidden', minHeight: '340px' }}>
+          <Image src={IMAGES.facility} alt={`Phillips ${data.city}`} fill style={{ objectFit: 'cover' }} priority />
         </div>
       </section>
 
@@ -177,6 +173,7 @@ export default function AppealingLocationClient({ data }: Props) {
                   cursor: 'pointer',
                 }}
               >
+                <Image src={serviceImages[i] || IMAGES.engineer} alt="" fill style={{ objectFit: 'cover', opacity: 0.15 }} />
                 <div style={{
                   fontFamily: '"Barlow Condensed", sans-serif',
                   fontWeight: 900,

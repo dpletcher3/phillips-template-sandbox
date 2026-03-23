@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { PostData } from '@/components/templates/post/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
+import { IMAGES } from '@/lib/appealing-images'
 
 const RED = '#F9423A'
 const GOLD = '#F68B33'
@@ -118,19 +120,11 @@ export default function AppealingPostClient({ data }: { data: PostData }) {
         </div>
       </header>
 
-      {/* Hero image placeholder */}
+      {/* Hero image */}
       <div style={{ maxWidth: 780, margin: '0 auto', padding: '0 48px' }}>
-        <div style={{
-          background: LIGHT,
-          height: 260,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 13,
-          color: GREY,
-          letterSpacing: '1px',
-          textTransform: 'uppercase',
-        }}>Hero Image</div>
+        <div style={{ position: 'relative', width: '100%', height: '280px' }}>
+          <Image src={IMAGES.metalAM} alt={data.title} fill style={{ objectFit: 'cover' }} priority />
+        </div>
       </div>
 
       {/* Body + TOC */}

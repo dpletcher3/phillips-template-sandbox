@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 import { PersonaData } from '@/components/templates/persona/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
@@ -20,6 +22,10 @@ export default function AppealingPersonaClient({ persona }: Props) {
     { key: 'brands', label: 'Brands' },
     { key: 'federal', label: 'Federal' },
   ]
+
+  const personaImage = persona.persona === 'federal' ? IMAGES.defense
+    : persona.persona === 'educator' ? IMAGES.metalAM
+    : IMAGES.machineShop
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff' }}>
@@ -47,6 +53,7 @@ export default function AppealingPersonaClient({ persona }: Props) {
           position: 'relative',
           overflow: 'hidden',
         }}>
+          <Image src={personaImage} alt="" fill style={{ objectFit: 'cover', opacity: 0.15 }} />
           {/* Radial glow */}
           <div style={{
             position: 'absolute',

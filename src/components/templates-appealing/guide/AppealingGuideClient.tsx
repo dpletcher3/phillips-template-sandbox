@@ -1,8 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { GuideData } from '@/components/templates/guide/types'
 import TemplateBadge from '@/components/TemplateBadge'
+import { IMAGES } from '@/lib/appealing-images'
 
 interface ProgressBar {
   label: string
@@ -81,7 +83,11 @@ export default function AppealingGuideClient({ data }: { data: GuideData }) {
       <div style={{
         background: 'linear-gradient(135deg, #000 0%, #1a1a1a 50%, #3F0017 100%)',
         padding: '48px',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        <Image src={IMAGES.machineVMC} alt="" fill style={{ objectFit: 'cover', opacity: 0.15 }} priority />
+        <div style={{ position: 'relative', zIndex: 1 }}>
         {/* Doc number */}
         <div style={{
           fontSize: '11px',
@@ -127,6 +133,7 @@ export default function AppealingGuideClient({ data }: { data: GuideData }) {
               <span style={{ fontSize: '10px', color: '#fff' }}>{m.value}</span>
             </div>
           ))}
+        </div>
         </div>
       </div>
 

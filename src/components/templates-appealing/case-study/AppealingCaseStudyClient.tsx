@@ -1,8 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import { CaseStudyData } from '@/components/templates/case-study/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
+import { IMAGES } from '@/lib/appealing-images'
 
 const RED = '#F9423A'
 const GOLD = '#F68B33'
@@ -34,7 +36,11 @@ export default function AppealingCaseStudyClient({ data }: { data: CaseStudyData
         background: 'linear-gradient(135deg, #000 0%, #1a1a1a 50%, #3F0017 100%)',
         color: '#fff',
         padding: '60px 48px',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        <Image src={IMAGES.machineShop} alt="" fill style={{ objectFit: 'cover', opacity: 0.2 }} priority />
+        <div style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 40 }}>
           {/* Left column */}
           <div>
@@ -129,6 +135,7 @@ export default function AppealingCaseStudyClient({ data }: { data: CaseStudyData
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 

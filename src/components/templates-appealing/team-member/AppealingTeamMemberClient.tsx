@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 import { TeamMemberData } from '@/components/templates/team-member/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
@@ -82,16 +84,9 @@ export default function AppealingTeamMemberClient({ data }: Props) {
           )}
         </div>
 
-        {/* Right — photo placeholder */}
-        <div style={{
-          background: '#F2F4F6',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '13px',
-          color: '#647883',
-        }}>
-          Photo
+        {/* Right — portrait photo */}
+        <div style={{ position: 'relative', overflow: 'hidden', minHeight: '360px', background: '#F2F4F6' }}>
+          <Image src={IMAGES.engineer} alt={data.name} fill style={{ objectFit: 'cover' }} sizes="(max-width:768px) 100vw, 60vw" />
         </div>
       </section>
 

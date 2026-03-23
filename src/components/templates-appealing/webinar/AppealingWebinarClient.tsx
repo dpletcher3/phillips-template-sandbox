@@ -4,6 +4,8 @@ import { useState } from 'react'
 import { WebinarData } from '@/components/templates/webinar/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 
 export default function AppealingWebinarClient({ data }: { data: WebinarData }) {
   const [selectedSpeakers, setSelectedSpeakers] = useState<Set<number>>(new Set())
@@ -69,11 +71,11 @@ export default function AppealingWebinarClient({ data }: { data: WebinarData }) 
       <div style={{
         background: 'linear-gradient(135deg, #000 0%, #1a1a1a 50%, #3F0017 100%)',
         padding: '60px 48px',
-        display: 'grid',
-        gridTemplateColumns: '1fr 380px',
-        gap: '48px',
-        alignItems: 'start',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        <Image src={IMAGES.abstract_metal} alt="" fill style={{ objectFit: 'cover', opacity: 0.1 }} priority />
+        <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr 380px', gap: '48px', alignItems: 'start' }}>
         {/* Left column */}
         <div>
           {/* Status badge */}
@@ -236,6 +238,7 @@ export default function AppealingWebinarClient({ data }: { data: WebinarData }) 
           }}>
             Register Now
           </button>
+        </div>
         </div>
       </div>
 

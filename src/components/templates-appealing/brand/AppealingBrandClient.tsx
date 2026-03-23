@@ -4,6 +4,8 @@ import { useState, useCallback } from 'react'
 import { BrandData } from '@/components/templates/brand/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 
 interface Props {
   brand: BrandData
@@ -159,13 +161,16 @@ export default function AppealingBrandClient({ brand }: Props) {
           </div>
 
           {/* Right column — floating circle */}
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', overflow: 'hidden', borderRadius: '4px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '320px' }}>
+            <Image src={IMAGES.machine5axis} alt={brand.name} fill style={{ objectFit: 'cover', opacity: 0.3 }} priority />
             <div
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onMouseUp={handleMouseUp}
               onMouseLeave={handleMouseUp}
               style={{
+                position: 'relative',
+                zIndex: 1,
                 width: '280px',
                 height: '280px',
                 borderRadius: '50%',
@@ -429,6 +434,35 @@ export default function AppealingBrandClient({ brand }: Props) {
                 </div>
               )
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Industries We Serve ── */}
+      <section style={{ padding: '64px 48px', background: '#000' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <h2 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontWeight: 800, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '2px', margin: '0 0 40px 0', color: '#fff' }}>
+            Industries We Serve
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+            {[
+              { img: IMAGES.aerospace, label: 'Aerospace', desc: 'Complex titanium & aluminum structural components' },
+              { img: IMAGES.medical, label: 'Medical', desc: 'Implants, surgical tools, and orthopedic devices' },
+              { img: IMAGES.automotive, label: 'Automotive', desc: 'Prototype and production molds, engine parts' },
+              { img: IMAGES.dieMould, label: 'Die & Mould', desc: 'High-precision cavities and complex geometries' },
+            ].map((card) => (
+              <div key={card.label} style={{ position: 'relative', overflow: 'hidden', height: '240px', cursor: 'pointer' }}
+                onMouseEnter={(e) => { const img = e.currentTarget.querySelector('img'); if (img) img.style.transform = 'scale(1.08)' }}
+                onMouseLeave={(e) => { const img = e.currentTarget.querySelector('img'); if (img) img.style.transform = 'scale(1)' }}
+              >
+                <Image src={card.img} alt={card.label} fill style={{ objectFit: 'cover', transition: 'transform .5s' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 55%)' }} />
+                <div style={{ position: 'absolute', bottom: '18px', left: '16px', right: '16px' }}>
+                  <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '17px', color: '#fff', fontWeight: 700, textTransform: 'uppercase', margin: '0 0 4px' }}>{card.label}</h3>
+                  <p style={{ fontSize: '11px', color: '#D7DFE3', lineHeight: 1.5, margin: 0 }}>{card.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

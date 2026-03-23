@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { SolutionData } from '@/components/templates/solution/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/appealing-images'
 
 interface Props {
   sol: SolutionData
@@ -57,7 +59,11 @@ export default function AppealingSolutionClient({ sol }: Props) {
       <section style={{
         background: 'linear-gradient(135deg, #000 0%, #1a1a1a 60%, #3F0017 100%)',
         padding: '60px 48px',
+        position: 'relative',
+        overflow: 'hidden',
       }}>
+        <Image src={IMAGES.machineVMC} alt="" fill style={{ objectFit: 'cover', opacity: 0.15 }} priority />
+        <div style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <span style={{
             display: 'inline-block',
@@ -156,6 +162,7 @@ export default function AppealingSolutionClient({ sol }: Props) {
               {sol.ctaSecondaryLabel}
             </button>
           </div>
+        </div>
         </div>
       </section>
 

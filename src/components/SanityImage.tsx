@@ -2,7 +2,8 @@ import Image from 'next/image'
 import { urlFor } from '../../sanity/lib/image'
 
 interface SanityImageProps {
-  image: unknown
+  image?: unknown
+  fallbackSrc?: string
   alt?: string
   width?: number
   height?: number
@@ -16,6 +17,7 @@ interface SanityImageProps {
 
 export default function SanityImage({
   image,
+  fallbackSrc,
   alt = '',
   width,
   height,
@@ -26,7 +28,7 @@ export default function SanityImage({
   priority,
   placeholder,
 }: SanityImageProps) {
-  if (!image) {
+  if (!image && !fallbackSrc) {
     return (
       placeholder ?? (
         <div
@@ -41,7 +43,7 @@ export default function SanityImage({
     )
   }
 
-  const url = urlFor(image).auto('format').url()
+  const url = image ? urlFor(image).auto('format').url() : fallbackSrc!
 
   if (fill) {
     return (
