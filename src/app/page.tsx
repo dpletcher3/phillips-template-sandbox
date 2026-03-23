@@ -16,6 +16,20 @@ const EC_TEMPLATES = [
   { name: 'Location',       href: '/ec/location/charlotte-nc',             desc: 'Office / facility page — region, address, services',          theme: 'Red Cinematic' },
 ]
 
+const APPEALING_TEMPLATES = [
+  { name: 'Brand',          href: '/appealing/brand/haas',                    desc: 'Brand detail page — hero, tagline, product lines, CTA',      theme: 'Viewer + Cards' },
+  { name: 'Solution',       href: '/appealing/solution/5-axis-machining',     desc: 'Solution overview — offering category, related brands',       theme: 'Spec + Bars' },
+  { name: 'Product Lines',  href: '/appealing/product-lines',                 desc: 'Product line specs grid — series, models, key specs',         theme: 'Compare' },
+  { name: 'Case Study',     href: '/appealing/case-study/navair-cycle-time',  desc: 'Customer success story — results metrics, body, brands',      theme: 'Timeline' },
+  { name: 'Blog Post',      href: '/appealing/post/metal-am-naval',           desc: 'Blog / news article — author, date, categories, body',       theme: 'Flip-Cards' },
+  { name: 'Guide',          href: '/appealing/guide/what-is-a-vmc',           desc: 'Educational guide — topic, intro, rich body content',         theme: 'Progress' },
+  { name: 'Webinar',        href: '/appealing/webinar/metal-am-defense',      desc: 'Webinar page — upcoming / on-demand, registration link',     theme: 'Countdown' },
+  { name: 'Course',         href: '/appealing/course/5-axis-programming',     desc: 'Training course — track, audience, duration, brands',         theme: 'Module-Sel' },
+  { name: 'Class Calendar', href: '/appealing/class-calendar',                desc: 'Scheduled class events — dates, seats, registration',         theme: 'Pulsing' },
+  { name: 'Team Member',    href: '/appealing/team-member/alan-phillips',     desc: 'Staff / leadership profile — photo, bio, LinkedIn',           theme: 'Gradient' },
+  { name: 'Location',       href: '/appealing/location/charlotte-nc',         desc: 'Office / facility page — region, address, services',          theme: 'Img-Reveal' },
+]
+
 const SIMPLE_TEMPLATES = [
   { name: 'Brand',          href: '/simple/brand/haas',                    desc: 'Brand detail page — hero, tagline, product lines, CTA',      theme: 'Product Detail' },
   { name: 'Solution',       href: '/simple/solution/5-axis-machining',     desc: 'Solution overview — offering category, related brands',       theme: 'Side Nav' },
@@ -31,12 +45,26 @@ const SIMPLE_TEMPLATES = [
 ]
 
 const RED = '#F9423A'
+const MAROON = '#3F0017'
+
+const TAB_CONFIG = {
+  ec:        { label: 'EYE CATCHING', underline: RED,    badge: RED,    themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
+  appealing: { label: 'APPEALING',    underline: MAROON, badge: MAROON, themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
+  simple:    { label: 'SIMPLE',       underline: '#fff', badge: '#000', themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
+} as const
+
+type TabKey = keyof typeof TAB_CONFIG
+
+const TEMPLATE_MAP: Record<TabKey, typeof EC_TEMPLATES> = {
+  ec: EC_TEMPLATES,
+  appealing: APPEALING_TEMPLATES,
+  simple: SIMPLE_TEMPLATES,
+}
 
 export default function SandboxIndex() {
-  const [activeTab, setActiveTab] = useState<'ec' | 'simple'>('ec')
-  const templates = activeTab === 'ec' ? EC_TEMPLATES : SIMPLE_TEMPLATES
-  const variantLabel = activeTab === 'ec' ? 'EYE CATCHING' : 'SIMPLE'
-  const variantColor = activeTab === 'ec' ? RED : '#000'
+  const [activeTab, setActiveTab] = useState<TabKey>('ec')
+  const templates = TEMPLATE_MAP[activeTab]
+  const config = TAB_CONFIG[activeTab]
 
   return (
     <main style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
@@ -58,7 +86,14 @@ export default function SandboxIndex() {
               padding: '5px 12px', borderRadius: '3px', background: RED, color: '#fff',
               fontFamily: '"Barlow Condensed", sans-serif',
             }}>
-              EyeCatching variant
+              EyeCatching
+            </span>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: MAROON, color: '#fff',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              Appealing
             </span>
             <span style={{
               fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -66,7 +101,7 @@ export default function SandboxIndex() {
               border: '1px solid rgba(255,255,255,.25)',
               fontFamily: '"Barlow Condensed", sans-serif',
             }}>
-              Simple variant
+              Simple
             </span>
           </div>
         </div>
@@ -85,10 +120,9 @@ export default function SandboxIndex() {
 
       {/* ── Tab Bar ── */}
       <div style={{ padding: '40px 60px 0', display: 'flex', gap: '0', borderBottom: '1px solid rgba(255,255,255,.08)' }}>
-        {(['ec', 'simple'] as const).map(tab => {
+        {(Object.keys(TAB_CONFIG) as TabKey[]).map(tab => {
           const isActive = activeTab === tab
-          const label = tab === 'ec' ? 'EYE CATCHING' : 'SIMPLE'
-          const underline = tab === 'ec' ? RED : '#fff'
+          const tc = TAB_CONFIG[tab]
           return (
             <button
               key={tab}
@@ -99,12 +133,12 @@ export default function SandboxIndex() {
                 fontFamily: "'Barlow Condensed', sans-serif", fontSize: '15px',
                 fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase',
                 color: isActive ? '#fff' : 'rgba(255,255,255,.3)',
-                borderBottom: isActive ? `3px solid ${underline}` : '3px solid transparent',
+                borderBottom: isActive ? `3px solid ${tc.underline}` : '3px solid transparent',
                 marginBottom: '-1px',
                 display: 'flex', alignItems: 'center', gap: '10px',
               }}
             >
-              {label}
+              {tc.label}
               <span style={{
                 fontSize: '9px', fontWeight: 700, letterSpacing: '0.5px',
                 padding: '2px 8px', borderRadius: '10px',
@@ -135,7 +169,7 @@ export default function SandboxIndex() {
               minHeight: '200px',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = activeTab === 'ec' ? 'rgba(249,66,58,.35)' : 'rgba(255,255,255,.2)'
+              e.currentTarget.style.borderColor = config.hoverBorder
               e.currentTarget.style.background = 'rgba(255,255,255,.05)'
             }}
             onMouseLeave={(e) => {
@@ -154,15 +188,15 @@ export default function SandboxIndex() {
                 <span style={{
                   fontSize: '8px', fontWeight: 900, letterSpacing: '0.14em', textTransform: 'uppercase',
                   padding: '3px 8px', borderRadius: '2px',
-                  background: variantColor, color: '#fff',
+                  background: config.badge, color: '#fff',
                   fontFamily: '"Barlow Condensed", sans-serif', lineHeight: 1, whiteSpace: 'nowrap',
                 }}>
-                  {variantLabel}
+                  {config.label}
                 </span>
               </div>
               <span style={{
                 fontSize: '9px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
-                color: activeTab === 'ec' ? RED : 'rgba(255,255,255,.5)',
+                color: config.themeColor,
                 display: 'inline-block', marginBottom: '12px',
               }}>
                 {t.theme}
@@ -174,7 +208,7 @@ export default function SandboxIndex() {
             <div style={{ marginTop: '20px' }}>
               <span style={{
                 fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase',
-                color: activeTab === 'ec' ? RED : 'rgba(255,255,255,.5)',
+                color: config.themeColor,
               }}>
                 View Template →
               </span>
@@ -209,18 +243,25 @@ export default function SandboxIndex() {
                 &quot;I&apos;m a...&quot; landing page — persona-driven solutions & brands
               </p>
             </div>
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div style={{ display: 'flex', gap: '10px' }}>
               <a href="/ec/persona/manufacturer" style={{
                 fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
                 color: '#fff', textDecoration: 'none',
-                padding: '8px 18px', borderRadius: '4px', background: RED,
+                padding: '8px 16px', borderRadius: '4px', background: RED,
               }}>
                 EyeCatching →
+              </a>
+              <a href="/appealing/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: '#fff', textDecoration: 'none',
+                padding: '8px 16px', borderRadius: '4px', background: MAROON,
+              }}>
+                Appealing →
               </a>
               <a href="/simple/persona/manufacturer" style={{
                 fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
                 color: '#fff', textDecoration: 'none',
-                padding: '8px 18px', borderRadius: '4px', background: '#000',
+                padding: '8px 16px', borderRadius: '4px', background: '#000',
                 border: '1px solid rgba(255,255,255,.25)',
               }}>
                 Simple →
@@ -244,22 +285,29 @@ export default function SandboxIndex() {
             }}>
               Compare Side by Side
             </h3>
-            <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '12.5px', margin: 0, maxWidth: '600px' }}>
-              Open <code style={{ color: RED, fontSize: '11px' }}>/ec/brand/haas</code> in one tab and{' '}
+            <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '12.5px', margin: 0, maxWidth: '640px' }}>
+              Open <code style={{ color: RED, fontSize: '11px' }}>/ec/brand/haas</code>,{' '}
+              <code style={{ color: '#c77', fontSize: '11px' }}>/appealing/brand/haas</code>, and{' '}
               <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code> in
-              another to compare the same Sanity content in both designs.
+              separate tabs to compare the same Sanity content across all three design variants.
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '10px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
             <a href="/ec/brand/haas" target="_blank" rel="noopener noreferrer" style={{
               fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
-              color: '#fff', textDecoration: 'none', padding: '10px 20px', borderRadius: '4px', background: RED,
+              color: '#fff', textDecoration: 'none', padding: '10px 18px', borderRadius: '4px', background: RED,
             }}>
               EyeCatching
             </a>
+            <a href="/appealing/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: '#fff', textDecoration: 'none', padding: '10px 18px', borderRadius: '4px', background: MAROON,
+            }}>
+              Appealing
+            </a>
             <a href="/simple/brand/haas" target="_blank" rel="noopener noreferrer" style={{
               fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
-              color: '#fff', textDecoration: 'none', padding: '10px 20px', borderRadius: '4px',
+              color: '#fff', textDecoration: 'none', padding: '10px 18px', borderRadius: '4px',
               background: '#000', border: '1px solid rgba(255,255,255,.25)',
             }}>
               Simple
@@ -280,8 +328,8 @@ export default function SandboxIndex() {
           >
             Edit content in Sanity Studio →
           </a>
-          <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '360px' }}>
-            All templates share the same Sanity dataset. Changes in Studio appear on both variants.
+          <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '420px' }}>
+            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, and Simple simultaneously.
           </p>
         </div>
       </footer>
