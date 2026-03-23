@@ -15,41 +15,45 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { _type, slug } = body
 
-    // Revalidate the specific path based on document type
+    // Revalidate both /ec/ and /simple/ variants for each document type
+    const prefixes = ['/ec', '/simple']
+
     switch (_type) {
       case 'brand':
-        revalidatePath(`/brand/${slug?.current}`)
-        revalidatePath(`/product-lines/${slug?.current}`)
+        for (const p of prefixes) {
+          revalidatePath(`${p}/brand/${slug?.current}`)
+          revalidatePath(`${p}/product-lines/${slug?.current}`)
+        }
         break
       case 'solution':
-        revalidatePath(`/solution/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/solution/${slug?.current}`)
         break
       case 'caseStudy':
-        revalidatePath(`/case-study/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/case-study/${slug?.current}`)
         break
       case 'post':
-        revalidatePath(`/post/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/post/${slug?.current}`)
         break
       case 'guide':
-        revalidatePath(`/guide/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/guide/${slug?.current}`)
         break
       case 'webinar':
-        revalidatePath(`/webinar/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/webinar/${slug?.current}`)
         break
       case 'course':
-        revalidatePath(`/course/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/course/${slug?.current}`)
         break
       case 'teamMember':
-        revalidatePath(`/team-member/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/team-member/${slug?.current}`)
         break
       case 'location':
-        revalidatePath(`/location/${slug?.current}`)
+        for (const p of prefixes) revalidatePath(`${p}/location/${slug?.current}`)
         break
       case 'personaPage':
-        revalidatePath(`/persona/${body.persona}`)
+        for (const p of prefixes) revalidatePath(`${p}/persona/${body.persona}`)
         break
       case 'classEvent':
-        revalidatePath('/class-calendar')
+        for (const p of prefixes) revalidatePath(`${p}/class-calendar`)
         break
       default:
         // Revalidate everything as fallback
