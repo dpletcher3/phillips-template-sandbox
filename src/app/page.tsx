@@ -1,123 +1,289 @@
 'use client'
 
-const templates = [
-  { name: 'Brand',          href: '/ec/brand/hermle',                          desc: 'Brand detail page — hero, tagline, product lines, CTA',           badge: 'Dark',  color: '#F9423A' },
-  { name: 'Solution',       href: '/ec/solution/5-axis-machining-centers',     desc: 'Solution overview — offering category, related brands',            badge: 'Dark',  color: '#F9423A' },
-  { name: 'Product Lines',  href: '/ec/product-lines/haas',                   desc: 'Product line specs grid — series, models, key specs',              badge: 'White', color: '#00AEEF' },
-  { name: 'Case Study',     href: '/ec/case-study/navair-frc-east',           desc: 'Customer success story — results metrics, body, brands',           badge: 'Paper', color: '#F68B33' },
-  { name: 'Post',           href: '/ec/post/5-axis-no-longer-optional',       desc: 'Blog / news article — author, date, categories, body',            badge: 'Paper', color: '#F68B33' },
-  { name: 'Guide',          href: '/ec/guide/5-axis-cnc-machining',           desc: 'Educational guide — topic, intro, rich body content',              badge: 'Paper', color: '#F68B33' },
-  { name: 'Webinar',        href: '/ec/webinar/5-axis-automation-lights-out', desc: 'Webinar page — upcoming / on-demand, registration link',           badge: 'Dark',  color: '#F9423A' },
-  { name: 'Course',         href: '/ec/course/5-axis-programming-setup',      desc: 'Training course — track, audience, duration, brands',              badge: 'White', color: '#00AEEF' },
-  { name: 'Class Calendar', href: '/ec/class-calendar',                       desc: 'Scheduled class events — dates, seats, registration',              badge: 'White', color: '#00AEEF' },
-  { name: 'Team Member',    href: '/ec/team-member/dan-pletcher',             desc: 'Staff / leadership profile — photo, bio, LinkedIn',                badge: 'Dark',  color: '#F9423A' },
-  { name: 'Location',       href: '/ec/location/hanover-md',                  desc: 'Office / facility page — region, address, services',               badge: 'White', color: '#00AEEF' },
-  { name: 'Persona',        href: '/ec/persona/manufacturer',                 desc: '"I\'m a…" landing page — persona-driven solutions & brands',       badge: 'Dark',  color: '#F9423A' },
+import { useState } from 'react'
+
+const EC_TEMPLATES = [
+  { name: 'Brand',          href: '/ec/brand/haas',                        desc: 'Brand detail page — hero, tagline, product lines, CTA',      theme: 'Dark Immersive' },
+  { name: 'Solution',       href: '/ec/solution/5-axis-machining',         desc: 'Solution overview — offering category, related brands',       theme: 'White Industrial' },
+  { name: 'Product Lines',  href: '/ec/product-lines',                     desc: 'Product line specs grid — series, models, key specs',         theme: 'Dark Editorial' },
+  { name: 'Case Study',     href: '/ec/case-study/navair-cycle-time',      desc: 'Customer success story — results metrics, body, brands',      theme: 'Editorial Paper' },
+  { name: 'Blog Post',      href: '/ec/post/metal-am-naval',               desc: 'Blog / news article — author, date, categories, body',       theme: 'White Editorial' },
+  { name: 'Guide',          href: '/ec/guide/what-is-a-vmc',               desc: 'Educational guide — topic, intro, rich body content',         theme: 'Dark Technical' },
+  { name: 'Webinar',        href: '/ec/webinar/metal-am-defense',          desc: 'Webinar page — upcoming / on-demand, registration link',     theme: 'Event Poster' },
+  { name: 'Course',         href: '/ec/course/5-axis-programming',         desc: 'Training course — track, audience, duration, brands',         theme: 'Light Clean' },
+  { name: 'Class Calendar', href: '/ec/class-calendar',                    desc: 'Scheduled class events — dates, seats, registration',         theme: 'Dark Board' },
+  { name: 'Team Member',    href: '/ec/team-member/alan-phillips',         desc: 'Staff / leadership profile — photo, bio, LinkedIn',           theme: 'Magazine Profile' },
+  { name: 'Location',       href: '/ec/location/charlotte-nc',             desc: 'Office / facility page — region, address, services',          theme: 'Red Cinematic' },
 ]
 
+const SIMPLE_TEMPLATES = [
+  { name: 'Brand',          href: '/simple/brand/haas',                    desc: 'Brand detail page — hero, tagline, product lines, CTA',      theme: 'Product Detail' },
+  { name: 'Solution',       href: '/simple/solution/5-axis-machining',     desc: 'Solution overview — offering category, related brands',       theme: 'Side Nav' },
+  { name: 'Product Lines',  href: '/simple/product-lines',                 desc: 'Product line specs grid — series, models, key specs',         theme: 'Editorial Scroll' },
+  { name: 'Case Study',     href: '/simple/case-study/navair-cycle-time',  desc: 'Customer success story — results metrics, body, brands',      theme: 'Story-Led' },
+  { name: 'Blog Post',      href: '/simple/post/metal-am-naval',           desc: 'Blog / news article — author, date, categories, body',       theme: 'Magazine' },
+  { name: 'Guide',          href: '/simple/guide/what-is-a-vmc',           desc: 'Educational guide — topic, intro, rich body content',         theme: 'Reference Doc' },
+  { name: 'Webinar',        href: '/simple/webinar/metal-am-defense',      desc: 'Webinar page — upcoming / on-demand, registration link',     theme: 'Event Reg' },
+  { name: 'Course',         href: '/simple/course/5-axis-programming',     desc: 'Training course — track, audience, duration, brands',         theme: 'Catalog' },
+  { name: 'Class Calendar', href: '/simple/class-calendar',                desc: 'Scheduled class events — dates, seats, registration',         theme: 'Schedule Table' },
+  { name: 'Team Member',    href: '/simple/team-member/alan-phillips',     desc: 'Staff / leadership profile — photo, bio, LinkedIn',           theme: 'Profile' },
+  { name: 'Location',       href: '/simple/location/charlotte-nc',         desc: 'Office / facility page — region, address, services',          theme: 'Regional' },
+]
+
+const RED = '#F9423A'
+
 export default function SandboxIndex() {
+  const [activeTab, setActiveTab] = useState<'ec' | 'simple'>('ec')
+  const templates = activeTab === 'ec' ? EC_TEMPLATES : SIMPLE_TEMPLATES
+  const variantLabel = activeTab === 'ec' ? 'EYE CATCHING' : 'SIMPLE'
+  const variantColor = activeTab === 'ec' ? RED : '#000'
+
   return (
     <main style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
-      {/* Header */}
-      <header style={{ padding: '60px 60px 0' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '8px' }}>
-          <h1 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>
-            <span style={{ color: '#F9423A' }}>Phillips</span>
-            <span style={{ color: 'rgba(255,255,255,.25)', margin: '0 12px' }}>/</span>
+
+      {/* ── Header ── */}
+      <header style={{ padding: '48px 60px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <h1 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '52px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '3px', margin: 0, lineHeight: 1.05 }}>
+            <span style={{ color: RED }}>Phillips</span>
+            <span style={{ color: 'rgba(255,255,255,.2)', margin: '0 14px' }}>/</span>
             <span>Template Sandbox</span>
           </h1>
+          <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '14px', fontWeight: 400, margin: '10px 0 0', letterSpacing: '1px' }}>
+            Next.js 14 + Sanity CMS — Design system reference
+          </p>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: RED, color: '#fff',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              EyeCatching variant
+            </span>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: '#000', color: '#fff',
+              border: '1px solid rgba(255,255,255,.25)',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              Simple variant
+            </span>
+          </div>
         </div>
-        <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '14px', fontWeight: 400, margin: '4px 0 0', letterSpacing: '1px' }}>
-          Next.js 14 + Sanity CMS — Design system reference
-        </p>
-        <div style={{ height: '1px', background: 'rgba(255,255,255,.08)', margin: '40px 0 0' }} />
+        <a
+          href="/studio"
+          style={{
+            color: 'rgba(255,255,255,.4)', fontSize: '11px', fontWeight: 600,
+            letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none',
+            padding: '8px 16px', border: '1px solid rgba(255,255,255,.1)', borderRadius: '4px',
+            marginTop: '8px',
+          }}
+        >
+          Studio →
+        </a>
       </header>
 
-      {/* Template Grid */}
-      <section style={{ padding: '40px 60px 80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '24px' }}>
-        {templates.map((t) => (
+      {/* ── Tab Bar ── */}
+      <div style={{ padding: '40px 60px 0', display: 'flex', gap: '0', borderBottom: '1px solid rgba(255,255,255,.08)' }}>
+        {(['ec', 'simple'] as const).map(tab => {
+          const isActive = activeTab === tab
+          const label = tab === 'ec' ? 'EYE CATCHING' : 'SIMPLE'
+          const underline = tab === 'ec' ? RED : '#fff'
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                padding: '14px 32px 16px', position: 'relative',
+                fontFamily: "'Barlow Condensed', sans-serif", fontSize: '15px',
+                fontWeight: 800, letterSpacing: '2.5px', textTransform: 'uppercase',
+                color: isActive ? '#fff' : 'rgba(255,255,255,.3)',
+                borderBottom: isActive ? `3px solid ${underline}` : '3px solid transparent',
+                marginBottom: '-1px',
+                display: 'flex', alignItems: 'center', gap: '10px',
+              }}
+            >
+              {label}
+              <span style={{
+                fontSize: '9px', fontWeight: 700, letterSpacing: '0.5px',
+                padding: '2px 8px', borderRadius: '10px',
+                background: isActive ? 'rgba(255,255,255,.1)' : 'rgba(255,255,255,.05)',
+                color: isActive ? 'rgba(255,255,255,.6)' : 'rgba(255,255,255,.2)',
+              }}>
+                11 templates
+              </span>
+            </button>
+          )
+        })}
+      </div>
+
+      {/* ── Template Grid ── */}
+      <section style={{ padding: '40px 60px 48px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        {templates.map((t, i) => (
           <a
-            key={t.href}
+            key={`${activeTab}-${i}`}
             href={t.href}
             style={{
-              display: 'block',
-              background: 'rgba(255,255,255,.03)',
+              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+              background: 'rgba(255,255,255,.025)',
               border: '1px solid rgba(255,255,255,.06)',
               borderRadius: '8px',
-              padding: '32px',
-              textDecoration: 'none',
-              color: '#fff',
+              padding: '28px 28px 24px',
+              textDecoration: 'none', color: '#fff',
               transition: 'border-color .2s, background .2s',
+              minHeight: '200px',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(249,66,58,.3)'
+              e.currentTarget.style.borderColor = activeTab === 'ec' ? 'rgba(249,66,58,.35)' : 'rgba(255,255,255,.2)'
               e.currentTarget.style.background = 'rgba(255,255,255,.05)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = 'rgba(255,255,255,.06)'
-              e.currentTarget.style.background = 'rgba(255,255,255,.03)'
+              e.currentTarget.style.background = 'rgba(255,255,255,.025)'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <h2 style={{
+                  fontFamily: "'Barlow Condensed', sans-serif", fontSize: '26px',
+                  fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', margin: 0,
+                }}>
                   {t.name}
                 </h2>
                 <span style={{
-                  fontSize: '9px',
-                  fontWeight: 900,
-                  letterSpacing: '0.14em',
-                  textTransform: 'uppercase',
-                  padding: '3px 8px',
-                  borderRadius: '2px',
-                  background: '#F9423A',
-                  color: '#fff',
-                  fontFamily: '"Barlow Condensed", sans-serif',
-                  lineHeight: 1,
-                  whiteSpace: 'nowrap',
+                  fontSize: '8px', fontWeight: 900, letterSpacing: '0.14em', textTransform: 'uppercase',
+                  padding: '3px 8px', borderRadius: '2px',
+                  background: variantColor, color: '#fff',
+                  fontFamily: '"Barlow Condensed", sans-serif', lineHeight: 1, whiteSpace: 'nowrap',
                 }}>
-                  Eye Catching
+                  {variantLabel}
                 </span>
               </div>
               <span style={{
-                fontSize: '10px',
-                fontWeight: 700,
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-                padding: '4px 10px',
-                borderRadius: '4px',
-                background: t.color + '18',
-                color: t.color,
+                fontSize: '9px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: activeTab === 'ec' ? RED : 'rgba(255,255,255,.5)',
+                display: 'inline-block', marginBottom: '12px',
               }}>
-                {t.badge}
+                {t.theme}
+              </span>
+              <p style={{ color: 'rgba(255,255,255,.35)', fontSize: '12.5px', lineHeight: '1.7', margin: 0 }}>
+                {t.desc}
+              </p>
+            </div>
+            <div style={{ marginTop: '20px' }}>
+              <span style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase',
+                color: activeTab === 'ec' ? RED : 'rgba(255,255,255,.5)',
+              }}>
+                View Template →
               </span>
             </div>
-            <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
-              {t.desc}
-            </p>
           </a>
         ))}
       </section>
 
-      {/* Studio Link */}
+      {/* ── Singletons & Shared ── */}
+      <section style={{ padding: '0 60px 48px' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: '32px' }}>
+          <h3 style={{
+            fontFamily: "'Barlow Condensed', sans-serif", fontSize: '14px', fontWeight: 800,
+            letterSpacing: '3px', textTransform: 'uppercase', color: 'rgba(255,255,255,.3)',
+            margin: '0 0 16px',
+          }}>
+            Singletons & Shared
+          </h3>
+          <div style={{
+            background: 'rgba(255,255,255,.025)', border: '1px solid rgba(255,255,255,.06)',
+            borderRadius: '8px', padding: '24px 28px',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          }}>
+            <div>
+              <h4 style={{
+                fontFamily: "'Barlow Condensed', sans-serif", fontSize: '22px',
+                fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 6px',
+              }}>
+                Persona Page
+              </h4>
+              <p style={{ color: 'rgba(255,255,255,.35)', fontSize: '12.5px', margin: 0 }}>
+                &quot;I&apos;m a...&quot; landing page — persona-driven solutions & brands
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <a href="/ec/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: '#fff', textDecoration: 'none',
+                padding: '8px 18px', borderRadius: '4px', background: RED,
+              }}>
+                EyeCatching →
+              </a>
+              <a href="/simple/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: '#fff', textDecoration: 'none',
+                padding: '8px 18px', borderRadius: '4px', background: '#000',
+                border: '1px solid rgba(255,255,255,.25)',
+              }}>
+                Simple →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Compare Section ── */}
+      <section style={{ padding: '0 60px 48px' }}>
+        <div style={{
+          background: 'rgba(249,66,58,.06)', border: '1px solid rgba(249,66,58,.15)',
+          borderRadius: '8px', padding: '28px 32px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <div>
+            <h3 style={{
+              fontFamily: "'Barlow Condensed', sans-serif", fontSize: '18px', fontWeight: 800,
+              letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 6px',
+            }}>
+              Compare Side by Side
+            </h3>
+            <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '12.5px', margin: 0, maxWidth: '600px' }}>
+              Open <code style={{ color: RED, fontSize: '11px' }}>/ec/brand/haas</code> in one tab and{' '}
+              <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code> in
+              another to compare the same Sanity content in both designs.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: '10px', flexShrink: 0 }}>
+            <a href="/ec/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: '#fff', textDecoration: 'none', padding: '10px 20px', borderRadius: '4px', background: RED,
+            }}>
+              EyeCatching
+            </a>
+            <a href="/simple/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: '#fff', textDecoration: 'none', padding: '10px 20px', borderRadius: '4px',
+              background: '#000', border: '1px solid rgba(255,255,255,.25)',
+            }}>
+              Simple
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ── */}
       <footer style={{ padding: '0 60px 60px' }}>
-        <div style={{ height: '1px', background: 'rgba(255,255,255,.08)', marginBottom: '32px' }} />
-        <a
-          href="/studio"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            color: '#F9423A',
-            fontSize: '13px',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            textDecoration: 'none',
-          }}
-        >
-          Open Sanity Studio →
-        </a>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <a
+            href="/studio"
+            style={{
+              color: RED, fontSize: '12px', fontWeight: 700,
+              letterSpacing: '2px', textTransform: 'uppercase', textDecoration: 'none',
+            }}
+          >
+            Edit content in Sanity Studio →
+          </a>
+          <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '360px' }}>
+            All templates share the same Sanity dataset. Changes in Studio appear on both variants.
+          </p>
+        </div>
       </footer>
     </main>
   )
