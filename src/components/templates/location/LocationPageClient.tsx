@@ -1,12 +1,14 @@
 'use client'
 
 import { LocationData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 
 export default function LocationPageClient({ data }: { data: LocationData }) {
   return (
     <main style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <a href="/" style={{ position: 'absolute', top: 24, left: 56, color: '#fff', fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700, textDecoration: 'none', zIndex: 10 }}>← Sandbox</a>
 
       <section style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '75vh' }}>

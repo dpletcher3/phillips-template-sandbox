@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ClassCalendarData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 const BLUE = '#00AEEF'
@@ -13,6 +14,7 @@ export default function ClassCalendarPageClient({ data }: { data: ClassCalendarD
 
   return (
     <main style={{ background: '#060606', minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <a href="/" style={{ position: 'absolute', top: 24, left: 56, color: RED, fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700, textDecoration: 'none', zIndex: 10 }}>← Sandbox</a>
 
       <section style={{ padding: '88px 56px 40px' }}>

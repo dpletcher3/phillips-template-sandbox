@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { PostData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 const SERIF = "'Georgia', 'Times New Roman', serif"
@@ -30,6 +31,7 @@ export default function PostPageClient({ data }: { data: PostData }) {
 
   return (
     <main style={{ background: '#fff', minHeight: '100vh', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <a href="/" style={{ position: 'absolute', top: 24, left: 56, color: RED, fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700, textDecoration: 'none', zIndex: 10 }}>← Sandbox</a>
 
       {/* ---- HEADER ---- */}

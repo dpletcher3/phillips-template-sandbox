@@ -59,9 +59,26 @@ export default function SandboxIndex() {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-              <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
-                {t.name}
-              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+                  {t.name}
+                </h2>
+                <span style={{
+                  fontSize: '9px',
+                  fontWeight: 900,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  padding: '3px 8px',
+                  borderRadius: '2px',
+                  background: '#F9423A',
+                  color: '#fff',
+                  fontFamily: '"Barlow Condensed", sans-serif',
+                  lineHeight: 1,
+                  whiteSpace: 'nowrap',
+                }}>
+                  Eye Catching
+                </span>
+              </div>
               <span style={{
                 fontSize: '10px',
                 fontWeight: 700,

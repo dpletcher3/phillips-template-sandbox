@@ -1,6 +1,7 @@
 'use client'
 
 import { CaseStudyData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 const CREAM = '#f9f7f3'
@@ -9,6 +10,7 @@ const SERIF = "'Georgia', 'Times New Roman', serif"
 export default function CaseStudyPageClient({ data }: { data: CaseStudyData }) {
   return (
     <main style={{ background: CREAM, minHeight: '100vh', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <a href="/" style={{ position: 'absolute', top: 24, left: 56, color: RED, fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700, textDecoration: 'none', zIndex: 10 }}>← Sandbox</a>
 
       {/* ---- MASTHEAD ---- */}

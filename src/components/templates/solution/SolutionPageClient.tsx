@@ -5,6 +5,7 @@ import SolutionHero from '@/components/templates/solution/SolutionHero'
 import SpecStripe from '@/components/templates/solution/SpecStripe'
 import BrandMatrix from '@/components/templates/solution/BrandMatrix'
 import { SolutionData, SpecBar } from '@/components/templates/solution/types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 function AnimatedSpecBars({ specs }: { specs: SpecBar[] }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -66,6 +67,7 @@ function AnimatedSpecBars({ specs }: { specs: SpecBar[] }) {
 export default function SolutionPageClient({ sol }: { sol: SolutionData }) {
   return (
     <main style={{ background: '#fff', minHeight: '100vh', color: '#000' }}>
+      <TemplateBadge />
       {/* ---- SECTION 1: HERO ---- */}
       <SolutionHero data={sol} />
 

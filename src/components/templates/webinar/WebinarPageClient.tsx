@@ -1,6 +1,7 @@
 'use client'
 
 import { WebinarData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 const BG = '#05050f'
@@ -8,6 +9,7 @@ const BG = '#05050f'
 export default function WebinarPageClient({ data }: { data: WebinarData }) {
   return (
     <main style={{ background: BG, minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <a href="/" style={{ position: 'absolute', top: 24, left: 56, color: RED, fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700, textDecoration: 'none', zIndex: 10 }}>← Sandbox</a>
 
       <section style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 400px', gap: 56, padding: '96px 56px 72px', overflow: 'hidden' }}>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { GuideData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 const BG = '#0d0d0d'
@@ -27,6 +28,7 @@ export default function GuidePageClient({ data }: { data: GuideData }) {
 
   return (
     <main style={{ background: BG, minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <div style={{ background: RED, padding: '10px 56px', display: 'flex', gap: 8, alignItems: 'center' }}>
         <a href="/" style={{ color: 'rgba(255,255,255,.7)', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none' }}>Sandbox</a>
         <span style={{ color: 'rgba(255,255,255,.4)' }}>/</span>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { CourseData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 const RED = '#F9423A'
 const MAROON = '#3F0017'
@@ -12,6 +13,7 @@ export default function CoursePageClient({ data }: { data: CourseData }) {
 
   return (
     <main style={{ background: BG, minHeight: '100vh', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
+      <TemplateBadge />
       <div style={{ background: MAROON, padding: '10px 56px', display: 'flex', gap: 8, alignItems: 'center' }}>
         <a href="/" style={{ color: 'rgba(255,255,255,.7)', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none' }}>Sandbox</a>
         <span style={{ color: 'rgba(255,255,255,.3)' }}>/</span>

@@ -3,6 +3,7 @@
 import PersonaHero from '@/components/templates/persona/PersonaHero'
 import PersonaFilterTabs from '@/components/templates/persona/PersonaFilterTabs'
 import { PersonaData } from '@/components/templates/persona/types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 export default function PersonaPageClient({ persona }: { persona: PersonaData }) {
   return (
@@ -13,6 +14,7 @@ export default function PersonaPageClient({ persona }: { persona: PersonaData })
         background: '#000',
       }}
     >
+      <TemplateBadge />
       {/* Left 45% — dark hero */}
       <PersonaHero data={persona} />
 

@@ -5,6 +5,7 @@ import BrandHero from './BrandHero'
 import ProductLineScroll from './ProductLineScroll'
 import SpecBars from './SpecBars'
 import { BrandData } from './types'
+import TemplateBadge from '@/components/TemplateBadge'
 
 type Tab = 'specs' | 'about' | 'cases'
 
@@ -19,6 +20,7 @@ export default function BrandPageClient({ brand }: { brand: BrandData }) {
 
   return (
     <main style={{ background: '#000', minHeight: '100vh', color: '#fff' }}>
+      <TemplateBadge />
       {/* ---- SECTION 1: HERO ---- */}
       <BrandHero data={brand} />
 
