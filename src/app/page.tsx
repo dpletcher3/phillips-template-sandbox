@@ -1,101 +1,107 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+const templates = [
+  { name: 'Brand',          href: '/brand',          desc: 'Brand detail page — hero, tagline, product lines, CTA',           badge: 'Dark',  color: '#F9423A' },
+  { name: 'Solution',       href: '/solution',       desc: 'Solution overview — offering category, related brands',            badge: 'Dark',  color: '#F9423A' },
+  { name: 'Product Lines',  href: '/product-lines',  desc: 'Product line specs grid — series, models, key specs',              badge: 'White', color: '#00AEEF' },
+  { name: 'Case Study',     href: '/case-study',     desc: 'Customer success story — results metrics, body, brands',           badge: 'Paper', color: '#F68B33' },
+  { name: 'Post',           href: '/post',           desc: 'Blog / news article — author, date, categories, body',            badge: 'Paper', color: '#F68B33' },
+  { name: 'Guide',          href: '/guide',          desc: 'Educational guide — topic, intro, rich body content',              badge: 'Paper', color: '#F68B33' },
+  { name: 'Webinar',        href: '/webinar',        desc: 'Webinar page — upcoming / on-demand, registration link',           badge: 'Dark',  color: '#F9423A' },
+  { name: 'Course',         href: '/course',         desc: 'Training course — track, audience, duration, brands',              badge: 'White', color: '#00AEEF' },
+  { name: 'Class Calendar', href: '/class-calendar', desc: 'Scheduled class events — dates, seats, registration',              badge: 'White', color: '#00AEEF' },
+  { name: 'Team Member',    href: '/team-member',    desc: 'Staff / leadership profile — photo, bio, LinkedIn',                badge: 'Dark',  color: '#F9423A' },
+  { name: 'Location',       href: '/location',       desc: 'Office / facility page — region, address, services',               badge: 'White', color: '#00AEEF' },
+  { name: 'Persona',        href: '/persona',        desc: '"I\'m a…" landing page — persona-driven solutions & brands',       badge: 'Dark',  color: '#F9423A' },
+]
+
+export default function SandboxIndex() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main style={{ background: '#000', minHeight: '100vh', color: '#fff', fontFamily: "'Montserrat', sans-serif" }}>
+      {/* Header */}
+      <header style={{ padding: '60px 60px 0' }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: '8px' }}>
+          <h1 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '48px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2px', margin: 0 }}>
+            <span style={{ color: '#F9423A' }}>Phillips</span>
+            <span style={{ color: 'rgba(255,255,255,.25)', margin: '0 12px' }}>/</span>
+            <span>Template Sandbox</span>
+          </h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '14px', fontWeight: 400, margin: '4px 0 0', letterSpacing: '1px' }}>
+          Next.js 14 + Sanity CMS — Design system reference
+        </p>
+        <div style={{ height: '1px', background: 'rgba(255,255,255,.08)', margin: '40px 0 0' }} />
+      </header>
+
+      {/* Template Grid */}
+      <section style={{ padding: '40px 60px 80px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '24px' }}>
+        {templates.map((t) => (
+          <a
+            key={t.href}
+            href={t.href}
+            style={{
+              display: 'block',
+              background: 'rgba(255,255,255,.03)',
+              border: '1px solid rgba(255,255,255,.06)',
+              borderRadius: '8px',
+              padding: '32px',
+              textDecoration: 'none',
+              color: '#fff',
+              transition: 'border-color .2s, background .2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(249,66,58,.3)'
+              e.currentTarget.style.background = 'rgba(255,255,255,.05)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,.06)'
+              e.currentTarget.style.background = 'rgba(255,255,255,.03)'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
+              <h2 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '28px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>
+                {t.name}
+              </h2>
+              <span style={{
+                fontSize: '10px',
+                fontWeight: 700,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                padding: '4px 10px',
+                borderRadius: '4px',
+                background: t.color + '18',
+                color: t.color,
+              }}>
+                {t.badge}
+              </span>
+            </div>
+            <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
+              {t.desc}
+            </p>
+          </a>
+        ))}
+      </section>
+
+      {/* Studio Link */}
+      <footer style={{ padding: '0 60px 60px' }}>
+        <div style={{ height: '1px', background: 'rgba(255,255,255,.08)', marginBottom: '32px' }} />
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/studio"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            color: '#F9423A',
+            fontSize: '13px',
+            fontWeight: 700,
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+          }}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
+          Open Sanity Studio →
         </a>
       </footer>
-    </div>
-  );
+    </main>
+  )
 }
