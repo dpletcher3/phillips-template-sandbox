@@ -15,8 +15,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { _type, slug } = body
 
-    // Revalidate both /ec/ and /simple/ variants for each document type
-    const prefixes = ['/ec', '/simple']
+    // Revalidate all three variants for each document type
+    const prefixes = ['/ec', '/simple', '/appealing']
 
     switch (_type) {
       case 'brand':
