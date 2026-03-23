@@ -7,7 +7,12 @@ export default defineType({
   fields: [
     defineField({ name: 'name',            title: 'Name',              type: 'string',  validation: r => r.required() }),
     defineField({ name: 'slug',            title: 'Slug',              type: 'slug',    options: { source: 'name' } }),
-    defineField({ name: 'offering',        title: 'Offering Category', type: 'string',  options: { list: ['CNC Machining','Additive Manufacturing','Hybrid Manufacturing','Automation & Smart Manufacturing'] } }),
+    defineField({ name: 'offering',        title: 'Offering Category', type: 'string',  options: { list: [
+      { title: 'CNC Machining', value: 'cnc machining' },
+      { title: 'Additive Manufacturing', value: 'additive manufacturing' },
+      { title: 'Hybrid Manufacturing', value: 'hybrid manufacturing' },
+      { title: 'Automation & Smart Manufacturing', value: 'automation & smart manufacturing' },
+    ] } }),
     defineField({ name: 'heroImage',       title: 'Hero Image',        type: 'image'    }),
     defineField({ name: 'shortDesc',       title: 'Short Description', type: 'string'   }),
     defineField({ name: 'description',     title: 'Description',       type: 'blockContent' }),
