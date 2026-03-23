@@ -1,8 +1,8 @@
 'use client'
 
 const templates = [
-  { name: 'Brand',          href: '/brand',          desc: 'Brand detail page — hero, tagline, product lines, CTA',           badge: 'Dark',  color: '#F9423A' },
-  { name: 'Solution',       href: '/solution',       desc: 'Solution overview — offering category, related brands',            badge: 'Dark',  color: '#F9423A' },
+  { name: 'Brand',          href: '/brand/hermle',                   desc: 'Brand detail page — hero, tagline, product lines, CTA',           badge: 'Dark',  color: '#F9423A' },
+  { name: 'Solution',       href: '/solution/5-axis-machining-centers', desc: 'Solution overview — offering category, related brands',            badge: 'Dark',  color: '#F9423A' },
   { name: 'Product Lines',  href: '/product-lines',  desc: 'Product line specs grid — series, models, key specs',              badge: 'White', color: '#00AEEF' },
   { name: 'Case Study',     href: '/case-study',     desc: 'Customer success story — results metrics, body, brands',           badge: 'Paper', color: '#F68B33' },
   { name: 'Post',           href: '/post',           desc: 'Blog / news article — author, date, categories, body',            badge: 'Paper', color: '#F68B33' },
@@ -12,7 +12,7 @@ const templates = [
   { name: 'Class Calendar', href: '/class-calendar', desc: 'Scheduled class events — dates, seats, registration',              badge: 'White', color: '#00AEEF' },
   { name: 'Team Member',    href: '/team-member',    desc: 'Staff / leadership profile — photo, bio, LinkedIn',                badge: 'Dark',  color: '#F9423A' },
   { name: 'Location',       href: '/location',       desc: 'Office / facility page — region, address, services',               badge: 'White', color: '#00AEEF' },
-  { name: 'Persona',        href: '/persona',        desc: '"I\'m a…" landing page — persona-driven solutions & brands',       badge: 'Dark',  color: '#F9423A' },
+  { name: 'Persona',        href: '/persona/manufacturer',           desc: '"I\'m a…" landing page — persona-driven solutions & brands',       badge: 'Dark',  color: '#F9423A' },
 ]
 
 export default function SandboxIndex() {

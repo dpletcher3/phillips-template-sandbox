@@ -1,29 +1,10 @@
-/*
-  ================================================================
-  SOLUTION TEMPLATE — Connect to Sanity
-  ================================================================
-  Sanity schema: solution (sanity/schemas/documents/solution.ts)
-
-  Section → Field mapping:
-  - Hero            → solution.name, solution.offering, solution.shortDesc, solution.heroImage
-  - Spec stripe     → derived from related brand specs
-  - Brand matrix    → solution.relatedBrands[] (references to brand)
-  - Spec bars       → derived from related brand product lines
-  - Dark end CTA    → static / configurable field
-
-  To connect: replace FIVE_AXIS_MOCK with a GROQ fetch in a
-  server component wrapper, then pass data as props.
-  ================================================================
-*/
-
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
 import SolutionHero from '@/components/templates/solution/SolutionHero'
 import SpecStripe from '@/components/templates/solution/SpecStripe'
 import BrandMatrix from '@/components/templates/solution/BrandMatrix'
-import { FIVE_AXIS_MOCK } from '@/components/templates/solution/mockData'
-import { SpecBar } from '@/components/templates/solution/types'
+import { SolutionData, SpecBar } from '@/components/templates/solution/types'
 
 function AnimatedSpecBars({ specs }: { specs: SpecBar[] }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -52,7 +33,7 @@ function AnimatedSpecBars({ specs }: { specs: SpecBar[] }) {
               </span>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
                 <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 20, color: '#000' }}>
-                  {typeof s.value === 'number' && s.value < 1 ? `±${s.value}` : s.value.toLocaleString()}
+                  {typeof s.value === 'number' && s.value < 1 ? `\u00b1${s.value}` : s.value.toLocaleString()}
                 </span>
                 <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: '#bbb', letterSpacing: 1 }}>
                   {s.unit}
@@ -82,9 +63,7 @@ function AnimatedSpecBars({ specs }: { specs: SpecBar[] }) {
   )
 }
 
-export default function SolutionTemplate() {
-  const sol = FIVE_AXIS_MOCK
-
+export default function SolutionPageClient({ sol }: { sol: SolutionData }) {
   return (
     <main style={{ background: '#fff', minHeight: '100vh', color: '#000' }}>
       {/* ---- SECTION 1: HERO ---- */}
