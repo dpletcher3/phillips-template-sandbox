@@ -33,4 +33,6 @@ export interface SolutionData {
   ctaHeading: string
   ctaAccent: string
   ctaDescription: string
+  ctaPrimaryLabel: string
+  ctaSecondaryLabel: string
 }

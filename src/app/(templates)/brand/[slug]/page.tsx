@@ -31,6 +31,13 @@ interface SanityBrand {
     industry?: string
     results?: Array<{ label?: string; value?: string }>
   }>
+  stats?: Array<{ value?: string; label?: string }>
+  taglineBarText?: string
+  aboutTitle?: string
+  aboutBody?: string
+  aboutStats?: Array<{ value?: string; label?: string }>
+  marqueeItems?: string[]
+  caseStudiesIntro?: string
   seo?: {
     metaTitle?: string
     metaDescription?: string
@@ -46,6 +53,14 @@ function transformBrand(sanity: SanityBrand | null) {
     tagline: sanity.tagline || HERMLE_MOCK.tagline,
     description: sanity.description || HERMLE_MOCK.description,
     categories: sanity.category || HERMLE_MOCK.categories,
+    heroStats: sanity.stats?.length
+      ? sanity.stats.map(s => ({ value: s.value ?? '', label: s.label ?? '' }))
+      : HERMLE_MOCK.heroStats,
+    marqueeText: sanity.marqueeItems?.length
+      ? sanity.marqueeItems.join('  ·  ') + '  ·  '
+      : sanity.taglineBarText
+        ? sanity.taglineBarText + '  ·  '
+        : HERMLE_MOCK.marqueeText,
     productLines: sanity.productLines?.length
       ? sanity.productLines.map(pl => ({
           name: pl.name || '',
@@ -61,6 +76,13 @@ function transformBrand(sanity: SanityBrand | null) {
           bestFor: pl.bestFor,
         }))
       : HERMLE_MOCK.productLines,
+    about: {
+      title: sanity.aboutTitle ?? HERMLE_MOCK.about.title,
+      description: sanity.aboutBody ?? HERMLE_MOCK.about.description,
+      stats: sanity.aboutStats?.length
+        ? sanity.aboutStats.map(s => ({ value: s.value ?? '', label: s.label ?? '' }))
+        : HERMLE_MOCK.about.stats,
+    },
     caseStudies: sanity.relatedCaseStudies?.length
       ? sanity.relatedCaseStudies.map(cs => ({
           title: cs.title || '',
@@ -76,7 +98,6 @@ function transformBrand(sanity: SanityBrand | null) {
 export async function generateStaticParams() {
   const slugs = await client.fetch<Array<{ slug: string }>>(allBrandSlugsQuery).catch(() => [])
   const params = slugs.map(s => ({ slug: s.slug }))
-  // Always include hermle so the mock fallback works
   if (!params.find(p => p.slug === 'hermle')) {
     params.push({ slug: 'hermle' })
   }

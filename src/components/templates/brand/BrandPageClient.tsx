@@ -99,10 +99,7 @@ export default function BrandPageClient({ brand }: { brand: BrandData }) {
                 Built for Micron-Level <span style={{ color: '#F9423A' }}>Precision</span>
               </h3>
               <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, lineHeight: 1.85, color: 'rgba(255,255,255,.4)', margin: '0 0 24px' }}>
-                Every {brand.name} machining center is built on a mineral-cast machine bed — three times the vibration damping of cast iron — with direct-drive torque motors and thermal compensation that maintains positioning accuracy across extended production runs.
-              </p>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, lineHeight: 1.85, color: 'rgba(255,255,255,.4)', margin: 0 }}>
-                The specs shown represent flagship capabilities across the full product range. Individual series may vary — consult your Phillips applications engineer for machine-specific configurations.
+                {brand.about.description}
               </p>
             </div>
           </div>
@@ -112,19 +109,14 @@ export default function BrandPageClient({ brand }: { brand: BrandData }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64 }}>
             <div>
               <h3 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 28, textTransform: 'uppercase' as const, letterSpacing: 1, margin: '0 0 20px' }}>
-                About <span style={{ color: '#F9423A' }}>{brand.name}</span>
+                {brand.about.title || <>About <span style={{ color: '#F9423A' }}>{brand.name}</span></>}
               </h3>
               <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, lineHeight: 1.85, color: 'rgba(255,255,255,.4)', margin: 0 }}>
                 {brand.about.description}
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignContent: 'start' }}>
-              {[
-                { label: 'Founded', value: brand.about.founded },
-                { label: 'Employees', value: brand.about.employees },
-                { label: 'Countries', value: brand.about.countries },
-                { label: 'In-House Mfg', value: brand.about.inHouseMfg },
-              ].map(s => (
+              {brand.about.stats.map(s => (
                 <div key={s.label} style={{ background: 'rgba(255,255,255,.03)', border: '1px solid rgba(255,255,255,.06)', borderRadius: 6, padding: '28px 24px' }}>
                   <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 36, color: '#fff', lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
                   <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase' as const, color: 'rgba(255,255,255,.3)' }}>{s.label}</div>

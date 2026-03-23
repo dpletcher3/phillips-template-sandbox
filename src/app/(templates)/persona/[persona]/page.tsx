@@ -23,6 +23,14 @@ interface SanityPersonaPage {
   }>
   ctaLabel?: string
   ctaUrl?: string
+  forLabel?: string
+  stats?: Array<{ value?: string; label?: string }>
+  filterTabs?: Array<{
+    id?: string
+    label?: string
+    solutions?: Array<{ name?: string; slug?: { current?: string }; offering?: string; shortDesc?: string }>
+    brands?: Array<{ name?: string; slug?: { current?: string }; tagline?: string; category?: string[] }>
+  }>
   seo?: {
     metaTitle?: string
     metaDescription?: string
@@ -42,6 +50,9 @@ function transformPersona(sanity: SanityPersonaPage | null) {
     ctaUrl: sanity.ctaUrl || MANUFACTURER_MOCK.ctaUrl,
     tabs: {
       ...MANUFACTURER_MOCK.tabs,
+      stats: sanity.stats?.length
+        ? sanity.stats.map(s => ({ value: s.value ?? '', label: s.label ?? '' }))
+        : MANUFACTURER_MOCK.tabs.stats,
       solutions: sanity.featuredSolutions?.length
         ? sanity.featuredSolutions.map(s => ({
             label: s.name || '',

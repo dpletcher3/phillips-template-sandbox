@@ -13,6 +13,10 @@ export default defineType({
     defineField({ name: 'mainImage',   title: 'Main Image',   type: 'image'     }),
     defineField({ name: 'excerpt',     title: 'Excerpt',      type: 'text'      }),
     defineField({ name: 'body',        title: 'Body',         type: 'blockContent' }),
+    defineField({ name: 'readTime',   title: 'Read Time',    type: 'string' }),
+    defineField({ name: 'heroImageCaption', title: 'Hero Image Caption', type: 'string' }),
+    defineField({ name: 'pullQuote',  title: 'Pull Quote',   type: 'text' }),
+    defineField({ name: 'tableOfContents', title: 'Table of Contents', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'seo',         title: 'SEO',          type: 'seoBlock'  }),
   ],
   preview: {

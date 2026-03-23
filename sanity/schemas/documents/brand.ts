@@ -13,6 +13,13 @@ export default defineType({
     defineField({ name: 'tagline',         title: 'Tagline',       type: 'string'     }),
     defineField({ name: 'description',     title: 'Description',   type: 'text'       }),
     defineField({ name: 'productLines',    title: 'Product Lines', type: 'array', of: [{ type: 'productLine' }] }),
+    defineField({ name: 'stats',           title: 'Hero Stats',    type: 'array', of: [{ type: 'object', fields: [{ name: 'value', type: 'string', title: 'Value' }, { name: 'label', type: 'string', title: 'Label' }] }], validation: r => r.max(3) }),
+    defineField({ name: 'taglineBarText',  title: 'Tagline Bar Text', type: 'string' }),
+    defineField({ name: 'aboutTitle',      title: 'About Title',   type: 'string' }),
+    defineField({ name: 'aboutBody',       title: 'About Body',    type: 'text' }),
+    defineField({ name: 'aboutStats',      title: 'About Stats',   type: 'array', of: [{ type: 'object', fields: [{ name: 'value', type: 'string', title: 'Value' }, { name: 'label', type: 'string', title: 'Label' }] }] }),
+    defineField({ name: 'marqueeItems',    title: 'Marquee Items', type: 'array', of: [{ type: 'string' }] }),
+    defineField({ name: 'caseStudiesIntro', title: 'Case Studies Intro', type: 'text' }),
     defineField({ name: 'seo',             title: 'SEO',           type: 'seoBlock'   }),
   ],
   preview: {

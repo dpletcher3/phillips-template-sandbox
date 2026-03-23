@@ -46,4 +46,6 @@ export const FIVE_AXIS_MOCK: SolutionData = {
   ctaAccent: 'Solution',
   ctaDescription:
     'Tell us about your part, your tolerance, and your production volume. Our applications engineers will recommend the right 5-axis platform — and prove it with a test cut.',
+  ctaPrimaryLabel: 'Request a Quote',
+  ctaSecondaryLabel: 'Schedule a Test Cut',
 }

@@ -77,12 +77,15 @@ export const HERMLE_MOCK: BrandData = {
     { label: 'X-Axis Travel',        value: 1050,   max: 1500,   unit: 'mm' },
   ],
   about: {
+    title: 'About Hermle',
     description:
       'Founded in Gosheim, Germany in 1938, Hermle AG has built its reputation on uncompromising precision engineering. Every Hermle machining center is manufactured in-house — from the mineral-cast machine bed to the spindle assembly — ensuring complete quality control. Hermle machines serve the world\'s most demanding industries: aerospace, medical, automotive, and precision mold & die. Phillips Corporation is the exclusive North American distributor for Hermle, providing sales, applications engineering, and service from coast to coast.',
-    founded: '1938',
-    employees: '1,300+',
-    countries: '50+',
-    inHouseMfg: '95%',
+    stats: [
+      { label: 'Founded', value: '1938' },
+      { label: 'Employees', value: '1,300+' },
+      { label: 'Countries', value: '50+' },
+      { label: 'In-House Mfg', value: '95%' },
+    ],
   },
   caseStudies: [
     {

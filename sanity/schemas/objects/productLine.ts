@@ -16,6 +16,10 @@ export default defineType({
     defineField({ name: 'tableLoad',   title: 'Table Load',    type: 'string'  }),
     defineField({ name: 'axes',        title: 'Axes',          type: 'string'  }),
     defineField({ name: 'bestFor',     title: 'Best For',      type: 'string'  }),
+    defineField({ name: 'tagline',    title: 'Tagline',       type: 'string'  }),
+    defineField({ name: 'type',       title: 'Machine Type',  type: 'string'  }),
+    defineField({ name: 'keySpecs',   title: 'Key Specs',     type: 'array', of: [{ type: 'object', fields: [{ name: 'value', type: 'string', title: 'Value' }, { name: 'label', type: 'string', title: 'Label' }] }] }),
+    defineField({ name: 'modelDetails', title: 'Model Details', type: 'array', of: [{ type: 'object', fields: [{ name: 'name', type: 'string', title: 'Name' }, { name: 'travel', type: 'string', title: 'Travel' }, { name: 'spindle', type: 'string', title: 'Spindle' }] }] }),
   ],
   preview: {
     select: { title: 'name', subtitle: 'models' },

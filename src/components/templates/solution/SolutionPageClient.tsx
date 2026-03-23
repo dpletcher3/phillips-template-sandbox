@@ -174,7 +174,7 @@ export default function SolutionPageClient({ sol }: { sol: SolutionData }) {
               onMouseEnter={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#000' }}
               onMouseLeave={e => { e.currentTarget.style.background = '#F9423A'; e.currentTarget.style.color = '#fff' }}
             >
-              Request a Quote
+              {sol.ctaPrimaryLabel ?? 'Request a Quote'}
             </a>
             <a
               href="#test-cut"
@@ -197,7 +197,7 @@ export default function SolutionPageClient({ sol }: { sol: SolutionData }) {
               onMouseEnter={e => { e.currentTarget.style.borderColor = '#F9423A' }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,.2)' }}
             >
-              Schedule a Test Cut
+              {sol.ctaSecondaryLabel ?? 'Schedule a Test Cut'}
             </a>
           </div>
         </div>

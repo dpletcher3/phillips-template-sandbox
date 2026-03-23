@@ -15,6 +15,10 @@ export default defineType({
     defineField({ name: 'body',          title: 'Body',           type: 'blockContent' }),
     defineField({ name: 'relatedBrands', title: 'Related Brands', type: 'array', of: [{ type: 'reference', to: [{ type: 'brand' }] }] }),
     defineField({ name: 'results',       title: 'Results',        type: 'array', of: [{ type: 'object', fields: [{ name: 'label', type: 'string', title: 'Label' }, { name: 'value', type: 'string', title: 'Value' }] }] }),
+    defineField({ name: 'pullQuote',    title: 'Pull Quote',     type: 'text' }),
+    defineField({ name: 'pullQuoteAttribution', title: 'Pull Quote Attribution', type: 'string' }),
+    defineField({ name: 'kickerTags',   title: 'Kicker Tags',    type: 'array', of: [{ type: 'string' }] }),
+    defineField({ name: 'byline',       title: 'Byline',         type: 'string' }),
     defineField({ name: 'seo',           title: 'SEO',            type: 'seoBlock' }),
   ],
   preview: {

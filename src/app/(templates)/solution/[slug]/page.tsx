@@ -16,13 +16,23 @@ interface SanitySolution {
     tagline?: string
     logo?: unknown
   }> | null
+  bgNumber?: string
+  typePills?: string[]
+  specStripe?: Array<{ label?: string; value?: string }>
+  specBars?: Array<{ label?: string; value?: number; max?: number; unit?: string; note?: string }>
+  specSectionTitle?: string
+  specSectionBody?: string
+  ctaTitle?: string
+  ctaSubtitle?: string
+  ctaDescription?: string
+  ctaPrimaryLabel?: string
+  ctaSecondaryLabel?: string
   seo?: {
     metaTitle?: string
     metaDescription?: string
   } | null
 }
 
-/** Extract plain text from Sanity blockContent (portable text) or pass through strings. */
 function toPlainText(value: unknown): string {
   if (typeof value === 'string') return value
   if (!Array.isArray(value)) return ''
@@ -45,8 +55,29 @@ function transformSolution(sanity: SanitySolution | null) {
     ...FIVE_AXIS_MOCK,
     name: sanity.name,
     offering: sanity.offering || FIVE_AXIS_MOCK.offering,
+    offeringNumber: sanity.bgNumber ?? FIVE_AXIS_MOCK.offeringNumber,
     shortDesc: sanity.shortDesc || FIVE_AXIS_MOCK.shortDesc,
     description: description || FIVE_AXIS_MOCK.description,
+    typePills: sanity.typePills?.length ? sanity.typePills : FIVE_AXIS_MOCK.typePills,
+    specNumbers: sanity.specStripe?.length
+      ? sanity.specStripe.map(s => ({ value: s.value ?? '', label: s.label ?? '' }))
+      : FIVE_AXIS_MOCK.specNumbers,
+    specs: sanity.specBars?.length
+      ? sanity.specBars.map(s => ({
+          label: s.label ?? '',
+          value: s.value ?? 0,
+          max: s.max ?? 100,
+          unit: s.unit ?? '',
+          note: s.note,
+        }))
+      : FIVE_AXIS_MOCK.specs,
+    specsHeading: sanity.specSectionTitle ?? FIVE_AXIS_MOCK.specsHeading,
+    specsDescription: sanity.specSectionBody ?? FIVE_AXIS_MOCK.specsDescription,
+    ctaHeading: sanity.ctaTitle ?? FIVE_AXIS_MOCK.ctaHeading,
+    ctaAccent: sanity.ctaSubtitle ?? FIVE_AXIS_MOCK.ctaAccent,
+    ctaDescription: sanity.ctaDescription ?? FIVE_AXIS_MOCK.ctaDescription,
+    ctaPrimaryLabel: sanity.ctaPrimaryLabel ?? 'Request a Quote',
+    ctaSecondaryLabel: sanity.ctaSecondaryLabel ?? 'Schedule a Test Cut',
     relatedBrands: Array.isArray(sanity.relatedBrands) && sanity.relatedBrands.length
       ? sanity.relatedBrands.map(b => ({
           name: b.name || '',
@@ -78,15 +109,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function SolutionPage({ params }: { params: { slug: string } }) {
   const sanitySolution = await client.fetch<SanitySolution | null>(solutionQuery, { slug: params.slug }).catch(() => null)
-
-  if (!sanitySolution) {
-    return (
-      <main style={{ background: '#000', color: '#fff', padding: '60px', fontFamily: 'sans-serif', minHeight: '100vh' }}>
-        <p style={{ color: '#F9423A' }}>Solution not found</p>
-      </main>
-    )
-  }
-
   const sol = transformSolution(sanitySolution)
 
   return <SolutionPageClient sol={sol} />

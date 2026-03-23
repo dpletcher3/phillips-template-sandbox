@@ -43,11 +43,9 @@ export interface BrandData {
   productLines: ProductLine[]
   specs: SpecBar[]
   about: {
+    title: string
     description: string
-    founded: string
-    employees: string
-    countries: string
-    inHouseMfg: string
+    stats: Stat[]
   }
   caseStudies: CaseStudyPreview[]
   marqueeText: string
