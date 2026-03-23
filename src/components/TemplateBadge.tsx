@@ -1,11 +1,17 @@
-export default function TemplateBadge({ label = 'EYE CATCHING' }: { label?: string }) {
+export default function TemplateBadge({
+  label = 'EYE CATCHING',
+  color = '#F9423A'
+}: {
+  label?: string
+  color?: string
+}) {
   return (
     <div style={{
       position: 'fixed',
       top: '12px',
       right: '12px',
       zIndex: 9999,
-      background: '#F9423A',
+      background: color,
       color: '#fff',
       fontFamily: '"Barlow Condensed", sans-serif',
       fontSize: '11px',
@@ -16,7 +22,7 @@ export default function TemplateBadge({ label = 'EYE CATCHING' }: { label?: stri
       display: 'flex',
       alignItems: 'center',
       gap: '7px',
-      boxShadow: '0 2px 12px rgba(249,66,58,0.4)',
+      boxShadow: `0 2px 12px ${color}66`,
       pointerEvents: 'none',
       userSelect: 'none',
     }}>
