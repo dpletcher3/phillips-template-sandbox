@@ -1,9 +1,170 @@
+/*
+  ================================================================
+  COURSE TEMPLATE — Connect to Sanity
+  ================================================================
+  Sanity schema: course (sanity/schemas/documents/course.ts)
+
+  Section → Field mapping:
+  - Hero      → course.title, course.track, course.audience, course.description, course.duration
+  - Modules   → custom object array on course document
+  - Info card → course.duration, course.track, relatedBrands
+  - Prereqs   → custom field or related courses
+  ================================================================
+*/
+
+'use client'
+
+import { useState } from 'react'
+
+const RED = '#F9423A'
+const MAROON = '#3F0017'
+const BG = '#f8f8f5'
+
+const MOCK = {
+  track: 'CNC',
+  level: 'Intermediate',
+  title: '5-Axis Programming & Setup',
+  subtitle: 'From 3+2 to Simultaneous: Master 5-axis operations on Hermle and Haas platforms.',
+  description: 'This 3-day intensive course covers everything from work coordinate systems and trunnion kinematics to simultaneous 5-axis toolpath strategies. You\'ll program, set up, and run parts on live machines at the Phillips Technology Center.',
+  duration: '3 Days',
+  schedule: 'Tue–Thu, 8 AM–5 PM',
+  price: '$1,800',
+  location: 'Phillips Technology Center, Hanover, MD',
+  machines: ['Hermle C 32 U', 'Haas UMC-750'],
+  modules: [
+    { number: 1, title: '5-Axis Fundamentals', description: 'Machine kinematics, coordinate systems, RTCP, and toolpoint control. Understanding trunnion vs. swivel-head configurations.' },
+    { number: 2, title: 'Work Holding & Fixturing', description: 'Zero-point systems, tombstone fixtures, and pallet strategies for 5-axis work. Live setup exercises.' },
+    { number: 3, title: '3+2 Positional Machining', description: 'Programming indexed positions for multi-face machining. Tool reach optimization and collision avoidance.' },
+    { number: 4, title: 'Simultaneous 5-Axis Toolpaths', description: 'Swarf cutting, flowline, and morph-between-curves strategies. CAM programming with hyperMILL and Mastercam.' },
+    { number: 5, title: 'Probing & In-Process Measurement', description: 'Part alignment, tool length compensation, and closed-loop quality verification on the machine.' },
+    { number: 6, title: 'Production Project', description: 'Program, set up, and run a complex 5-axis part from print to finished piece. Peer review and instructor feedback.' },
+  ],
+  prerequisites: [
+    'Basic CNC mill operation experience',
+    'Familiarity with G-code fundamentals',
+    'Completion of "CNC Mill Essentials" or equivalent',
+    'CAM software exposure (Mastercam, hyperMILL, or similar)',
+  ],
+}
+
 export default function CourseTemplate() {
+  const [activeModule, setActiveModule] = useState(0)
+
   return (
-    <main style={{ background: '#000', minHeight: '100vh', color: '#fff', padding: '60px', fontFamily: 'sans-serif' }}>
-      <a href="/" style={{ color: '#F9423A', fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: 700 }}>← Back to Sandbox</a>
-      <h1 style={{ fontFamily: 'serif', fontSize: '64px', fontWeight: 900, textTransform: 'uppercase', margin: '32px 0 16px' }}>Course</h1>
-      <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '14px' }}>Template content renders here — connect to Sanity to populate</p>
+    <main style={{ background: BG, minHeight: '100vh', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
+      {/* Maroon topbar breadcrumb */}
+      <div style={{ background: MAROON, padding: '10px 56px', display: 'flex', gap: 8, alignItems: 'center' }}>
+        <a href="/" style={{ color: 'rgba(255,255,255,.7)', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none' }}>Sandbox</a>
+        <span style={{ color: 'rgba(255,255,255,.3)' }}>/</span>
+        <span style={{ color: 'rgba(255,255,255,.5)', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase' }}>Training</span>
+        <span style={{ color: 'rgba(255,255,255,.3)' }}>/</span>
+        <span style={{ color: '#fff', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase' }}>{MOCK.track}</span>
+      </div>
+
+      {/* ---- HERO: 2-col ---- */}
+      <section style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 48, padding: '48px 56px 56px' }}>
+        {/* Left */}
+        <div>
+          <span style={{ display: 'inline-block', padding: '5px 14px', background: RED, color: '#fff', fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', borderRadius: 2, marginBottom: 16 }}>{MOCK.track} Track</span>
+          <h1 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 'clamp(40px, 5vw, 56px)', textTransform: 'uppercase', lineHeight: 1, letterSpacing: 1, margin: '0 0 12px', color: '#1a1a1a' }}>{MOCK.title}</h1>
+          <p style={{ fontSize: 14, fontWeight: 500, color: '#666', margin: '0 0 8px' }}>{MOCK.subtitle}</p>
+          <div style={{ display: 'flex', gap: 16, marginBottom: 24 }}>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#999', letterSpacing: 1, textTransform: 'uppercase' }}>{MOCK.level}</span>
+            <span style={{ color: '#ddd' }}>·</span>
+            <span style={{ fontSize: 11, fontWeight: 600, color: '#999', letterSpacing: 1, textTransform: 'uppercase' }}>{MOCK.duration}</span>
+          </div>
+          <p style={{ fontSize: 13, lineHeight: 1.85, color: '#777', maxWidth: 520, margin: '0 0 28px' }}>{MOCK.description}</p>
+          <div style={{ display: 'flex', gap: 12 }}>
+            <a href="#" style={{ padding: '13px 28px', background: RED, color: '#fff', fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', borderRadius: 2 }}>Enroll Now</a>
+            <a href="#" style={{ padding: '13px 28px', background: 'transparent', color: '#1a1a1a', fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 2, textTransform: 'uppercase', textDecoration: 'none', border: '1px solid #ddd', borderRadius: 2 }}>Download Syllabus</a>
+          </div>
+        </div>
+
+        {/* Right: info card */}
+        <div style={{ background: '#fff', border: '1px solid #e8e6e1', borderRadius: 8, padding: '28px 24px', alignSelf: 'start', position: 'sticky', top: 24 }}>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 32, color: RED, marginBottom: 4 }}>{MOCK.price}</div>
+          <div style={{ fontSize: 10, color: '#999', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 20 }}>per student</div>
+          {[
+            { label: 'Duration', value: MOCK.duration },
+            { label: 'Schedule', value: MOCK.schedule },
+            { label: 'Location', value: MOCK.location },
+          ].map(r => (
+            <div key={r.label} style={{ padding: '12px 0', borderTop: '1px solid #f0ede8' }}>
+              <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#999', marginBottom: 4 }}>{r.label}</div>
+              <div style={{ fontSize: 13, color: '#444' }}>{r.value}</div>
+            </div>
+          ))}
+          <div style={{ padding: '12px 0', borderTop: '1px solid #f0ede8' }}>
+            <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#999', marginBottom: 8 }}>Machines</div>
+            {MOCK.machines.map(m => (
+              <div key={m} style={{ fontSize: 12, color: '#444', padding: '4px 0' }}>• {m}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---- MODULES + PREREQUISITES ---- */}
+      <section style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 48, padding: '0 56px 80px' }}>
+        {/* Left: module list */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+            <div style={{ width: 32, height: 2, background: RED }} />
+            <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, textTransform: 'uppercase', color: '#999' }}>Course Modules</span>
+          </div>
+          {MOCK.modules.map((m, i) => (
+            <div
+              key={m.number}
+              onClick={() => setActiveModule(i)}
+              style={{
+                display: 'flex',
+                gap: 20,
+                padding: '20px 0',
+                borderBottom: '1px solid #e8e6e1',
+                cursor: 'pointer',
+                transition: 'background .15s',
+              }}
+            >
+              <div
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: '50%',
+                  background: activeModule === i ? RED : '#fff',
+                  border: activeModule === i ? 'none' : '2px solid #ddd',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: activeModule === i ? '#fff' : '#999',
+                  flexShrink: 0,
+                  transition: 'background .2s, color .2s, border .2s',
+                }}
+              >
+                {m.number}
+              </div>
+              <div>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 18, textTransform: 'uppercase', letterSpacing: 1, color: activeModule === i ? RED : '#1a1a1a', transition: 'color .2s', marginBottom: 4 }}>{m.title}</div>
+                <div style={{ fontSize: 12, lineHeight: 1.7, color: '#999', maxHeight: activeModule === i ? 100 : 0, overflow: 'hidden', transition: 'max-height .3s ease' }}>{m.description}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Right: prerequisites */}
+        <div style={{ alignSelf: 'start' }}>
+          <div style={{ background: '#fff', border: '1px solid #e8e6e1', borderRadius: 8, padding: '28px 24px' }}>
+            <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: '#1a1a1a', marginBottom: 16 }}>Prerequisites</div>
+            {MOCK.prerequisites.map((p, i) => (
+              <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', padding: '10px 0', borderTop: i > 0 ? '1px solid #f0ede8' : 'none' }}>
+                <div style={{ width: 6, height: 6, borderRadius: '50%', background: RED, marginTop: 6, flexShrink: 0 }} />
+                <div style={{ fontSize: 12, lineHeight: 1.6, color: '#666' }}>{p}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
