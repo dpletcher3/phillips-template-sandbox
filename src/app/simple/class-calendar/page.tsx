@@ -1,9 +1,15 @@
+import { Metadata } from 'next'
 import { client } from '../../../../sanity/lib/client'
 import { classCalendarQuery } from '@/lib/queries'
 
 export const revalidate = 30
 import { CLASS_CALENDAR_MOCK } from '@/components/templates/class-calendar/mockData'
 import SimpleClassCalendarClient from '@/components/templates-simple/class-calendar/SimpleClassCalendarClient'
+
+export const metadata: Metadata = {
+  title: 'Class Calendar | Phillips Template Sandbox',
+  description: 'Upcoming training classes and registration — Phillips Corporation',
+}
 
 interface SanityClassEvent {
   _id: string
