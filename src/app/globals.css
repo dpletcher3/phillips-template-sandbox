@@ -3,25 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Phillips Brand Colors */
+  --red:     #F9423A;
+  --blue:    #00AEEF;
+  --gold:    #F68B33;
+  --black:   #000000;
+  --maroon:  #3F0017;
+  --grey:    #647883;
+  --light:   #D7DFE3;
+  --bg:      #F2F4F6;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  /* Typography */
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body:    'Montserrat', sans-serif;
 }
