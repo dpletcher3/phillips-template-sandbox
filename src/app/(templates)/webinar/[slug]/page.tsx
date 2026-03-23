@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { webinarQuery, allWebinarSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { WEBINAR_MOCK } from '@/components/templates/webinar/mockData'
 import WebinarPageClient from '@/components/templates/webinar/WebinarPageClient'
 

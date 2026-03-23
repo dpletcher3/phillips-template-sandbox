@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { caseStudyQuery, allCaseStudySlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { CASE_STUDY_MOCK } from '@/components/templates/case-study/mockData'
 import CaseStudyPageClient from '@/components/templates/case-study/CaseStudyPageClient'
 

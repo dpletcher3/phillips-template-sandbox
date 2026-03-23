@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { solutionQuery, allSolutionSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { FIVE_AXIS_MOCK } from '@/components/templates/solution/mockData'
 import SolutionPageClient from '@/components/templates/solution/SolutionPageClient'
 

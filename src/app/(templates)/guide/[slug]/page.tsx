@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { guideQuery, allGuideSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { GUIDE_MOCK } from '@/components/templates/guide/mockData'
 import GuidePageClient from '@/components/templates/guide/GuidePageClient'
 

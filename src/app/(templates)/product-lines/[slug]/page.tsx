@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { brandProductLinesQuery, allBrandSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { PRODUCT_LINES_MOCK } from '@/components/templates/product-lines/mockData'
 import ProductLinesPageClient from '@/components/templates/product-lines/ProductLinesPageClient'
 

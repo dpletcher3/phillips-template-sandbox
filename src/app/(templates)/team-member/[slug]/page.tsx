@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { teamMemberQuery, allTeamMemberSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { TEAM_MEMBER_MOCK } from '@/components/templates/team-member/mockData'
 import TeamMemberPageClient from '@/components/templates/team-member/TeamMemberPageClient'
 

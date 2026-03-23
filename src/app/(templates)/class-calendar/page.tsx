@@ -1,5 +1,7 @@
 import { client } from '../../../../sanity/lib/client'
 import { classCalendarQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { CLASS_CALENDAR_MOCK } from '@/components/templates/class-calendar/mockData'
 import ClassCalendarPageClient from '@/components/templates/class-calendar/ClassCalendarPageClient'
 

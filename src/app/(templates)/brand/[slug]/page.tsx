@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
+
+export const revalidate = 30
 import { brandQuery, allBrandSlugsQuery } from '@/lib/queries'
 import { HERMLE_MOCK } from '@/components/templates/brand/mockData'
 import BrandPageClient from '@/components/templates/brand/BrandPageClient'

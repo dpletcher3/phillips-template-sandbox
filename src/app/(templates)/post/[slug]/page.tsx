@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { postQuery, allPostSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { POST_MOCK } from '@/components/templates/post/mockData'
 import PostPageClient from '@/components/templates/post/PostPageClient'
 

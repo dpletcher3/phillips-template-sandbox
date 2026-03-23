@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { locationQuery, allLocationSlugsQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { LOCATION_MOCK } from '@/components/templates/location/mockData'
 import LocationPageClient from '@/components/templates/location/LocationPageClient'
 

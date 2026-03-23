@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { client } from '../../../../../sanity/lib/client'
 import { personaPageQuery } from '@/lib/queries'
+
+export const revalidate = 30
 import { MANUFACTURER_MOCK } from '@/components/templates/persona/mockData'
 import PersonaPageClient from '@/components/templates/persona/PersonaPageClient'
 
