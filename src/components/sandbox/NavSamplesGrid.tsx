@@ -55,7 +55,13 @@ export default function NavSamplesGrid() {
             iframeSrc="/nav-samples/strong.html"
             accentColor="#F9423A"
           />
-          {/* Future nav variants drop in here */}
+          <NavSampleCard
+            title="Simple"
+            description="Clean white mega nav — I'm a…, Solutions, Brands, Training, Resources, About. All 6 panels fully interactive."
+            theme="White panels · Barlow Condensed · Red accent system"
+            iframeSrc="/nav-samples/simple.html"
+            accentColor="#000000"
+          />
         </div>
 
       </div>
