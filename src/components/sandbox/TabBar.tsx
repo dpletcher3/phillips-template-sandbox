@@ -9,9 +9,9 @@ export default function TabBar() {
   const router = useRouter()
   const active: TopTab = searchParams.get('tab') === 'nav' ? 'nav' : 'templates'
 
-  const tabs: { key: TopTab; label: string }[] = [
-    { key: 'templates', label: 'Templates' },
-    { key: 'nav', label: 'Nav Samples' },
+  const tabs: { key: TopTab; label: string; count: number; badgeBg: string; badgeColor: string }[] = [
+    { key: 'templates', label: 'Templates', count: 12, badgeBg: 'rgba(255,255,255,0.06)', badgeColor: 'rgba(255,255,255,0.45)' },
+    { key: 'nav', label: 'Nav Samples', count: 1, badgeBg: 'rgba(249,66,58,0.15)', badgeColor: '#F9423A' },
   ]
 
   return (
@@ -50,6 +50,16 @@ export default function TabBar() {
             }}
           >
             {t.label}
+            <span style={{
+              background: t.badgeBg,
+              color: t.badgeColor,
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: 9,
+              padding: '1px 6px',
+              marginLeft: 6,
+            }}>
+              {t.count}
+            </span>
           </button>
         )
       })}

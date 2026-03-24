@@ -1,65 +1,63 @@
+import NavSampleCard from './NavSampleCard'
+
 export default function NavSamplesGrid() {
   return (
     <div style={{
       background: '#09090B',
-      padding: '64px 28px',
-      textAlign: 'center',
+      minHeight: '80vh',
     }}>
-      <p style={{
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: '9px',
-        letterSpacing: '0.16em',
-        color: 'rgba(255,255,255,0.45)',
-        marginBottom: '14px',
-        marginTop: 0,
-      }}>
-        {'// Nav Samples'}
-      </p>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '40px 28px 80px' }}>
 
-      <h2 style={{
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: 800,
-        fontSize: '32px',
-        color: 'rgba(255,255,255,0.95)',
-        margin: '0 0 12px',
-      }}>
-        Navigation Prototypes
-      </h2>
+        {/* Section header */}
+        <div style={{ marginBottom: 32 }}>
+          <div style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: 9,
+            letterSpacing: '.16em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.45)',
+            marginBottom: 10,
+          }}>
+            {'// Nav Samples'}
+          </div>
+          <h2 style={{
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 28,
+            fontWeight: 800,
+            color: 'rgba(255,255,255,0.95)',
+            letterSpacing: -0.5,
+            margin: '0 0 8px',
+          }}>
+            Navigation Prototypes
+          </h2>
+          <p style={{
+            fontSize: 13,
+            color: 'rgba(255,255,255,0.45)',
+            maxWidth: 480,
+            margin: 0,
+            lineHeight: 1.5,
+          }}>
+            Full-fidelity interactive nav prototypes for each template theme.
+            Click any card to preview or open full-screen.
+          </p>
+        </div>
 
-      <p style={{
-        fontSize: '14px',
-        color: 'rgba(255,255,255,0.45)',
-        marginBottom: '40px',
-        marginTop: 0,
-      }}>
-        Interactive nav samples for each template theme
-      </p>
-
-      <div style={{
-        background: '#111113',
-        border: '1px solid rgba(255,255,255,0.07)',
-        borderTop: '2px solid rgba(255,255,255,0.07)',
-        padding: '24px',
-        maxWidth: '300px',
-        margin: '0 auto',
-      }}>
-        <p style={{
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 700,
-          fontSize: '16px',
-          color: 'rgba(255,255,255,0.85)',
-          margin: '0 0 6px',
+        {/* Card grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: 16,
         }}>
-          Strong Nav
-        </p>
-        <p style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '11px',
-          color: 'rgba(255,255,255,0.3)',
-          margin: 0,
-        }}>
-          Coming in Prompt 2
-        </p>
+          <NavSampleCard
+            title="Strong"
+            description="Full dark mega nav — I'm a…, Solutions, Brands, Training, Resources, About. All 6 panels fully interactive."
+            theme="Full dark · JetBrains Mono · Red + Cyan + Gold"
+            iframeSrc="/nav-samples/strong.html"
+            accentColor="#F9423A"
+          />
+          {/* Future nav variants drop in here */}
+        </div>
+
       </div>
     </div>
   )

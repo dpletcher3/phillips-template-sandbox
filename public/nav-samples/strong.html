@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phillips Corporation — Mega Nav · Strong Theme</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── STRONG DESIGN TOKENS ── */
+:root {
+  --red:       #F9423A;
+  --cyan:      #00D4FF;
+  --gold:      #F68B33;
+
+  --z-bg:      #09090B;
+  --z-surface: #111113;
+  --z-card:    #18181B;
+  --z-border:  rgba(255,255,255,0.07);
+  --z-dim:     rgba(255,255,255,0.45);
+  --z-mid:     rgba(255,255,255,0.70);
+  --z-bright:  rgba(255,255,255,0.95);
+
+  --l-bg:      #ffffff;
+  --l-alt:     #F4F5F7;
+  --l-border:  #E2E4E8;
+  --l-ink:     #0D0D0E;
+  --l-mid:     #3C3F45;
+  --l-dim:     #72777F;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--z-bg);
+  color: var(--z-bright);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; }
+
+/* ── PULSE ANIMATION ── */
+@keyframes pulseRing { to { transform: scale(2.2); opacity: 0; } }
+@keyframes marquee   { to { transform: translateX(-50%); } }
+@keyframes fadeDown  { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+
+/* ════════════════════════════════════════
+   NAV SHELL
+════════════════════════════════════════ */
+nav {
+  background: rgba(9,9,11,.92);
+  backdrop-filter: blur(20px);
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--z-border);
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: stretch; height: 58px; padding: 0 28px;
+}
+
+/* Logo */
+.nav-logo {
+  display: flex; align-items: center; margin-right: 32px; flex-shrink: 0;
+  gap: 10px;
+}
+.nav-logo-mark {
+  width: 26px; height: 26px; background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: #fff;
+}
+.nav-logo-name {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--z-bright);
+}
+
+/* Nav items */
+.nav-items { display: flex; align-items: stretch; list-style: none; flex: 1; }
+.nav-items li { display: flex; align-items: stretch; }
+
+.nav-btn {
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; gap: 5px; padding: 0 13px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--z-mid); border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s; white-space: nowrap;
+}
+.nav-btn:hover, .nav-btn.active { color: var(--z-bright); border-bottom-color: var(--red); }
+.nav-btn .chev { width: 9px; height: 9px; transition: transform .2s; opacity: .6; }
+.nav-btn.active .chev { transform: rotate(180deg); }
+
+/* Right side */
+.nav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.btn-search {
+  background: none; border: none; cursor: pointer;
+  color: var(--z-dim); padding: 7px;
+  display: flex; align-items: center; transition: color .15s;
+}
+.btn-search:hover { color: var(--z-bright); }
+.btn-cta {
+  background: transparent; color: var(--red);
+  border: 1px solid var(--red); padding: 0 18px; height: 30px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+  transition: all .2s; white-space: nowrap;
+}
+.btn-cta:hover { background: var(--red); color: #fff; }
+
+/* ════════════════════════════════════════
+   MEGA DROPDOWN WRAPPER
+════════════════════════════════════════ */
+.mega-wrap {
+  position: fixed; left: 0; right: 0; top: 58px; z-index: 200;
+  pointer-events: none; opacity: 0; transform: translateY(-6px);
+  transition: opacity .18s, transform .18s;
+}
+.mega-wrap.open { opacity: 1; transform: translateY(0); pointer-events: all; }
+
+.mega-panel {
+  background: var(--z-surface);
+  border-top: 1px solid var(--z-border);
+  border-bottom: 1px solid var(--z-border);
+  box-shadow: 0 24px 64px rgba(0,0,0,.6);
+  display: none;
+}
+.mega-panel.active { display: block; animation: fadeDown .16s ease; }
+.panel-inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+
+/* ════════════════════════════════════════
+   PANEL LABEL
+════════════════════════════════════════ */
+.panel-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--z-dim);
+  margin-bottom: 16px; display: block;
+}
+
+/* ════════════════════════════════════════
+   PERSONA CARDS (I'M A… panel)
+════════════════════════════════════════ */
+.card-panel { padding: 22px 0 20px; }
+
+.card-grid { display: grid; gap: 8px; margin-bottom: 0; }
+.card-grid.cols-5 { grid-template-columns: repeat(5,1fr); }
+.card-grid.cols-6 { grid-template-columns: repeat(6,1fr); }
+
+.nav-card {
+  border: 1px solid var(--z-border); background: var(--z-card);
+  padding: 16px 14px; cursor: pointer;
+  transition: border-color .15s, background .15s;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.nav-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--ac, var(--red)); transform: scaleX(0);
+  transition: transform .2s; transform-origin: left;
+}
+.nav-card:hover { border-color: rgba(255,255,255,.15); background: #202024; }
+.nav-card:hover::before { transform: scaleX(1); }
+.nav-card.sel { border-color: var(--ac, var(--red)); background: #202024; }
+.nav-card.sel::before { transform: scaleX(1); }
+
+.card-icon {
+  font-size: 22px; margin-bottom: 9px; display: block; line-height: 1;
+  filter: grayscale(.3);
+}
+.card-name {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--z-bright); margin-bottom: 5px;
+}
+.card-desc { font-size: 10.5px; color: var(--z-dim); line-height: 1.6; flex: 1; }
+
+/* Detail expansion */
+.card-detail {
+  margin-top: 12px; background: var(--z-card);
+  border: 1px solid var(--z-border); padding: 18px 22px; display: none;
+}
+.card-detail.show { display: flex; gap: 28px; flex-wrap: wrap; animation: fadeDown .16s ease; }
+
+.dd-col { flex: 1; min-width: 130px; }
+.dd-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--z-dim);
+  margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid var(--z-border);
+}
+.dd-links { list-style: none; }
+.dd-links li { margin-bottom: 1px; }
+.dd-links a {
+  display: block; padding: 4px 6px; font-size: 11.5px; color: var(--z-mid);
+  text-decoration: none; transition: color .1s, background .1s; border-radius: 2px;
+}
+.dd-links a:hover { color: var(--z-bright); background: rgba(255,255,255,.04); }
+
+.dd-cta {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
+  padding: 7px 14px; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+  text-decoration: none; background: var(--red); color: #fff; transition: opacity .15s;
+}
+.dd-cta:hover { opacity: .85; }
+
+/* ════════════════════════════════════════
+   3-ZONE LAYOUT (Solutions, Brands, Training, Resources)
+════════════════════════════════════════ */
+.sol-layout { display: flex; gap: 0; min-height: 300px; }
+
+/* Zone 1 — Selector column */
+.sol-offerings {
+  width: 210px; flex-shrink: 0;
+  background: var(--z-bg);
+  border-right: 1px solid var(--z-border);
+  padding: 20px 12px;
+}
+.sol-offerings-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em; color: var(--z-dim);
+  padding: 0 4px 10px; display: block;
+}
+
+.off-card {
+  display: flex; align-items: center; gap: 9px; width: 100%;
+  background: var(--z-card); border: 1px solid var(--z-border);
+  padding: 9px 11px; margin-bottom: 6px; cursor: pointer;
+  transition: border-color .15s, background .15s; text-align: left;
+  position: relative; overflow: hidden;
+}
+.off-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--red); transform: scaleX(0); transform-origin: left;
+  transition: transform .18s;
+}
+.off-card:hover { border-color: rgba(255,255,255,.15); background: #202024; }
+.off-card:hover::before, .off-card.active::before { transform: scaleX(1); }
+.off-card.active { border-color: var(--red); background: #202024; }
+.off-card-icon { font-size: 16px; flex-shrink: 0; filter: grayscale(.3); }
+.off-card-name {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .04em;
+  color: var(--z-mid); line-height: 1.3;
+}
+.off-card.active .off-card-name { color: var(--z-bright); }
+
+/* Zone 2 — Content */
+.sol-center { flex: 1; padding: 20px 24px; min-width: 0; }
+
+.offering-content { display: none; }
+.offering-content.active { display: block; animation: fadeDown .14s ease; }
+
+.sol-center-header { margin-bottom: 14px; }
+.sol-center-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+  color: var(--z-bright); display: block; margin-bottom: 3px;
+}
+.sol-center-desc { font-size: 11px; color: var(--z-dim); }
+
+/* Product type tabs (Solutions > CNC) */
+.product-type-tabs {
+  display: flex; gap: 4px; margin-bottom: 14px; flex-wrap: wrap;
+}
+.pt-tab {
+  background: var(--z-card); border: 1px solid var(--z-border);
+  padding: 4px 12px; font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--z-dim); cursor: pointer; transition: all .15s;
+}
+.pt-tab:hover { border-color: rgba(255,255,255,.2); color: var(--z-mid); }
+.pt-tab.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+.pt-content { display: none; }
+.pt-content.active { display: block; animation: fadeDown .13s ease; }
+
+/* Link grid inside zone 2 */
+.link-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px 8px; }
+.link-grid a {
+  display: block; padding: 5px 6px; font-size: 11.5px; color: var(--z-mid);
+  text-decoration: none; transition: color .1s, background .1s; border-radius: 2px;
+}
+.link-grid a:hover { color: var(--z-bright); background: rgba(255,255,255,.04); }
+.link-grid a .tag {
+  display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; padding: 1px 5px; margin-left: 4px;
+  vertical-align: middle; background: rgba(249,66,58,.15); color: var(--red);
+}
+
+.view-all-link {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--red); text-decoration: none;
+  transition: color .15s;
+}
+.view-all-link:hover { color: var(--cyan); }
+
+/* Link cards (brand cards, resource cards) */
+.card-grid.cols-3 { grid-template-columns: repeat(3,1fr); }
+
+.link-card {
+  border: 1px solid var(--z-border); background: var(--z-card);
+  padding: 13px 14px; text-decoration: none; display: block;
+  transition: border-color .15s, background .15s;
+  position: relative; overflow: hidden;
+}
+.link-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--ac, var(--red)); transform: scaleX(0);
+  transition: transform .2s; transform-origin: left;
+}
+.link-card:hover { border-color: rgba(255,255,255,.15); background: #202024; }
+.link-card:hover::before { transform: scaleX(1); }
+
+.link-card-cat {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--z-dim); margin-bottom: 5px;
+}
+.link-card-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .04em;
+  color: var(--z-bright); margin-bottom: 7px;
+}
+.link-card-links { list-style: none; }
+.link-card-links li { margin-bottom: 1px; }
+.link-card-links a {
+  display: block; padding: 2px 0; font-size: 11px; color: var(--z-dim);
+  transition: color .1s;
+}
+.link-card-links a:hover { color: var(--z-bright); }
+
+/* Zone 3 — Callout */
+.sol-callout {
+  width: 205px; flex-shrink: 0; border-left: 1px solid var(--z-border);
+  padding: 20px 16px; display: flex; flex-direction: column; gap: 16px;
+}
+
+.callout-card {
+  background: linear-gradient(135deg, #1a0a0a 0%, #2a0f0f 50%, #1a0a0a 100%);
+  border: 1px solid rgba(249,66,58,.2);
+  padding: 16px; color: #fff; position: relative; overflow: hidden;
+}
+.callout-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--red);
+}
+.callout-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--red); margin-bottom: 6px;
+}
+.callout-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .03em;
+  line-height: 1.3; margin-bottom: 8px; color: var(--z-bright);
+}
+.callout-desc { font-size: 10.5px; color: var(--z-mid); line-height: 1.6; margin-bottom: 12px; }
+.callout-btn {
+  display: inline-block; background: var(--red); color: #fff; padding: 6px 12px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; text-decoration: none;
+  transition: opacity .15s;
+}
+.callout-btn:hover { opacity: .85; }
+
+/* Callout variant: cyan */
+.callout-card.cyan {
+  background: linear-gradient(135deg, #051a24 0%, #0a2d3d 50%, #051a24 100%);
+  border-color: rgba(0,212,255,.2);
+}
+.callout-card.cyan::before { background: var(--cyan); }
+.callout-card.cyan .callout-eyebrow { color: var(--cyan); }
+
+/* Callout variant: gold */
+.callout-card.gold {
+  background: linear-gradient(135deg, #1a1000 0%, #2a1c00 50%, #1a1000 100%);
+  border-color: rgba(246,139,51,.2);
+}
+.callout-card.gold::before { background: var(--gold); }
+.callout-card.gold .callout-eyebrow { color: var(--gold); }
+
+/* Quick links in callout zone */
+.sol-ql-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--z-dim);
+  padding-bottom: 6px; border-bottom: 1px solid var(--z-border);
+}
+.sol-ql { list-style: none; }
+.sol-ql li { margin-bottom: 1px; }
+.sol-ql a {
+  display: block; padding: 4px 4px; font-size: 11.5px; color: var(--z-mid);
+  text-decoration: none; transition: color .1s; border-radius: 2px;
+}
+.sol-ql a:hover { color: var(--z-bright); }
+
+/* ════════════════════════════════════════
+   PAGE CHROME (demo page below nav)
+════════════════════════════════════════ */
+.page-demo {
+  max-width: 1280px; margin: 0 auto; padding: 80px 28px 60px;
+}
+
+/* Data strip marquee */
+.data-strip {
+  border-top: 1px solid var(--z-border); border-bottom: 1px solid var(--z-border);
+  overflow: hidden; white-space: nowrap; background: var(--z-bg); margin-bottom: 0;
+}
+.data-strip-inner { display: inline-flex; animation: marquee 30s linear infinite; }
+.d-item {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 28px; border-right: 1px solid var(--z-border);
+}
+.d-lbl {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: var(--z-mid); text-transform: uppercase;
+}
+.d-val {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--cyan); font-weight: 500;
+}
+
+/* Demo hero */
+.demo-hero { text-align: center; padding: 64px 28px 40px; }
+.demo-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .16em; color: var(--z-dim);
+  margin-bottom: 16px; display: block;
+}
+.demo-title {
+  font-family: 'Inter', sans-serif; font-size: clamp(36px, 5vw, 56px);
+  font-weight: 900; letter-spacing: -1.5px; color: var(--z-bright);
+  line-height: .95; margin-bottom: 18px;
+}
+.demo-title span { color: var(--red); }
+.demo-sub {
+  font-size: 14px; color: var(--z-dim); max-width: 480px;
+  margin: 0 auto 28px; line-height: 1.75;
+}
+.demo-hint {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--z-dim);
+  background: var(--z-card); border: 1px solid var(--z-border);
+  padding: 10px 18px;
+}
+
+/* Summary grid */
+.summary { padding: 0 28px 80px; max-width: 1280px; margin: 0 auto; }
+.summary-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--z-dim);
+  margin-bottom: 14px;
+}
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 8px; }
+.summary-card {
+  background: var(--z-card); border: 1px solid var(--z-border);
+  border-top: 2px solid var(--dot, var(--red)); padding: 16px 18px;
+}
+.summary-card-title {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--z-bright);
+  margin-bottom: 7px;
+}
+.summary-card p { font-size: 11.5px; color: var(--z-dim); line-height: 1.65; }
+.summary-card ul { list-style: none; margin-top: 5px; }
+.summary-card ul li { font-size: 11.5px; color: var(--z-mid); padding: 2px 0; }
+.summary-card ul li::before { content: '→ '; color: var(--red); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <div class="nav-logo">
+      <div class="nav-logo-mark">P</div>
+      <div class="nav-logo-name">PHILLIPS</div>
+    </div>
+
+    <!-- Nav links -->
+    <ul class="nav-items">
+      <li><button class="nav-btn" onclick="togglePanel('ima',this)">I'm a… <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button></li>
+      <li><button class="nav-btn" onclick="togglePanel('solutions',this)">Solutions <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button></li>
+      <li><button class="nav-btn" onclick="togglePanel('brands',this)">Brands <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button></li>
+      <li><button class="nav-btn" onclick="togglePanel('education',this)">Training &amp; Education <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button></li>
+      <li><button class="nav-btn" onclick="togglePanel('resources',this)">Resources <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button></li>
+      <li><button class="nav-btn" onclick="togglePanel('about',this)">About <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button></li>
+    </ul>
+
+    <!-- Right -->
+    <div class="nav-right">
+      <button class="btn-search" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="btn-cta">Request a Quote</button>
+    </div>
+  </div>
+
+  <!-- ════ MEGA PANELS ════ -->
+  <div class="mega-wrap" id="megaWrap">
+
+    <!-- ══════════════════
+         I'M A…
+    ══════════════════ -->
+    <div class="mega-panel" id="panel-ima">
+      <div class="panel-inner">
+        <div class="card-panel">
+          <span class="panel-label">// Select your role to find the right solutions</span>
+          <div class="card-grid cols-5">
+
+            <div class="nav-card" style="--ac:#F9423A" onclick="selCard('manufacturer',this,'ima')">
+              <span class="card-icon">🏭</span>
+              <div class="card-name">Manufacturer</div>
+              <div class="card-desc">Job shop, OEM, or tier supplier seeking CNC, AM, or automation solutions</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#00D4FF" onclick="selCard('federal',this,'ima')">
+              <span class="card-icon">⚓</span>
+              <div class="card-name">Federal / DoD</div>
+              <div class="card-desc">Government buyer, contracting officer, or defense program manager</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F68B33" onclick="selCard('machinist',this,'ima')">
+              <span class="card-icon">🔧</span>
+              <div class="card-name">Machinist</div>
+              <div class="card-desc">CNC operator, programmer, or shop-floor technician looking for tools, training, and support</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F9423A" onclick="selCard('researcher',this,'ima')">
+              <span class="card-icon">🔬</span>
+              <div class="card-name">Researcher</div>
+              <div class="card-desc">R&amp;D lab or university exploring advanced manufacturing technologies</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F68B33" onclick="selCard('partner',this,'ima')">
+              <span class="card-icon">🤝</span>
+              <div class="card-name">Partner / Distributor</div>
+              <div class="card-desc">Channel partner, reseller, or integration specialist</div>
+            </div>
+
+          </div>
+
+          <!-- Detail expansions -->
+          <div class="card-detail" id="ima-detail-manufacturer">
+            <div class="dd-col"><div class="dd-title">Top Solutions</div><ul class="dd-links"><li><a href="#">5-Axis Machining</a></li><li><a href="#">CNC Turning</a></li><li><a href="#">Metal AM</a></li><li><a href="#">Automation Cells</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Featured Brands</div><ul class="dd-links"><li><a href="#">Haas Automation</a></li><li><a href="#">Hermle</a></li><li><a href="#">FANUC</a></li><li><a href="#">EOS</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">By Industry</div><ul class="dd-links"><li><a href="#">Aerospace &amp; Defense</a></li><li><a href="#">Automotive</a></li><li><a href="#">Die &amp; Mould</a></li><li><a href="#">Job Shops</a></li></ul></div>
+            <div class="dd-col" style="display:flex;flex-direction:column;justify-content:flex-end;"><a href="#" class="dd-cta">Manufacturer Solutions →</a></div>
+          </div>
+
+          <div class="card-detail" id="ima-detail-federal">
+            <div class="dd-col"><div class="dd-title">Capabilities</div><ul class="dd-links"><li><a href="#">Additive Mfg</a></li><li><a href="#">CNC Machining</a></li><li><a href="#">Hybrid Mfg</a></li><li><a href="#">Cold Spray</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Programs</div><ul class="dd-links"><li><a href="#">COE-AMX</a></li><li><a href="#">NNSY / Navy</a></li><li><a href="#">Army Arsenal</a></li><li><a href="#">Marine Corps</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Procurement</div><ul class="dd-links"><li><a href="#">GSA Schedule</a></li><li><a href="#">Contract Vehicles</a></li><li><a href="#">CAGE / DUNS</a></li></ul></div>
+            <div class="dd-col" style="display:flex;flex-direction:column;justify-content:flex-end;"><a href="#" class="dd-cta" style="background:var(--cyan);color:#000;">Federal Programs →</a></div>
+          </div>
+
+          <div class="card-detail" id="ima-detail-machinist">
+            <div class="dd-col"><div class="dd-title">Tools &amp; Tooling</div><ul class="dd-links"><li><a href="#">Cutting Tools</a></li><li><a href="#">Workholding &amp; Fixtures</a></li><li><a href="#">Tool Holders</a></li><li><a href="#">Inserts &amp; Carbide</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Support</div><ul class="dd-links"><li><a href="#">Service &amp; Repair</a></li><li><a href="#">Spare Parts</a></li><li><a href="#">Remote Support</a></li><li><a href="#">Quick Case</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Training &amp; Resources</div><ul class="dd-links"><li><a href="#">CNC Training Tracks</a></li><li><a href="#">Phillips Machinist App</a></li><li><a href="#">Knowledge Hub</a></li><li><a href="#">Webinars</a></li></ul></div>
+            <div class="dd-col" style="display:flex;flex-direction:column;justify-content:flex-end;"><a href="#" class="dd-cta" style="background:var(--gold);">Machinist Resources →</a></div>
+          </div>
+
+          <div class="card-detail" id="ima-detail-researcher">
+            <div class="dd-col"><div class="dd-title">Technologies</div><ul class="dd-links"><li><a href="#">Metal AM / L-PBF</a></li><li><a href="#">DED Processes</a></li><li><a href="#">CAM Software</a></li><li><a href="#">Hybrid Mfg</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Programs</div><ul class="dd-links"><li><a href="#">COE-AMX</a></li><li><a href="#">University Partnerships</a></li><li><a href="#">Industry 4.0 Labs</a></li></ul></div>
+            <div class="dd-col" style="display:flex;flex-direction:column;justify-content:flex-end;"><a href="#" class="dd-cta">Research Solutions →</a></div>
+          </div>
+
+          <div class="card-detail" id="ima-detail-partner">
+            <div class="dd-col"><div class="dd-title">Partnership</div><ul class="dd-links"><li><a href="#">Partner Portal</a></li><li><a href="#">Become a Reseller</a></li><li><a href="#">Co-Marketing Programs</a></li></ul></div>
+            <div class="dd-col"><div class="dd-title">Resources</div><ul class="dd-links"><li><a href="#">Product Specs &amp; Docs</a></li><li><a href="#">Pricing &amp; Quoting</a></li><li><a href="#">Certification</a></li></ul></div>
+            <div class="dd-col" style="display:flex;flex-direction:column;justify-content:flex-end;"><a href="#" class="dd-cta" style="background:var(--gold);">Partner with Phillips →</a></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════
+         SOLUTIONS
+    ══════════════════ -->
+    <div class="mega-panel" id="panel-solutions">
+      <div class="panel-inner">
+        <div class="sol-layout">
+
+          <div class="sol-offerings">
+            <span class="sol-offerings-label">// What We Enable</span>
+            <button class="off-card active" onclick="setOffering('cnc',this)">
+              <span class="off-card-icon">⚙️</span>
+              <span class="off-card-name">CNC Machining</span>
+            </button>
+            <button class="off-card" onclick="setOffering('additive',this)">
+              <span class="off-card-icon">🖨️</span>
+              <span class="off-card-name">Additive Mfg</span>
+            </button>
+            <button class="off-card" onclick="setOffering('hybrid',this)">
+              <span class="off-card-icon">🔀</span>
+              <span class="off-card-name">Hybrid Mfg</span>
+            </button>
+            <button class="off-card" onclick="setOffering('automation',this)">
+              <span class="off-card-icon">🤖</span>
+              <span class="off-card-name">Automation &amp; Smart Mfg</span>
+            </button>
+          </div>
+
+          <div class="sol-center">
+
+            <div class="offering-content active" id="off-cnc">
+              <div class="sol-center-header">
+                <span class="sol-center-title">CNC Machining</span>
+                <span class="sol-center-desc">Milling, turning, grinding, EDM &amp; more</span>
+              </div>
+              <div class="product-type-tabs">
+                <button class="pt-tab active" onclick="setTab('cnc','machines',this)">Machines</button>
+                <button class="pt-tab" onclick="setTab('cnc','tooling',this)">Tooling</button>
+                <button class="pt-tab" onclick="setTab('cnc','services',this)">Services</button>
+              </div>
+              <div class="pt-content active" id="cnc-machines">
+                <div class="link-grid">
+                  <a href="#">5-Axis Machining Centers</a>
+                  <a href="#">Vertical Machining Centers</a>
+                  <a href="#">Horizontal Machining Centers</a>
+                  <a href="#">CNC Turning Centers</a>
+                  <a href="#">Swiss-Type Lathes</a>
+                  <a href="#">Multi-Tasking Machines</a>
+                  <a href="#">EDM Systems</a>
+                  <a href="#">Grinding Machines</a>
+                  <a href="#">Deep Hole Drilling</a>
+                </div>
+                <a href="#" class="view-all-link">View all CNC Machines →</a>
+              </div>
+              <div class="pt-content" id="cnc-tooling">
+                <div class="link-grid">
+                  <a href="#">Cutting Tools</a>
+                  <a href="#">Workholding &amp; Fixtures</a>
+                  <a href="#">Tool Holders</a>
+                  <a href="#">Inserts &amp; Carbide</a>
+                  <a href="#">Probing Systems</a>
+                  <a href="#">Coolant Systems</a>
+                </div>
+                <a href="#" class="view-all-link">View all Tooling →</a>
+              </div>
+              <div class="pt-content" id="cnc-services">
+                <div class="link-grid">
+                  <a href="#">Phillips OPTO <span class="tag">New</span></a>
+                  <a href="#">Application Engineering</a>
+                  <a href="#">Machine Installation</a>
+                  <a href="#">Service &amp; Repair</a>
+                  <a href="#">Spare Parts</a>
+                  <a href="#">Remote Support</a>
+                </div>
+                <a href="#" class="view-all-link">View all CNC Services →</a>
+              </div>
+            </div>
+
+            <div class="offering-content" id="off-additive">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Additive Manufacturing</span>
+                <span class="sol-center-desc">Metal AM, polymer AM, and hybrid additive solutions</span>
+              </div>
+              <div class="link-grid">
+                <a href="#">Metal AM / L-PBF</a>
+                <a href="#">Directed Energy Deposition</a>
+                <a href="#">Binder Jetting</a>
+                <a href="#">Composite Printing</a>
+                <a href="#">AM Software &amp; Simulation</a>
+                <a href="#">Post-Processing</a>
+                <a href="#">COE-AMX Program</a>
+                <a href="#">Naval &amp; Defense AM</a>
+                <a href="#">AM Consulting</a>
+              </div>
+              <a href="#" class="view-all-link">View all AM Solutions →</a>
+            </div>
+
+            <div class="offering-content" id="off-hybrid">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Hybrid Manufacturing</span>
+                <span class="sol-center-desc">Additive + subtractive in a single platform</span>
+              </div>
+              <div class="link-grid">
+                <a href="#">Hybrid Machining Centers</a>
+                <a href="#">DED + Milling Cells</a>
+                <a href="#">Cold Spray Systems</a>
+                <a href="#">Hybrid Process Design</a>
+                <a href="#">HYB Division</a>
+                <a href="#">Case Studies</a>
+              </div>
+              <a href="#" class="view-all-link">View all Hybrid Solutions →</a>
+            </div>
+
+            <div class="offering-content" id="off-automation">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Automation &amp; Smart Mfg</span>
+                <span class="sol-center-desc">Robots, FMS, cobots &amp; digital integration</span>
+              </div>
+              <div class="link-grid">
+                <a href="#">Industrial Robots</a>
+                <a href="#">Collaborative Robots</a>
+                <a href="#">Flexible Mfg Systems</a>
+                <a href="#">Pallet Automation</a>
+                <a href="#">Cell Design &amp; Integration</a>
+                <a href="#">Digital Transformation</a>
+                <a href="#">Programming &amp; Commissioning</a>
+                <a href="#">Preventative Maintenance</a>
+                <a href="#">Phillips Vision (AI)</a>
+              </div>
+              <a href="#" class="view-all-link">View all Automation Services →</a>
+            </div>
+
+          </div>
+
+          <div class="sol-callout">
+            <div class="callout-card">
+              <div class="callout-eyebrow">// Phillips OPTO</div>
+              <div class="callout-title">Solution Design Services</div>
+              <div class="callout-desc">From single machines to full turnkey cells — our engineers design the right solution for your process.</div>
+              <a href="#" class="callout-btn">Talk to an Engineer</a>
+            </div>
+            <div>
+              <div class="sol-ql-label">// Quick Links</div>
+              <ul class="sol-ql">
+                <li><a href="#">Phillips Connect Portal</a></li>
+                <li><a href="#">Quick Case (Service)</a></li>
+                <li><a href="#">Spare Parts Request</a></li>
+                <li><a href="#">All Solutions →</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════
+         BRANDS
+    ══════════════════ -->
+    <div class="mega-panel" id="panel-brands">
+      <div class="panel-inner">
+        <div class="sol-layout">
+
+          <div class="sol-offerings">
+            <span class="sol-offerings-label">// By Category</span>
+            <button class="off-card active" onclick="setBrand('cnc',this)">
+              <span class="off-card-icon">⚙️</span>
+              <span class="off-card-name">CNC Machining</span>
+            </button>
+            <button class="off-card" onclick="setBrand('additive',this)">
+              <span class="off-card-icon">🖨️</span>
+              <span class="off-card-name">Additive Mfg</span>
+            </button>
+            <button class="off-card" onclick="setBrand('edm',this)">
+              <span class="off-card-icon">⚡</span>
+              <span class="off-card-name">EDM &amp; Grinding</span>
+            </button>
+            <button class="off-card" onclick="setBrand('automation',this)">
+              <span class="off-card-icon">🤖</span>
+              <span class="off-card-name">Automation &amp; Robotics</span>
+            </button>
+            <button class="off-card" onclick="setBrand('metrology',this)">
+              <span class="off-card-icon">📐</span>
+              <span class="off-card-name">Metrology &amp; Software</span>
+            </button>
+          </div>
+
+          <div class="sol-center">
+
+            <div class="offering-content active" id="brand-cnc">
+              <div class="sol-center-header">
+                <span class="sol-center-title">CNC Machining</span>
+                <span class="sol-center-desc">Machining centers, lathes, EDM &amp; precision metal removal</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Machining Centers</div>
+                  <div class="link-card-title">Haas Automation</div>
+                  <ul class="link-card-links"><li><a href="#">VMC Series</a></li><li><a href="#">HMC Series</a></li><li><a href="#">Lathes</a></li><li><a href="#">5-Axis</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">5-Axis Precision</div>
+                  <div class="link-card-title">Hermle</div>
+                  <ul class="link-card-links"><li><a href="#">C-Series 5-Axis</a></li><li><a href="#">Automation Cells</a></li><li><a href="#">Pallet Systems</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Swiss-Type Turning</div>
+                  <div class="link-card-title">Tsugami</div>
+                  <ul class="link-card-links"><li><a href="#">Swiss Lathes</a></li><li><a href="#">Multi-Spindle</a></li><li><a href="#">Turn-Mill</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Heavy Duty</div>
+                  <div class="link-card-title">Johnford</div>
+                  <ul class="link-card-links"><li><a href="#">Double Column</a></li><li><a href="#">Floor Type</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">CNC Turning</div>
+                  <div class="link-card-title">FEMCO</div>
+                  <ul class="link-card-links"><li><a href="#">Big Bore Lathes</a></li><li><a href="#">Turn-Mill Centers</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all CNC Brands →</a>
+            </div>
+
+            <div class="offering-content" id="brand-additive">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Additive Manufacturing</span>
+                <span class="sol-center-desc">Metal &amp; polymer AM systems from leading OEMs</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Metal AM / L-PBF</div>
+                  <div class="link-card-title">EOS</div>
+                  <ul class="link-card-links"><li><a href="#">M 290 / M 400</a></li><li><a href="#">Polymer SLS</a></li><li><a href="#">EOS Software</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Composite &amp; Metal FFF</div>
+                  <div class="link-card-title">Markforged</div>
+                  <ul class="link-card-links"><li><a href="#">Metal X</a></li><li><a href="#">Mark Two</a></li><li><a href="#">Digital Forge</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Binder Jetting</div>
+                  <div class="link-card-title">Desktop Metal</div>
+                  <ul class="link-card-links"><li><a href="#">Studio System</a></li><li><a href="#">Production System</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all AM Brands →</a>
+            </div>
+
+            <div class="offering-content" id="brand-edm">
+              <div class="sol-center-header">
+                <span class="sol-center-title">EDM &amp; Grinding</span>
+                <span class="sol-center-desc">Wire EDM, sinker EDM, and precision grinding systems</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Wire &amp; Sinker EDM</div>
+                  <div class="link-card-title">Sodick</div>
+                  <ul class="link-card-links"><li><a href="#">Wire EDM</a></li><li><a href="#">Sinker EDM</a></li><li><a href="#">High-Speed Milling</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">EDM &amp; Milling</div>
+                  <div class="link-card-title">GF Machining</div>
+                  <ul class="link-card-links"><li><a href="#">AgieCharmilles EDM</a></li><li><a href="#">Mikron Milling</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Cylindrical Grinding</div>
+                  <div class="link-card-title">Studer</div>
+                  <ul class="link-card-links"><li><a href="#">Universal Grinding</a></li><li><a href="#">CNC OD Grinding</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Deep Hole Drilling</div>
+                  <div class="link-card-title">Precihole</div>
+                  <ul class="link-card-links"><li><a href="#">BTA Drilling</a></li><li><a href="#">Gundrilling</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all EDM &amp; Grinding Brands →</a>
+            </div>
+
+            <div class="offering-content" id="brand-automation">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Automation &amp; Robotics</span>
+                <span class="sol-center-desc">Industrial robots, cobots, and turnkey automation cells</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Industrial Robotics</div>
+                  <div class="link-card-title">FANUC</div>
+                  <ul class="link-card-links"><li><a href="#">Industrial Robots</a></li><li><a href="#">CNC Controls</a></li><li><a href="#">Vision Systems</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Collaborative Robots</div>
+                  <div class="link-card-title">Universal Robots</div>
+                  <ul class="link-card-links"><li><a href="#">UR5 / UR10</a></li><li><a href="#">UR20 Heavy Payload</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all Automation Brands →</a>
+            </div>
+
+            <div class="offering-content" id="brand-metrology">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Metrology &amp; Software</span>
+                <span class="sol-center-desc">CMMs, probing, scanning, and CAM software</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#72777F">
+                  <div class="link-card-cat">CMM &amp; Scanning</div>
+                  <div class="link-card-title">Hexagon</div>
+                  <ul class="link-card-links"><li><a href="#">CMMs</a></li><li><a href="#">Laser Trackers</a></li><li><a href="#">PC-DMIS Software</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#72777F">
+                  <div class="link-card-cat">Probing Systems</div>
+                  <div class="link-card-title">Renishaw</div>
+                  <ul class="link-card-links"><li><a href="#">On-Machine Probing</a></li><li><a href="#">CMM Styli</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#72777F">
+                  <div class="link-card-cat">CAM Software</div>
+                  <div class="link-card-title">Mastercam</div>
+                  <ul class="link-card-links"><li><a href="#">Mill / Turn</a></li><li><a href="#">Multi-Axis</a></li><li><a href="#">Simulation</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all Metrology &amp; Software Brands →</a>
+            </div>
+
+          </div>
+
+          <div class="sol-callout">
+            <div class="callout-card">
+              <div class="callout-eyebrow">// Can't Decide?</div>
+              <div class="callout-title">Let Us Match You to the Right Brand</div>
+              <div class="callout-desc">Our application engineers can recommend the right machine for your specific process and budget.</div>
+              <a href="#" class="callout-btn">Talk to an Expert</a>
+            </div>
+            <div>
+              <div class="sol-ql-label">// All Brands</div>
+              <ul class="sol-ql">
+                <li><a href="#">Browse All Brands →</a></li>
+                <li><a href="#">Compare Models</a></li>
+                <li><a href="#">Request a Demo</a></li>
+                <li><a href="#">Download Specs</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════
+         TRAINING & EDUCATION
+    ══════════════════ -->
+    <div class="mega-panel" id="panel-education">
+      <div class="panel-inner">
+        <div class="sol-layout">
+
+          <div class="sol-offerings">
+            <span class="sol-offerings-label">// Program Areas</span>
+            <button class="off-card active" onclick="setEdu('professionals',this)">
+              <span class="off-card-icon">🎯</span>
+              <span class="off-card-name">For Professionals</span>
+            </button>
+            <button class="off-card" onclick="setEdu('workforce',this)">
+              <span class="off-card-icon">🏗️</span>
+              <span class="off-card-name">Workforce Development</span>
+            </button>
+            <button class="off-card" onclick="setEdu('coe',this)">
+              <span class="off-card-icon">🏛️</span>
+              <span class="off-card-name">Centers of Excellence</span>
+            </button>
+            <button class="off-card" onclick="setEdu('federal',this)">
+              <span class="off-card-icon">⚓</span>
+              <span class="off-card-name">Federal Training</span>
+            </button>
+          </div>
+
+          <div class="sol-center">
+
+            <div class="offering-content active" id="edu-professionals">
+              <div class="sol-center-header">
+                <span class="sol-center-title">For Professionals</span>
+                <span class="sol-center-desc">Hands-on training for machinists, programmers &amp; engineers</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Service Tracks</div>
+                  <div class="link-card-title">Haas Service Training</div>
+                  <ul class="link-card-links"><li><a href="#">Maintenance &amp; Repair</a></li><li><a href="#">Advanced Lathe Service</a></li><li><a href="#">Advanced Mill Service</a></li><li><a href="#">Field Certification</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Operator Tracks</div>
+                  <div class="link-card-title">CNC Operator Training</div>
+                  <ul class="link-card-links"><li><a href="#">Basic Mill Operator</a></li><li><a href="#">Basic Lathe Operator</a></li><li><a href="#">5-Axis Training</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Programming Tracks</div>
+                  <div class="link-card-title">CNC Programming</div>
+                  <ul class="link-card-links"><li><a href="#">Advanced Programming</a></li><li><a href="#">Macros &amp; Probing</a></li><li><a href="#">Mastercam Training</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all Professional Programs →</a>
+            </div>
+
+            <div class="offering-content" id="edu-workforce">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Workforce Development</span>
+                <span class="sol-center-desc">Building the next generation of manufacturing talent</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Academic Programs</div>
+                  <div class="link-card-title">Education Partnerships</div>
+                  <ul class="link-card-links"><li><a href="#">Community College</a></li><li><a href="#">High School Programs</a></li><li><a href="#">Apprenticeships</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Curriculum</div>
+                  <div class="link-card-title">Custom Curriculum</div>
+                  <ul class="link-card-links"><li><a href="#">On-Site Delivery</a></li><li><a href="#">Custom Design</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">Explore Workforce Programs →</a>
+            </div>
+
+            <div class="offering-content" id="edu-coe">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Centers of Excellence</span>
+                <span class="sol-center-desc">Advanced mfg COEs across the US</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Defense Manufacturing</div>
+                  <div class="link-card-title">COE-AMX</div>
+                  <ul class="link-card-links"><li><a href="#">Danville, VA Facility</a></li><li><a href="#">L-PBF Capabilities</a></li><li><a href="#">DED Programs</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Partnerships</div>
+                  <div class="link-card-title">Partner With Us</div>
+                  <ul class="link-card-links"><li><a href="#">Partner Program</a></li><li><a href="#">Industry 4.0 Labs</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">About</div>
+                  <div class="link-card-title">Our COE Model</div>
+                  <ul class="link-card-links"><li><a href="#">About Our COEs</a></li><li><a href="#">Impact Stories</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">Explore all Centers of Excellence →</a>
+            </div>
+
+            <div class="offering-content" id="edu-federal">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Federal Training</span>
+                <span class="sol-center-desc">DoD-focused instruction, certification &amp; on-site programs</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">On-Site Programs</div>
+                  <div class="link-card-title">DoD &amp; Military</div>
+                  <ul class="link-card-links"><li><a href="#">On-Site DoD Training</a></li><li><a href="#">NNSY Programs</a></li><li><a href="#">Webinar Calendar</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Software Training</div>
+                  <div class="link-card-title">Mastercam Federal</div>
+                  <ul class="link-card-links"><li><a href="#">Mastercam Training</a></li><li><a href="#">License Support</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Credentials</div>
+                  <div class="link-card-title">Certification Programs</div>
+                  <ul class="link-card-links"><li><a href="#">Certification Info</a></li><li><a href="#">Request Training</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all Federal Training Programs →</a>
+            </div>
+
+          </div>
+
+          <div class="sol-callout">
+            <div class="callout-card cyan">
+              <div class="callout-eyebrow">// Phillips Education</div>
+              <div class="callout-title">Training &amp; Workforce Dev</div>
+              <div class="callout-desc">From hands-on CNC instruction to federal certification — building the workforce that runs advanced manufacturing.</div>
+              <a href="#" class="callout-btn" style="background:var(--gold);">All Programs</a>
+            </div>
+            <div>
+              <div class="sol-ql-label">// Quick Links</div>
+              <ul class="sol-ql">
+                <li><a href="#">Request On-Site Training</a></li>
+                <li><a href="#">Webinar Calendar</a></li>
+                <li><a href="#">Certification Info</a></li>
+                <li><a href="#">Class Calendar →</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════
+         RESOURCES
+    ══════════════════ -->
+    <div class="mega-panel" id="panel-resources">
+      <div class="panel-inner">
+        <div class="sol-layout">
+
+          <div class="sol-offerings">
+            <span class="sol-offerings-label">// Resource Type</span>
+            <button class="off-card active" onclick="setResource('knowledge',this)">
+              <span class="off-card-icon">📚</span>
+              <span class="off-card-name">Knowledge Hub</span>
+            </button>
+            <button class="off-card" onclick="setResource('casestudies',this)">
+              <span class="off-card-icon">📋</span>
+              <span class="off-card-name">Case Studies</span>
+            </button>
+            <button class="off-card" onclick="setResource('media',this)">
+              <span class="off-card-icon">🎬</span>
+              <span class="off-card-name">Media &amp; Events</span>
+            </button>
+            <button class="off-card" onclick="setResource('tools',this)">
+              <span class="off-card-icon">🛠️</span>
+              <span class="off-card-name">Digital Tools</span>
+            </button>
+          </div>
+
+          <div class="sol-center">
+
+            <div class="offering-content active" id="res-knowledge">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Knowledge Hub</span>
+                <span class="sol-center-desc">Guides, explainers &amp; technical resources</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">CNC Machining</div>
+                  <div class="link-card-title">Machining Guides</div>
+                  <ul class="link-card-links"><li><a href="#">What is a VMC?</a></li><li><a href="#">CNC Lathe Guide</a></li><li><a href="#">5-Axis Explained</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">Additive Mfg</div>
+                  <div class="link-card-title">AM Guides</div>
+                  <ul class="link-card-links"><li><a href="#">Metal 3D Printing Guide</a></li><li><a href="#">L-PBF vs DED</a></li><li><a href="#">AM for Defense</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Automation</div>
+                  <div class="link-card-title">Automation Basics</div>
+                  <ul class="link-card-links"><li><a href="#">Intro to Robotics</a></li><li><a href="#">Cobot vs Robot</a></li><li><a href="#">FMS Explained</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">Browse all Guides →</a>
+            </div>
+
+            <div class="offering-content" id="res-casestudies">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Case Studies</span>
+                <span class="sol-center-desc">Real results from Phillips customers</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">By Industry</div>
+                  <div class="link-card-title">Industry Stories</div>
+                  <ul class="link-card-links"><li><a href="#">Aerospace &amp; Defense</a></li><li><a href="#">Automotive</a></li><li><a href="#">Medical Devices</a></li><li><a href="#">Job Shops</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#00D4FF">
+                  <div class="link-card-cat">By Technology</div>
+                  <div class="link-card-title">Tech Stories</div>
+                  <ul class="link-card-links"><li><a href="#">CNC Machining</a></li><li><a href="#">Metal AM</a></li><li><a href="#">Automation Cells</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Federal</div>
+                  <div class="link-card-title">Defense &amp; Gov</div>
+                  <ul class="link-card-links"><li><a href="#">Federal Success Stories</a></li><li><a href="#">White Papers</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">View all Case Studies →</a>
+            </div>
+
+            <div class="offering-content" id="res-media">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Media &amp; Events</span>
+                <span class="sol-center-desc">Blog, videos, webinars &amp; upcoming events</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Written Content</div>
+                  <div class="link-card-title">Blog</div>
+                  <ul class="link-card-links"><li><a href="#">Latest Posts</a></li><li><a href="#">Industry News</a></li><li><a href="#">Tech Spotlights</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Video &amp; Online</div>
+                  <div class="link-card-title">Video &amp; Webinars</div>
+                  <ul class="link-card-links"><li><a href="#">Videos</a></li><li><a href="#">Webinars</a></li><li><a href="#">On-Demand Library</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F68B33">
+                  <div class="link-card-cat">Live Events</div>
+                  <div class="link-card-title">Events Calendar</div>
+                  <ul class="link-card-links"><li><a href="#">Upcoming Events</a></li><li><a href="#">Trade Shows</a></li><li><a href="#">Demo Days</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">See all Media &amp; Events →</a>
+            </div>
+
+            <div class="offering-content" id="res-tools">
+              <div class="sol-center-header">
+                <span class="sol-center-title">Digital Tools</span>
+                <span class="sol-center-desc">Apps, portals &amp; self-service platforms</span>
+              </div>
+              <div class="card-grid cols-3" style="gap:7px;">
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Mobile App</div>
+                  <div class="link-card-title">Phillips Machinist App</div>
+                  <ul class="link-card-links"><li><a href="#">Download App</a></li><li><a href="#">Features Overview</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Customer Portal</div>
+                  <div class="link-card-title">Connect Portal</div>
+                  <ul class="link-card-links"><li><a href="#">Log In</a></li><li><a href="#">Request Access</a></li></ul>
+                </div>
+                <div class="link-card" style="--ac:#F9423A">
+                  <div class="link-card-cat">Service Tools</div>
+                  <div class="link-card-title">Quick Case &amp; Parts</div>
+                  <ul class="link-card-links"><li><a href="#">Quick Case</a></li><li><a href="#">Spare Parts Request</a></li></ul>
+                </div>
+              </div>
+              <a href="#" class="view-all-link">Explore all Digital Tools →</a>
+            </div>
+
+          </div>
+
+          <div class="sol-callout">
+            <div class="callout-card" style="background:linear-gradient(135deg,#0d1a1f 0%,#0f2530 50%,#0d1a1f 100%);border-color:rgba(0,212,255,.2);">
+              <div class="callout-eyebrow" style="color:var(--cyan);">// Featured Resource</div>
+              <div class="callout-title">Phillips Machinist App</div>
+              <div class="callout-desc">Access machine docs, submit service cases, and order parts — right from the shop floor.</div>
+              <a href="#" class="callout-btn">Download Free</a>
+            </div>
+            <div>
+              <div class="sol-ql-label">// Popular Guides</div>
+              <ul class="sol-ql">
+                <li><a href="#">What is a VMC?</a></li>
+                <li><a href="#">Metal 3D Printing Guide</a></li>
+                <li><a href="#">Automation Basics</a></li>
+                <li><a href="#">All Resources →</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════
+         ABOUT
+    ══════════════════ -->
+    <div class="mega-panel" id="panel-about">
+      <div class="panel-inner">
+        <div class="card-panel">
+          <span class="panel-label">// Phillips Corporation</span>
+          <div class="card-grid cols-6">
+
+            <div class="nav-card" style="--ac:#F9423A">
+              <span class="card-icon">🏢</span>
+              <div class="card-name">Company</div>
+              <div class="card-desc">Our story, mission, and what sets Phillips apart in advanced manufacturing</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#00D4FF">
+              <span class="card-icon">👥</span>
+              <div class="card-name">Leadership</div>
+              <div class="card-desc">Meet the executive team driving Phillips forward</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F68B33">
+              <span class="card-icon">📖</span>
+              <div class="card-name">History</div>
+              <div class="card-desc">Decades of precision engineering and innovation since 1958</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F9423A">
+              <span class="card-icon">📍</span>
+              <div class="card-name">Locations</div>
+              <div class="card-desc">Regional offices and demo centers across the US and India</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F68B33">
+              <span class="card-icon">💼</span>
+              <div class="card-name">Careers</div>
+              <div class="card-desc">Join the Phillips team — open roles across all divisions</div>
+            </div>
+
+            <div class="nav-card" style="--ac:#F9423A">
+              <span class="card-icon">✉️</span>
+              <div class="card-name">Contact</div>
+              <div class="card-desc">Reach your regional team or get general support</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mega-wrap -->
+</nav>
+
+<!-- ══ DATA STRIP ══ -->
+<div class="data-strip">
+  <div class="data-strip-inner" id="strip">
+  </div>
+</div>
+
+<!-- ══ PAGE CONTENT ══ -->
+<div class="demo-hero">
+  <span class="demo-tag">// Phillips Corporation — Mega Nav · Strong Theme</span>
+  <h1 class="demo-title">Fully Unified<br><span>3-Zone Navigation</span></h1>
+  <p class="demo-sub">Every panel uses the Strong design system — dark surfaces, JetBrains Mono typographic identity, red+cyan+gold accents, and the same 3-zone layout throughout.</p>
+  <div class="demo-hint">↑ Click any nav item above — all 6 dropdowns are fully functional</div>
+</div>
+
+<div class="summary">
+  <div class="summary-title">// Navigation Panels</div>
+  <div class="summary-grid">
+    <div class="summary-card" style="--dot:#F9423A">
+      <div class="summary-card-title">I'm a…</div>
+      <p>5 persona cards — Manufacturer, Federal/DoD, Machinist, Researcher, Partner. Click any card to expand a detail section with contextual links and a CTA.</p>
+    </div>
+    <div class="summary-card" style="--dot:#00D4FF">
+      <div class="summary-card-title">Solutions</div>
+      <p>3-zone layout. Left: CNC / Additive / Hybrid / Automation selector. Center: sub-tabs (Machines, Tooling, Services). Right: OPTO callout + quick links.</p>
+    </div>
+    <div class="summary-card" style="--dot:#F68B33">
+      <div class="summary-card-title">Brands</div>
+      <p>3-zone. Left: category selector. Center: individual brand link-cards per category. Right: expert matchmaking CTA + all brands links.</p>
+    </div>
+    <div class="summary-card" style="--dot:#F9423A">
+      <div class="summary-card-title">Training &amp; Education</div>
+      <ul><li>Professionals — service, operator, programming tracks</li><li>Workforce Development</li><li>Centers of Excellence (COE-AMX)</li><li>Federal Training</li></ul>
+    </div>
+    <div class="summary-card" style="--dot:#F68B33">
+      <div class="summary-card-title">Resources</div>
+      <ul><li>Knowledge Hub — guides by category</li><li>Case Studies — by industry &amp; technology</li><li>Media &amp; Events — blog, video, webinars</li><li>Digital Tools — app, portal, quick case</li></ul>
+    </div>
+    <div class="summary-card" style="--dot:#00D4FF">
+      <div class="summary-card-title">About</div>
+      <p>6 icon cards — Company, Leadership, History, Locations, Careers, Contact. All in the Strong dark card system.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ JAVASCRIPT (identical logic to v5, zero content changes) ══ -->
+<script>
+  let curPanel = null;
+
+  function togglePanel(id, btn) {
+    const wrap = document.getElementById('megaWrap');
+    document.querySelectorAll('.mega-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    if (curPanel === id) { wrap.classList.remove('open'); curPanel = null; return; }
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+    wrap.classList.add('open');
+    curPanel = id;
+  }
+
+  function selCard(id, card, panelId) {
+    const panel = document.getElementById('panel-' + panelId);
+    panel.querySelectorAll('.nav-card').forEach(c => c.classList.remove('sel'));
+    panel.querySelectorAll('.card-detail').forEach(d => d.classList.remove('show'));
+    card.classList.add('sel');
+    const det = document.getElementById(panelId + '-detail-' + id);
+    if (det) det.classList.add('show');
+  }
+
+  function setOffering(id, btn) {
+    const panel = document.getElementById('panel-solutions');
+    panel.querySelectorAll('.off-card').forEach(b => b.classList.remove('active'));
+    panel.querySelectorAll('.offering-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('off-' + id).classList.add('active');
+  }
+
+  function setBrand(id, btn) {
+    const panel = document.getElementById('panel-brands');
+    panel.querySelectorAll('.off-card').forEach(b => b.classList.remove('active'));
+    panel.querySelectorAll('.offering-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('brand-' + id).classList.add('active');
+  }
+
+  function setEdu(id, btn) {
+    const panel = document.getElementById('panel-education');
+    panel.querySelectorAll('.off-card').forEach(b => b.classList.remove('active'));
+    panel.querySelectorAll('.offering-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('edu-' + id).classList.add('active');
+  }
+
+  function setResource(id, btn) {
+    const panel = document.getElementById('panel-resources');
+    panel.querySelectorAll('.off-card').forEach(b => b.classList.remove('active'));
+    panel.querySelectorAll('.offering-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('res-' + id).classList.add('active');
+  }
+
+  function setTab(prefix, type, btn) {
+    const off = btn.closest('.offering-content');
+    off.querySelectorAll('.pt-tab').forEach(t => t.classList.remove('active'));
+    off.querySelectorAll('.pt-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(prefix + '-' + type).classList.add('active');
+  }
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('nav').contains(e.target)) {
+      document.getElementById('megaWrap').classList.remove('open');
+      document.querySelectorAll('.mega-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      curPanel = null;
+    }
+  });
+
+  // Data strip
+  const stripData = [
+    {l:'Haas Automation',v:'Authorized Factory Outlet'},
+    {l:'Region',v:'Mid-Atlantic · 30+ Years'},
+    {l:'Machines',v:'200+ Models'},
+    {l:'Service',v:'24/7 Support'},
+    {l:'Training',v:'52 Weeks / Year'},
+    {l:'COE-AMX',v:'Danville, VA'},
+    {l:'NNSY',v:'Portsmouth, VA'},
+    {l:'Brands',v:'50+ Partners'},
+    {l:'Locations',v:'US + India Operations'},
+    {l:'GSA',v:'Schedule Available'},
+  ];
+  const el = document.getElementById('strip');
+  let h = '';
+  for (let r = 0; r < 3; r++) {
+    stripData.forEach(d => {
+      h += `<div class="d-item"><span class="d-lbl">${d.l}</span><span class="d-val">${d.v}</span></div>`;
+    });
+  }
+  el.innerHTML = h;
+</script>
+</body>
+</html>
