@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Montserrat } from "next/font/google";
+import { Barlow_Condensed, Montserrat, JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
@@ -14,6 +14,18 @@ const montserrat = Montserrat({
   variable: "--font-body",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
+  variable: "--font-mono",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+});
+
 export const metadata: Metadata = {
   title: "Phillips Template Sandbox",
   description: "Phillips Corporation design system and page templates",
@@ -25,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${barlowCondensed.variable} ${montserrat.variable}`}>
+    <html lang="en" className={`${barlowCondensed.variable} ${montserrat.variable} ${jetbrainsMono.variable} ${inter.variable}`}>
       <body className="bg-black antialiased">
         {children}
       </body>

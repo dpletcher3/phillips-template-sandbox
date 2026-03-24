@@ -44,13 +44,30 @@ const SIMPLE_TEMPLATES = [
   { name: 'Location',       href: '/simple/location/charlotte-nc',         desc: 'Office / facility page — region, address, services',          theme: 'Regional' },
 ]
 
+const STRONG_TEMPLATES = [
+  { name: 'Brand',          href: '/strong/brand/haas',                     desc: 'Full dark · HUD hero · spec cards · gallery',               theme: 'HUD Dark' },
+  { name: 'Solution',       href: '/strong/solution/5-axis-machining',      desc: 'Full dark · industry grid · OPTO section',                  theme: 'Industry Grid' },
+  { name: 'Product Line',   href: '/strong/product-line',                   desc: 'Full dark · 4-panel tabs · model cards · travel bars',      theme: 'Tabbed Panels' },
+  { name: 'Case Study',     href: '/strong/case-study/navair-frc-east',    desc: 'Dark hero · light timeline body',                            theme: 'Timeline' },
+  { name: 'Blog Post',      href: '/strong/post/metal-am-naval',           desc: 'Dark hero · light editorial · flip cards',                   theme: 'Drop-Cap' },
+  { name: 'Guide',          href: '/strong/guide/what-is-a-vmc',           desc: 'Dark hero · light TOC + body',                               theme: 'TOC Sidebar' },
+  { name: 'Catalog',        href: '/strong/catalog',                        desc: 'Full dark · 12 course cards · filter tabs',                  theme: 'Card Grid' },
+  { name: 'Course',         href: '/strong/course/advanced-lathe-service',  desc: 'Dark hero · light module grid',                              theme: 'Module Select' },
+  { name: 'Class Event',    href: '/strong/class-event',                    desc: 'Dark header · light schedule calendar',                      theme: 'Calendar Table' },
+  { name: 'Team Member',    href: '/strong/team-member/alan-phillips',      desc: 'Dark panel · light bio',                                     theme: 'Portrait Split' },
+  { name: 'Location',       href: '/strong/location/charlotte-nc',          desc: 'Dark split hero · light services',                           theme: 'Split Hero' },
+  { name: 'Persona',        href: '/strong/persona/manufacturer',           desc: 'Dark left split · light filter tabs',                        theme: 'Filter Tabs' },
+]
+
 const RED = '#F9423A'
 const MAROON = '#3F0017'
+const STRONG_BG = '#09090B'
 
 const TAB_CONFIG = {
-  ec:        { label: 'EYE CATCHING', underline: RED,    badge: RED,    themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
-  appealing: { label: 'APPEALING',    underline: MAROON, badge: MAROON, themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
-  simple:    { label: 'SIMPLE',       underline: '#fff', badge: '#000', themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
+  ec:        { label: 'EYE CATCHING', underline: RED,       badge: RED,       themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
+  appealing: { label: 'APPEALING',    underline: MAROON,    badge: MAROON,    themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
+  simple:    { label: 'SIMPLE',       underline: '#fff',    badge: '#000',    themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
+  strong:    { label: 'STRONG',       underline: STRONG_BG, badge: STRONG_BG, themeColor: '#00D4FF',              hoverBorder: 'rgba(0,212,255,.3)' },
 } as const
 
 type TabKey = keyof typeof TAB_CONFIG
@@ -59,6 +76,7 @@ const TEMPLATE_MAP: Record<TabKey, typeof EC_TEMPLATES> = {
   ec: EC_TEMPLATES,
   appealing: APPEALING_TEMPLATES,
   simple: SIMPLE_TEMPLATES,
+  strong: STRONG_TEMPLATES,
 }
 
 export default function SandboxIndex() {
@@ -103,6 +121,14 @@ export default function SandboxIndex() {
             }}>
               Simple
             </span>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: STRONG_BG, color: '#00D4FF',
+              border: '1px solid rgba(0,212,255,.3)',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              Strong
+            </span>
           </div>
         </div>
         <a
@@ -145,7 +171,7 @@ export default function SandboxIndex() {
                 background: isActive ? 'rgba(255,255,255,.1)' : 'rgba(255,255,255,.05)',
                 color: isActive ? 'rgba(255,255,255,.6)' : 'rgba(255,255,255,.2)',
               }}>
-                11 templates
+                {TEMPLATE_MAP[tab].length} templates
               </span>
             </button>
           )
@@ -266,6 +292,14 @@ export default function SandboxIndex() {
               }}>
                 Simple →
               </a>
+              <a href="/strong/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: '#00D4FF', textDecoration: 'none',
+                padding: '8px 16px', borderRadius: '4px', background: STRONG_BG,
+                border: '1px solid rgba(0,212,255,.3)',
+              }}>
+                Strong →
+              </a>
             </div>
           </div>
         </div>
@@ -287,9 +321,10 @@ export default function SandboxIndex() {
             </h3>
             <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '12.5px', margin: 0, maxWidth: '640px' }}>
               Open <code style={{ color: RED, fontSize: '11px' }}>/ec/brand/haas</code>,{' '}
-              <code style={{ color: '#c77', fontSize: '11px' }}>/appealing/brand/haas</code>, and{' '}
-              <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code> in
-              separate tabs to compare the same Sanity content across all three design variants.
+              <code style={{ color: '#c77', fontSize: '11px' }}>/appealing/brand/haas</code>,{' '}
+              <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code>, and{' '}
+              <code style={{ color: '#00D4FF', fontSize: '11px' }}>/strong/brand/haas</code> in
+              separate tabs to compare the same Sanity content across all four design variants.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
@@ -312,6 +347,13 @@ export default function SandboxIndex() {
             }}>
               Simple
             </a>
+            <a href="/strong/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: '#00D4FF', textDecoration: 'none', padding: '10px 18px', borderRadius: '4px',
+              background: STRONG_BG, border: '1px solid rgba(0,212,255,.3)',
+            }}>
+              Strong
+            </a>
           </div>
         </div>
       </section>
@@ -329,7 +371,7 @@ export default function SandboxIndex() {
             Edit content in Sanity Studio →
           </a>
           <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '420px' }}>
-            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, and Simple simultaneously.
+            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, and Strong simultaneously.
           </p>
         </div>
       </footer>
