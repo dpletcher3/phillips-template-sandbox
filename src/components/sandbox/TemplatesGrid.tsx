@@ -242,6 +242,61 @@ export default function TemplatesGrid() {
         ))}
       </section>
 
+      {/* ── EyeCatching v2 — Static ── */}
+      <section style={{ padding: '0 60px 48px' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: '32px' }}>
+          <h3 style={{
+            fontFamily: "'Barlow Condensed', sans-serif", fontSize: '14px', fontWeight: 800,
+            letterSpacing: '3px', textTransform: 'uppercase', color: 'rgba(255,255,255,.3)',
+            margin: '0 0 16px',
+          }}>
+            Static Variants
+          </h3>
+          <a
+            href="/eyecatching-v2"
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              background: 'rgba(249,66,58,.06)', border: '1px solid rgba(249,66,58,.15)',
+              borderRadius: '8px', padding: '24px 28px', textDecoration: 'none', color: '#fff',
+              transition: 'border-color .2s, background .2s',
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
+                <h4 style={{
+                  fontFamily: "'Barlow Condensed', sans-serif", fontSize: '22px',
+                  fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', margin: 0,
+                }}>
+                  EyeCatching v2
+                </h4>
+                <span style={{
+                  fontSize: '8px', fontWeight: 900, letterSpacing: '0.14em', textTransform: 'uppercase',
+                  padding: '3px 8px', borderRadius: '2px', background: RED, color: '#fff',
+                  fontFamily: '"Barlow Condensed", sans-serif', lineHeight: 1,
+                }}>
+                  STATIC
+                </span>
+              </div>
+              <span style={{
+                fontSize: '9px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: RED, display: 'inline-block', marginBottom: '8px',
+              }}>
+                Immersive · DM Serif Display · Image-forward
+              </span>
+              <p style={{ color: 'rgba(255,255,255,.35)', fontSize: '12.5px', margin: 0, maxWidth: '640px' }}>
+                12 fully static page templates with Unsplash images — no Sanity connection. Brand, Solution, Product Line, Case Study, Post, Guide, Webinar, Course, Calendar, Team, Location, Persona.
+              </p>
+            </div>
+            <span style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase',
+              color: RED, flexShrink: 0,
+            }}>
+              View All 12 →
+            </span>
+          </a>
+        </div>
+      </section>
+
       {/* ── Singletons & Shared ── */}
       <section style={{ padding: '0 60px 48px' }}>
         <div style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingTop: '32px' }}>

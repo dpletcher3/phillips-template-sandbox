@@ -1,0 +1,17 @@
+export const EC_IMAGES = {
+  machine5axis:   'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1200&h=800&fit=crop',
+  machineVMC:     'https://images.unsplash.com/photo-1537462715315-bfa26e71eaac?w=1200&h=800&fit=crop',
+  machineTurning: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop',
+  machineShop:    'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1200&h=800&fit=crop',
+  machineFloor:   'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=800&fit=crop',
+  metalAM:        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&h=800&fit=crop',
+  cncClose:       'https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=1200&h=800&fit=crop',
+  spindleClose:   'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=800&fit=crop',
+  engineer:       'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=1000&fit=crop',
+  trainingRoom:   'https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=1200&h=700&fit=crop',
+  executive:      'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=1000&fit=crop',
+  building:       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=800&fit=crop',
+  defense:        'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=1200&h=800&fit=crop',
+  medical:        'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=800&fit=crop',
+  aerospace:      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=800&fit=crop',
+} as const
