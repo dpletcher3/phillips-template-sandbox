@@ -4,8 +4,10 @@ import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["600", "700", "800", "900"],
-  variable: "--font-display",
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-bc",
+  display: "swap",
 });
 
 const montserrat = Montserrat({

@@ -9,6 +9,32 @@ export const PHILLIPS_COLORS = {
   bg:     '#F2F4F6',
 } as const
 
+export const FONT = {
+  display: {
+    fontFamily: 'var(--font-bc), sans-serif',
+    fontWeight: 700,
+    fontStyle: 'italic',
+    textTransform: 'uppercase',
+  },
+  body: {
+    fontFamily: 'var(--font-bc), sans-serif',
+    fontWeight: 400,
+    fontStyle: 'italic',
+    textTransform: 'uppercase',
+  },
+  light: {
+    fontFamily: 'var(--font-bc), sans-serif',
+    fontWeight: 300,
+    fontStyle: 'italic',
+    textTransform: 'uppercase',
+  },
+} as const satisfies Record<string, React.CSSProperties>
+
+// Convenience inline style fragments
+export const F_DISPLAY = FONT.display
+export const F_BODY    = FONT.body
+export const F_LIGHT   = FONT.light
+
 export const NAV_ITEMS = [
   { id: 'ima',       label: "I'm a…"             },
   { id: 'solutions', label: 'Solutions'           },

@@ -13,7 +13,19 @@
   --light:   #D7DFE3;
   --bg:      #F2F4F6;
 
-  /* Typography */
-  --font-display: 'Barlow Condensed', sans-serif;
-  --font-body:    'Montserrat', sans-serif;
+  /* Phillips Custom Font System */
+  --font-bc: var(--font-bc);
+
+  /* Three tiers — always italic, always uppercase */
+  --display:    700 italic 1em/1 var(--font-bc), sans-serif;
+  --body-font:  400 italic 1em/1 var(--font-bc), sans-serif;
+  --light-font: 300 italic 1em/1 var(--font-bc), sans-serif;
 }
+
+/* Shorthand utility classes */
+.f-display  { font-family: var(--font-bc), sans-serif; font-weight: 700;
+              font-style: italic; text-transform: uppercase; }
+.f-body     { font-family: var(--font-bc), sans-serif; font-weight: 400;
+              font-style: italic; text-transform: uppercase; }
+.f-light    { font-family: var(--font-bc), sans-serif; font-weight: 300;
+              font-style: italic; text-transform: uppercase; }
