@@ -11,28 +11,32 @@ export default function NavSamplesGrid() {
         {/* Section header */}
         <div style={{ marginBottom: 32 }}>
           <div style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: 9,
-            letterSpacing: '.16em',
+            fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+            fontWeight: 700,
+            fontStyle: 'italic',
             textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.45)',
+            letterSpacing: '0.14em',
+            fontSize: 11,
+            color: '#F9423A',
             marginBottom: 10,
           }}>
             {'// Nav Samples'}
           </div>
           <h2 style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 28,
-            fontWeight: 800,
-            color: 'rgba(255,255,255,0.95)',
-            letterSpacing: -0.5,
+            fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+            fontSize: 32,
+            fontWeight: 900,
+            textTransform: 'uppercase',
+            letterSpacing: '0.04em',
+            color: '#fff',
             margin: '0 0 8px',
           }}>
             Navigation Prototypes
           </h2>
           <p style={{
+            fontFamily: 'var(--font-montserrat), Montserrat, sans-serif',
             fontSize: 13,
-            color: 'rgba(255,255,255,0.45)',
+            color: 'rgba(255,255,255,0.5)',
             maxWidth: 480,
             margin: 0,
             lineHeight: 1.5,

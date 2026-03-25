@@ -11,19 +11,19 @@ export const PHILLIPS_COLORS = {
 
 export const FONT = {
   display: {
-    fontFamily: 'var(--font-bc), sans-serif',
+    fontFamily: 'var(--font-barlow-condensed), sans-serif',
     fontWeight: 700,
     fontStyle: 'italic',
     textTransform: 'uppercase',
   },
   body: {
-    fontFamily: 'var(--font-bc), sans-serif',
+    fontFamily: 'var(--font-barlow-condensed), sans-serif',
     fontWeight: 400,
     fontStyle: 'italic',
     textTransform: 'uppercase',
   },
   light: {
-    fontFamily: 'var(--font-bc), sans-serif',
+    fontFamily: 'var(--font-barlow-condensed), sans-serif',
     fontWeight: 300,
     fontStyle: 'italic',
     textTransform: 'uppercase',

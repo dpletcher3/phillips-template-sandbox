@@ -18,8 +18,8 @@ const config: Config = {
         'p-bg':     '#F2F4F6',
       },
       fontFamily: {
-        bc:      ['var(--font-bc)', 'sans-serif'],
-        display: ['var(--font-bc)', 'sans-serif'],
+        bc:      ['var(--font-barlow-condensed)', 'sans-serif'],
+        display: ['var(--font-barlow-condensed)', 'sans-serif'],
         body:    ['Montserrat', 'sans-serif'],
         mono:    ['JetBrains Mono', 'monospace'],
       },

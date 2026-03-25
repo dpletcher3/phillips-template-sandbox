@@ -37,28 +37,32 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
         {/* Top section */}
         <div style={{ padding: '18px 18px 0' }}>
           <div style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontWeight: 700,
-            fontSize: '12px',
+            fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+            fontWeight: 900,
+            fontSize: 18,
             textTransform: 'uppercase',
             letterSpacing: '0.06em',
-            color: 'rgba(255,255,255,0.95)',
+            color: '#fff',
           }}>
             {title}
           </div>
           <div style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '9px',
+            fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+            fontWeight: 700,
+            fontStyle: 'italic',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            fontSize: 10,
             color: 'rgba(255,255,255,0.45)',
-            marginTop: '4px',
+            marginTop: 4,
           }}>
             {theme}
           </div>
           <div style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '11.5px',
+            fontFamily: 'var(--font-montserrat), Montserrat, sans-serif',
+            fontSize: 11.5,
             color: 'rgba(255,255,255,0.55)',
-            marginTop: '8px',
+            marginTop: 8,
             lineHeight: 1.5,
           }}>
             {description}
@@ -67,9 +71,9 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
 
         {/* Preview section */}
         <div style={{
-          marginTop: '14px',
+          marginTop: 14,
           width: '100%',
-          height: '180px',
+          height: 180,
           overflow: 'hidden',
           position: 'relative',
         }}>
@@ -101,7 +105,7 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
         <div style={{
           padding: '12px 18px 14px',
           display: 'flex',
-          gap: '8px',
+          gap: 8,
         }}>
           <button
             onClick={() => setModalOpen(true)}
@@ -110,11 +114,11 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
               background: '#F9423A',
               color: '#fff',
               border: 'none',
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '9px',
-              fontWeight: 700,
+              fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+              fontSize: 12,
+              fontWeight: 800,
               textTransform: 'uppercase',
-              letterSpacing: '1.5px',
+              letterSpacing: '0.1em',
               padding: '8px 0',
               cursor: 'pointer',
             }}
@@ -127,11 +131,11 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
               flex: 1,
               background: 'transparent',
               border: '1px solid rgba(255,255,255,0.15)',
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '9px',
-              fontWeight: 700,
+              fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+              fontSize: 12,
+              fontWeight: 800,
               textTransform: 'uppercase',
-              letterSpacing: '1.5px',
+              letterSpacing: '0.1em',
               padding: '8px 0',
               color: 'rgba(255,255,255,0.7)',
               cursor: 'pointer',
@@ -154,7 +158,7 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
         }}>
           {/* Top bar */}
           <div style={{
-            height: '44px',
+            height: 44,
             background: '#09090B',
             borderBottom: '1px solid rgba(255,255,255,0.07)',
             padding: '0 20px',
@@ -164,11 +168,11 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
             flexShrink: 0,
           }}>
             <span style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '10px',
-              fontWeight: 700,
+              fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+              fontSize: 12,
+              fontWeight: 800,
               textTransform: 'uppercase',
-              letterSpacing: '1.5px',
+              letterSpacing: '0.1em',
               color: 'rgba(255,255,255,0.7)',
             }}>
               {title} Nav
@@ -176,8 +180,11 @@ export default function NavSampleCard({ title, description, theme, iframeSrc, ac
             <button
               onClick={closeModal}
               style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '10px',
+                fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+                fontSize: 11,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
                 color: 'rgba(255,255,255,0.45)',
                 background: 'none',
                 border: 'none',

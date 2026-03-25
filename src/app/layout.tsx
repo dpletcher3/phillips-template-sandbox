@@ -4,16 +4,16 @@ import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["300", "400", "600", "700", "800", "900"],
   style: ["normal", "italic"],
-  variable: "--font-bc",
+  variable: "--font-barlow-condensed",
   display: "swap",
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-body",
+  variable: "--font-montserrat",
 });
 
 const jetbrainsMono = JetBrains_Mono({

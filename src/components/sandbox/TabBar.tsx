@@ -33,17 +33,16 @@ export default function TabBar() {
               router.push(`/${params.toString() ? `?${params.toString()}` : ''}`)
             }}
             style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '1.5px',
+              fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+              fontSize: 14,
+              fontWeight: 800,
+              letterSpacing: '0.07em',
               textTransform: 'uppercase',
               padding: '14px 24px',
-              color: isActive ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)',
-              borderBottom: isActive ? '2px solid #F9423A' : '2px solid transparent',
+              color: isActive ? '#fff' : 'rgba(255,255,255,0.55)',
               background: 'transparent',
               border: 'none',
-              borderBlockEnd: isActive ? '2px solid #F9423A' : '2px solid transparent',
+              borderBlockEnd: isActive ? '3px solid #F9423A' : '3px solid transparent',
               cursor: 'pointer',
               borderRadius: 0,
               marginBottom: '-1px',
@@ -53,8 +52,9 @@ export default function TabBar() {
             <span style={{
               background: t.badgeBg,
               color: t.badgeColor,
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: 9,
+              fontFamily: 'var(--font-barlow-condensed), Barlow Condensed, sans-serif',
+              fontWeight: 700,
+              fontSize: 11,
               padding: '1px 6px',
               marginLeft: 6,
             }}>
