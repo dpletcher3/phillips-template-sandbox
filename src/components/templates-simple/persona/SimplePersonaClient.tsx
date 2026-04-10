@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { PersonaData } from '@/components/templates/persona/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import SimpleNav from '@/components/nav/SimpleNav'
@@ -9,6 +10,19 @@ const RED = '#F9423A'
 const GREY = '#647883'
 const LIGHT = '#F2F4F6'
 const BORDER = '#D7DFE3'
+
+const PERSONA_IMAGES: Record<string, string> = {
+  manufacturer: '/images/persona/haas-cnc-mill-cutting-action.jpg',
+  federal: '/images/persona/phillips-umc1000-laser-additive-closeup.jpg',
+  educator: '/images/persona/phillips-training-education-banner.jpg',
+}
+
+const SOLUTION_CARD_IMAGES = [
+  '/images/persona/haas-umc750-5axis-mill.png',
+  '/images/persona/haas-cnc-lathe-turning-center.png',
+  '/images/persona/haas-vf4ss-fanuc-robot-automation.png',
+  '/images/persona/haas-umc1000ss-phillips-additive-hybrid.png',
+]
 
 type Tab = 'overview' | 'solutions' | 'brands' | 'federal'
 
@@ -30,13 +44,19 @@ export default function SimplePersonaClient({ persona }: { persona: PersonaData 
       {/* Split hero */}
       <section style={{ display: 'grid', gridTemplateColumns: '42fr 58fr', minHeight: '55vh' }}>
         {/* Left dark panel */}
-        <div style={{ background: '#111', padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#fff' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)', marginBottom: 16 }}>I&apos;m a {persona.persona}</div>
-          <h1 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 40, textTransform: 'uppercase', lineHeight: 1.05, margin: '0 0 16px' }}>
+        <div style={{ background: '#111', padding: '56px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+          <Image
+            src={PERSONA_IMAGES[persona.persona.toLowerCase()] || PERSONA_IMAGES.manufacturer}
+            alt=""
+            fill
+            style={{ objectFit: 'cover', opacity: 0.15 }}
+          />
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,.4)', marginBottom: 16, position: 'relative', zIndex: 1 }}>I&apos;m a {persona.persona}</div>
+          <h1 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 40, textTransform: 'uppercase', lineHeight: 1.05, margin: '0 0 16px', position: 'relative', zIndex: 1 }}>
             {persona.headline.replace(persona.headlineAccent, '').trim()} <em style={{ color: RED, fontStyle: 'normal' }}>{persona.headlineAccent}</em>
           </h1>
-          <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(255,255,255,.5)', margin: '0 0 28px', maxWidth: 400 }}>{persona.description}</p>
-          <div style={{ display: 'flex', gap: 12 }}>
+          <p style={{ fontSize: 14, lineHeight: 1.8, color: 'rgba(255,255,255,.5)', margin: '0 0 28px', maxWidth: 400, position: 'relative', zIndex: 1 }}>{persona.description}</p>
+          <div style={{ display: 'flex', gap: 12, position: 'relative', zIndex: 1 }}>
             <a href={persona.ctaUrl} style={{ background: RED, color: '#fff', border: 'none', padding: '12px 28px', fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}>{persona.ctaLabel}</a>
             <button style={{ background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,.2)', padding: '12px 28px', fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', cursor: 'pointer' }}>Learn More</button>
           </div>
@@ -75,10 +95,14 @@ export default function SimplePersonaClient({ persona }: { persona: PersonaData 
                 </div>
                 <h3 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 18, textTransform: 'uppercase', letterSpacing: 1, margin: '0 0 16px' }}>Key Solutions</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 32 }}>
-                  {persona.tabs.solutions.slice(0, 4).map(s => (
-                    <a key={s.label} href={s.href} style={{ border: `1px solid ${BORDER}`, borderRadius: 4, padding: '16px 20px', textDecoration: 'none', color: '#1a1a1a', cursor: 'pointer' }}>
-                      <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{s.label}</div>
-                      <div style={{ fontSize: 12, color: GREY, lineHeight: 1.5 }}>{s.description}</div>
+                  {persona.tabs.solutions.slice(0, 4).map((s, i) => (
+                    <a key={s.label} href={s.href} style={{ position: 'relative', height: 180, overflow: 'hidden', borderRadius: 4, textDecoration: 'none', cursor: 'pointer', display: 'block' }}>
+                      <Image src={SOLUTION_CARD_IMAGES[i]} alt={s.label} fill style={{ objectFit: 'cover' }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 30%, rgba(0,0,0,.75) 100%)' }} />
+                      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 16, zIndex: 1 }}>
+                        <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4, color: '#fff' }}>{s.label}</div>
+                        <div style={{ fontSize: 12, color: 'rgba(255,255,255,.7)', lineHeight: 1.5 }}>{s.description}</div>
+                      </div>
                     </a>
                   ))}
                 </div>

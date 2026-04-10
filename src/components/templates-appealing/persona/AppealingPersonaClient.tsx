@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { IMAGES } from '@/lib/appealing-images'
 import { PersonaData } from '@/components/templates/persona/types'
 import TemplateBadge from '@/components/TemplateBadge'
 import AppealingNav from '@/components/nav/AppealingNav'
@@ -23,9 +22,16 @@ export default function AppealingPersonaClient({ persona }: Props) {
     { key: 'federal', label: 'Federal' },
   ]
 
-  const personaImage = persona.persona === 'federal' ? IMAGES.defense
-    : persona.persona === 'educator' ? IMAGES.metalAM
-    : IMAGES.machineShop
+  const personaImage = persona.persona === 'federal' ? '/images/persona/phillips-umc1000-laser-additive-closeup.jpg'
+    : persona.persona === 'educator' ? '/images/persona/phillips-training-education-banner.jpg'
+    : '/images/persona/haas-cnc-mill-cutting-action.jpg'
+
+  const SOLUTION_CARD_IMAGES = [
+    '/images/persona/haas-umc750-5axis-mill.png',
+    '/images/persona/haas-cnc-lathe-turning-center.png',
+    '/images/persona/haas-vf4ss-fanuc-robot-automation.png',
+    '/images/persona/haas-umc1000ss-phillips-additive-hybrid.png',
+  ]
 
   return (
     <div style={{ minHeight: '100vh', background: '#fff' }}>
@@ -223,35 +229,54 @@ export default function AppealingPersonaClient({ persona }: Props) {
                 }}>
                   {persona.tabs.solutions.slice(0, 4).map((sol, i) => (
                     <div key={i} style={{
-                      border: '1px solid #D7DFE3',
-                      padding: '20px',
-                      transition: 'all 0.2s ease',
+                      position: 'relative',
+                      height: '180px',
+                      overflow: 'hidden',
                       cursor: 'pointer',
+                      transition: 'all 0.2s ease',
                     }}
                     onMouseEnter={(e) => {
                       (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(0,0,0,.08)'
-                      ;(e.currentTarget as HTMLElement).style.borderBottom = '3px solid #F9423A'
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLElement).style.boxShadow = 'none'
-                      ;(e.currentTarget as HTMLElement).style.borderBottom = '1px solid #D7DFE3'
                     }}
                     >
+                      <Image
+                        src={SOLUTION_CARD_IMAGES[i] || SOLUTION_CARD_IMAGES[0]}
+                        alt={sol.label}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                      />
                       <div style={{
-                        fontFamily: '"Barlow Condensed", sans-serif',
-                        fontWeight: 700,
-                        fontSize: '15px',
-                        color: '#000',
-                        marginBottom: '6px',
-                      }}>
-                        {sol.label}
-                      </div>
+                        position: 'absolute',
+                        inset: 0,
+                        background: 'linear-gradient(180deg, transparent 30%, rgba(0,0,0,.75) 100%)',
+                      }} />
                       <div style={{
-                        fontSize: '12px',
-                        color: '#647883',
-                        lineHeight: 1.5,
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: '16px',
+                        zIndex: 1,
                       }}>
-                        {sol.description}
+                        <div style={{
+                          fontFamily: '"Barlow Condensed", sans-serif',
+                          fontWeight: 700,
+                          fontSize: '15px',
+                          color: '#fff',
+                          marginBottom: '4px',
+                        }}>
+                          {sol.label}
+                        </div>
+                        <div style={{
+                          fontSize: '12px',
+                          color: 'rgba(255,255,255,.7)',
+                          lineHeight: 1.5,
+                        }}>
+                          {sol.description}
+                        </div>
                       </div>
                     </div>
                   ))}

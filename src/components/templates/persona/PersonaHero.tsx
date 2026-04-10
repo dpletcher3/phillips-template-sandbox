@@ -1,6 +1,13 @@
 'use client'
 
+import Image from 'next/image'
 import { PersonaData } from './types'
+
+const PERSONA_IMAGES: Record<string, string> = {
+  manufacturer: '/images/persona/haas-cnc-mill-cutting-action.jpg',
+  federal: '/images/persona/phillips-umc1000-laser-additive-closeup.jpg',
+  educator: '/images/persona/phillips-training-education-banner.jpg',
+}
 
 /* ----------------------------------------------------------------
    Sanity fields → PersonaHero mapping:
@@ -28,14 +35,12 @@ export default function PersonaHero({ data }: Props) {
         overflow: 'hidden',
       }}
     >
-      {/* Photo placeholder overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(255,255,255,.03)',
-          zIndex: 0,
-        }}
+      {/* Background photo */}
+      <Image
+        src={PERSONA_IMAGES[data.persona.toLowerCase()] || '/images/persona/haas-cnc-mill-cutting-action.jpg'}
+        alt=""
+        fill
+        style={{ objectFit: 'cover', opacity: 0.2 }}
       />
 
       {/* Maroon gradient overlay */}

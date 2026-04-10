@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import StrongNav from '@/components/strong/StrongNav'
+import StrongLiteNav from '@/components/strong-lite/StrongLiteNav'
+import FinalCTA from '@/components/strong-lite/FinalCTA'
 
 /* ── Design Tokens ─────────────────────────────────── */
 const RED       = '#F9423A'
@@ -11,12 +12,11 @@ const Z_BG      = '#09090B'
 const Z_DIM     = 'rgba(255,255,255,0.45)'
 const Z_MID     = 'rgba(255,255,255,0.70)'
 
-const L_BG      = '#ffffff'
-const L_ALT     = '#F4F5F7'
-const L_BORDER  = '#E2E4E8'
+const L_BG      = '#FFFFFF'
+const L_BORDER  = 'rgba(13,13,14,0.08)'
 const L_INK     = '#0D0D0E'
-const L_MID     = '#3C3F45'
-const L_DIM     = '#72777F'
+const L_MID     = 'rgba(13,13,14,0.65)'
+const L_DIM     = 'rgba(13,13,14,0.45)'
 
 const MONO  = 'var(--font-mono, "JetBrains Mono"), monospace'
 const INTER = 'var(--font-inter, Inter), sans-serif'
@@ -55,16 +55,16 @@ const SOLUTION_CARDS = [
 ]
 
 /* ── Page Component ────────────────────────────────── */
-export default function StrongPersonaPage() {
+export default function PersonaLitePage() {
   const [activePane, setActivePane] = useState<Pane>('overview')
 
   /* Slug-based BG — default to manufacturer */
   const bgImage = PERSONA_BG['manufacturer'] ?? '/images/persona/haas-cnc-mill-cutting-action.jpg'
 
   return (
-    <div style={{ background: Z_BG, minHeight: '100vh' }}>
+    <div style={{ background: L_BG, minHeight: '100vh' }}>
       {/* ═══ 1. NAV ═══ */}
-      <StrongNav />
+      <StrongLiteNav />
 
       {/* ═══ 2. FULL-HEIGHT SPLIT ═══ */}
       <div style={{
@@ -72,7 +72,7 @@ export default function StrongPersonaPage() {
         gridTemplateColumns: '42% 58%',
         minHeight: 'calc(100vh - 58px)',
       }}>
-        {/* ─── LEFT PANEL ─── */}
+        {/* ─── LEFT PANEL (stays dark) ─── */}
         <div style={{
           position: 'relative',
           overflow: 'hidden',
@@ -174,16 +174,21 @@ export default function StrongPersonaPage() {
           </div>
         </div>
 
-        {/* ─── RIGHT PANEL ─── */}
+        {/* ─── RIGHT PANEL (light) ─── */}
         <div style={{
           background: L_BG,
           display: 'flex',
           flexDirection: 'column',
           borderLeft: `1px solid ${L_BORDER}`,
         }}>
-          {/* Tab Bar */}
+          {/* Tab Bar — light sticky */}
           <div style={{
-            background: L_ALT,
+            position: 'sticky',
+            top: 58,
+            zIndex: 10,
+            background: 'rgba(255,255,255,.92)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             borderBottom: `1px solid ${L_BORDER}`,
             padding: '0 26px',
             display: 'flex',
@@ -252,6 +257,7 @@ export default function StrongPersonaPage() {
                       textAlign: 'center' as const,
                       padding: '16px 0',
                       border: `1px solid ${L_BORDER}`,
+                      background: L_BG,
                     }}>
                       <div style={{
                         fontFamily: INTER,
@@ -472,6 +478,7 @@ export default function StrongPersonaPage() {
                     <div key={item.tag} style={{
                       border: `1px solid ${L_BORDER}`,
                       padding: '16px',
+                      background: L_BG,
                     }}>
                       <div style={{
                         fontFamily: MONO,
@@ -501,6 +508,14 @@ export default function StrongPersonaPage() {
           </div>
         </div>
       </div>
+
+      {/* ═══ 3. FINAL CTA (stays dark) ═══ */}
+      <FinalCTA
+        tag="// Built For You"
+        headline="Let us solve your manufacturing challenges."
+        accentWord="manufacturing challenges."
+        description="Phillips has the machines, training, and support to keep your shop running at peak performance. Talk to our team today."
+      />
     </div>
   )
 }

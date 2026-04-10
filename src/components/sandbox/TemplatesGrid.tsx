@@ -59,15 +59,32 @@ const STRONG_TEMPLATES = [
   { name: 'Persona',        href: '/strong/persona/manufacturer',           desc: 'Dark left split · light filter tabs',                        theme: 'Filter Tabs' },
 ]
 
+const STRONG_LITE_TEMPLATES = [
+  { name: 'Brand',          href: '/strong-lite/brand/haas',                     desc: 'Dark hero · light spec cards · bright gallery',              theme: 'HUD Lite' },
+  { name: 'Solution',       href: '/strong-lite/solution/5-axis-machining',      desc: 'Dark hero · light industry grid · light OPTO',               theme: 'Industry Lite' },
+  { name: 'Product Line',   href: '/strong-lite/product-line',                   desc: 'Dark hero · light tabs · white model cards',                 theme: 'Tabbed Lite' },
+  { name: 'Case Study',     href: '/strong-lite/case-study/navair-frc-east',    desc: 'Dark hero · light timeline · dark results accent',           theme: 'Timeline Lite' },
+  { name: 'Blog Post',      href: '/strong-lite/post/metal-am-naval',           desc: 'Dark hero · light editorial body',                           theme: 'Drop-Cap Lite' },
+  { name: 'Guide',          href: '/strong-lite/guide/what-is-a-vmc',           desc: 'Dark hero · light TOC + body',                               theme: 'TOC Lite' },
+  { name: 'Catalog',        href: '/strong-lite/catalog',                        desc: 'Dark hero · light course cards · light filters',              theme: 'Card Grid Lite' },
+  { name: 'Course',         href: '/strong-lite/course/advanced-lathe-service',  desc: 'Dark hero · light module grid',                              theme: 'Module Lite' },
+  { name: 'Class Event',    href: '/strong-lite/class-event',                    desc: 'Dark header · light calendar table',                         theme: 'Calendar Lite' },
+  { name: 'Team Member',    href: '/strong-lite/team-member/alan-phillips',      desc: 'Dark portrait panel · light bio',                            theme: 'Portrait Lite' },
+  { name: 'Location',       href: '/strong-lite/location/charlotte-nc',          desc: 'Dark hero · light services cards',                           theme: 'Split Lite' },
+  { name: 'Persona',        href: '/strong-lite/persona/manufacturer',           desc: 'Dark hero · light filter tabs + cards',                      theme: 'Filter Lite' },
+]
+
 const RED = '#F9423A'
 const MAROON = '#3F0017'
 const STRONG_BG = '#09090B'
+const STRONG_LITE_BG = '#F2F4F6'
 
 const TAB_CONFIG = {
-  ec:        { label: 'EYE CATCHING', underline: RED,       badge: RED,       themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
-  appealing: { label: 'APPEALING',    underline: MAROON,    badge: MAROON,    themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
-  simple:    { label: 'SIMPLE',       underline: '#fff',    badge: '#000',    themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
-  strong:    { label: 'STRONG',       underline: STRONG_BG, badge: STRONG_BG, themeColor: '#00D4FF',              hoverBorder: 'rgba(0,212,255,.3)' },
+  ec:           { label: 'EYE CATCHING',  underline: RED,             badge: RED,             themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
+  appealing:    { label: 'APPEALING',     underline: MAROON,          badge: MAROON,          themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
+  simple:       { label: 'SIMPLE',        underline: '#fff',          badge: '#000',          themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
+  strong:       { label: 'STRONG',        underline: STRONG_BG,       badge: STRONG_BG,       themeColor: '#00D4FF',              hoverBorder: 'rgba(0,212,255,.3)' },
+  'strong-lite': { label: 'STRONG-LITE',  underline: RED,             badge: STRONG_LITE_BG,  themeColor: '#F9423A',              hoverBorder: 'rgba(249,66,58,.25)' },
 } as const
 
 type TabKey = keyof typeof TAB_CONFIG
@@ -77,6 +94,7 @@ const TEMPLATE_MAP: Record<TabKey, typeof EC_TEMPLATES> = {
   appealing: APPEALING_TEMPLATES,
   simple: SIMPLE_TEMPLATES,
   strong: STRONG_TEMPLATES,
+  'strong-lite': STRONG_LITE_TEMPLATES,
 }
 
 export default function TemplatesGrid() {
@@ -127,6 +145,14 @@ export default function TemplatesGrid() {
               fontFamily: '"Barlow Condensed", sans-serif',
             }}>
               Strong
+            </span>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: STRONG_LITE_BG, color: RED,
+              border: '1px solid rgba(249,66,58,.25)',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              Strong-Lite
             </span>
           </div>
         </div>
@@ -354,6 +380,14 @@ export default function TemplatesGrid() {
               }}>
                 Strong →
               </a>
+              <a href="/strong-lite/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: RED, textDecoration: 'none',
+                padding: '8px 16px', borderRadius: '4px', background: STRONG_LITE_BG,
+                border: '1px solid rgba(249,66,58,.25)',
+              }}>
+                Strong-Lite →
+              </a>
             </div>
           </div>
         </div>
@@ -376,9 +410,10 @@ export default function TemplatesGrid() {
             <p style={{ color: 'rgba(255,255,255,.4)', fontSize: '12.5px', margin: 0, maxWidth: '640px' }}>
               Open <code style={{ color: RED, fontSize: '11px' }}>/ec/brand/haas</code>,{' '}
               <code style={{ color: '#c77', fontSize: '11px' }}>/appealing/brand/haas</code>,{' '}
-              <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code>, and{' '}
-              <code style={{ color: '#00D4FF', fontSize: '11px' }}>/strong/brand/haas</code> in
-              separate tabs to compare the same Sanity content across all four design variants.
+              <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code>,{' '}
+              <code style={{ color: '#00D4FF', fontSize: '11px' }}>/strong/brand/haas</code>, and{' '}
+              <code style={{ color: RED, fontSize: '11px' }}>/strong-lite/brand/haas</code> in
+              separate tabs to compare the same Sanity content across all five design variants.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
@@ -408,6 +443,13 @@ export default function TemplatesGrid() {
             }}>
               Strong
             </a>
+            <a href="/strong-lite/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: RED, textDecoration: 'none', padding: '10px 18px', borderRadius: '4px',
+              background: STRONG_LITE_BG, border: '1px solid rgba(249,66,58,.25)',
+            }}>
+              Strong-Lite
+            </a>
           </div>
         </div>
       </section>
@@ -425,7 +467,7 @@ export default function TemplatesGrid() {
             Edit content in Sanity Studio →
           </a>
           <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '420px' }}>
-            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, and Strong simultaneously.
+            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, Strong, and Strong-Lite simultaneously.
           </p>
         </div>
       </footer>
