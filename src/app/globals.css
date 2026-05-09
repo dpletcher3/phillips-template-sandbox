@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth-scroll for in-page anchor jumps (Branded Subnav uses #ids). */
+html { scroll-behavior: smooth; }
+
 :root {
   /* Phillips Brand Colors */
   --red:     #F9423A;
@@ -29,3 +32,57 @@
               font-style: italic; text-transform: uppercase; }
 .f-light    { font-family: var(--font-barlow-condensed), sans-serif; font-weight: 300;
               font-style: italic; text-transform: uppercase; }
+
+/* =========================================================================
+   BRANDED template family (5th variant)
+   Hybrid type system: Montserrat 700–900 for display, Barlow Condensed
+   italic for accents/eyebrows. Per Phillips Brand Guidelines One-Sheet.
+   These vars exist so inline styles inside src/components/branded/* can
+   reach the same tokens that Tailwind classes resolve to (see
+   tailwind.config.ts → colors.branded / boxShadow / borderRadius).
+   ========================================================================= */
+:root {
+  /* Brand colors */
+  --branded-red:      #F9423A;
+  --branded-red-deep: #D6362F; /* hover state for red surfaces */
+  --branded-maroon:   #3F0017;
+  --branded-gold:     #F68B33;
+  --branded-blue:     #00AEEF;
+  --branded-black:    #000000;
+  --branded-white:    #FFFFFF;
+
+  /* 9-step neutral ramp */
+  --branded-gray-50:  #F7F9FB;
+  --branded-gray-100: #EDF1F4;
+  --branded-gray-200: #D7DFE3;
+  --branded-gray-300: #BFC8D0;
+  --branded-gray-400: #8A949E;
+  --branded-gray-500: #647883;
+  --branded-gray-600: #4A5260;
+  --branded-gray-700: #2A2F36;
+
+  /* Radii */
+  --branded-r-sm: 6px;
+  --branded-r-md: 12px;
+  --branded-r-lg: 20px;
+  --branded-r-xl: 28px;
+
+  /* Layered shadows (last one is red-tinted for primary CTAs) */
+  --branded-shadow-sm:  0 1px 2px rgba(15, 23, 42, 0.04);
+  --branded-shadow-md:  0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+  --branded-shadow-lg:  0 1px 3px rgba(15, 23, 42, 0.05), 0 18px 40px -16px rgba(15, 23, 42, 0.12);
+  --branded-shadow-red: 0 1px 2px rgba(249, 66, 58, 0.10), 0 12px 28px -8px rgba(249, 66, 58, 0.18);
+
+  /* US flag tokens — used only by BrandedTopBar's country flag SVG.
+     Spec'd by the U.S. flag standard, not by the Phillips brand palette. */
+  --branded-flag-red:  #B22234;
+  --branded-flag-blue: #3C3B6E;
+
+  /* Overlay tints used by the Operationalize tile gradients on the
+     Branded home page. Each is an alpha derivative of a base brand
+     color; centralized here so home-page sections stay hex-free. */
+  --branded-overlay-red-1:  rgba(249, 66, 58, 0.78);  /* --branded-red @ 78% */
+  --branded-overlay-red-2:  rgba(214, 54, 47, 0.65);  /* --branded-red-deep @ 65% */
+  --branded-overlay-blue-1: rgba(0, 174, 239, 0.65);  /* --branded-blue @ 65% */
+  --branded-overlay-blue-2: rgba(0, 135, 200, 0.55);  /* darker shade-down @ 55% */
+}

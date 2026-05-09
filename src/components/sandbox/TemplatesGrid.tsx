@@ -74,17 +74,38 @@ const STRONG_LITE_TEMPLATES = [
   { name: 'Persona',        href: '/strong-lite/persona/manufacturer',           desc: 'Dark hero · light filter tabs + cards',                      theme: 'Filter Lite' },
 ]
 
+const BRANDED_TEMPLATES = [
+  { name: 'Home',           href: '/branded',                                  desc: 'Singleton home — additive hybrid, innovation grid, machinist app, photo strip',     theme: 'Editorial Brand' },
+  { name: 'Brand',          href: '/branded/brand/haas',                       desc: 'Brand detail — dark hero · Inspired card · product lines · stats · case studies',    theme: 'Frosted Hero' },
+  { name: 'Solution',       href: '/branded/solution/phillips-opto',           desc: 'Flexible Solution — sub-nav, accordion, testimonials, team grid (or robotics variant)', theme: 'Sticky Subnav' },
+  { name: 'Product Lines',  href: '/branded/product-lines/haas',               desc: 'Product card grid — top-border accent · key specs · brochure CTA',                   theme: 'Spec Cards' },
+  { name: 'Case Study',     href: '/branded/case-study/navair-cycle-time',     desc: 'Customer story — kicker tags · results grid · pull-quote · related brands',          theme: 'Pull-Quote' },
+  { name: 'Blog Post',      href: '/branded/post/metal-am-naval',              desc: 'Article — TOC sidebar · portable body · pull-quote · author card · related',         theme: 'TOC Sidebar' },
+  { name: 'Guide',          href: '/branded/guide/what-is-a-vmc',              desc: 'Educational — level/read-time/doc badges · callouts · TOC · next chapter',           theme: 'Callout Cards' },
+  { name: 'Webinar',        href: '/branded/webinar/metal-am-defense',         desc: 'Event — status badge (Upcoming/Live/On-Demand) · speakers · agenda · register',      theme: 'Speakers Grid' },
+  { name: 'Course',         href: '/branded/course/5-axis-programming',        desc: 'Training — track/audience pills · modules accordion · prerequisites · CTA',          theme: 'Module Acc' },
+  { name: 'Class Calendar', href: '/branded/class-calendar',                   desc: 'Event list — track filter · date/location/seats · register row',                     theme: 'Event List' },
+  { name: 'Team Member',    href: '/branded/team-member/alan-phillips',        desc: 'Profile — RedBlockFrame portrait · bio · expertise pills · contact strip',           theme: 'Red-Block Frame' },
+  { name: 'Location',       href: '/branded/location/charlotte-nc',            desc: 'Facility — full-bleed photo · overlapping address card · map · services',            theme: 'Overlap Card' },
+]
+
 const RED = '#F9423A'
 const MAROON = '#3F0017'
 const STRONG_BG = '#09090B'
 const STRONG_LITE_BG = '#F2F4F6'
+// Branded family badge color — gold from the Phillips palette. Picked because
+// it's distinct from red/maroon/black/strong-dark and complements the gold
+// already in `BrandStripe` without competing with the red used heavily in
+// the family's hero treatments.
+const BRANDED_GOLD = '#F68B33'
 
 const TAB_CONFIG = {
-  ec:           { label: 'EYE CATCHING',  underline: RED,             badge: RED,             themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
-  appealing:    { label: 'APPEALING',     underline: MAROON,          badge: MAROON,          themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
-  simple:       { label: 'SIMPLE',        underline: '#fff',          badge: '#000',          themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
-  strong:       { label: 'STRONG',        underline: STRONG_BG,       badge: STRONG_BG,       themeColor: '#00D4FF',              hoverBorder: 'rgba(0,212,255,.3)' },
-  'strong-lite': { label: 'STRONG-LITE',  underline: RED,             badge: STRONG_LITE_BG,  themeColor: '#F9423A',              hoverBorder: 'rgba(249,66,58,.25)' },
+  ec:            { label: 'EYE CATCHING', underline: RED,           badge: RED,             themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
+  appealing:     { label: 'APPEALING',    underline: MAROON,        badge: MAROON,          themeColor: MAROON,                 hoverBorder: 'rgba(63,0,23,.5)' },
+  simple:        { label: 'SIMPLE',       underline: '#fff',        badge: '#000',          themeColor: 'rgba(255,255,255,.5)', hoverBorder: 'rgba(255,255,255,.2)' },
+  strong:        { label: 'STRONG',       underline: STRONG_BG,     badge: STRONG_BG,       themeColor: '#00D4FF',              hoverBorder: 'rgba(0,212,255,.3)' },
+  'strong-lite': { label: 'STRONG-LITE',  underline: RED,           badge: STRONG_LITE_BG,  themeColor: '#F9423A',              hoverBorder: 'rgba(249,66,58,.25)' },
+  branded:       { label: 'BRANDED',      underline: BRANDED_GOLD,  badge: BRANDED_GOLD,    themeColor: BRANDED_GOLD,           hoverBorder: 'rgba(246,139,51,.45)' },
 } as const
 
 type TabKey = keyof typeof TAB_CONFIG
@@ -95,6 +116,7 @@ const TEMPLATE_MAP: Record<TabKey, typeof EC_TEMPLATES> = {
   simple: SIMPLE_TEMPLATES,
   strong: STRONG_TEMPLATES,
   'strong-lite': STRONG_LITE_TEMPLATES,
+  branded: BRANDED_TEMPLATES,
 }
 
 export default function TemplatesGrid() {
@@ -153,6 +175,13 @@ export default function TemplatesGrid() {
               fontFamily: '"Barlow Condensed", sans-serif',
             }}>
               Strong-Lite
+            </span>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: BRANDED_GOLD, color: '#fff',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              Branded
             </span>
           </div>
         </div>
@@ -388,6 +417,13 @@ export default function TemplatesGrid() {
               }}>
                 Strong-Lite →
               </a>
+              <a href="/branded/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: '#fff', textDecoration: 'none',
+                padding: '8px 16px', borderRadius: '4px', background: BRANDED_GOLD,
+              }}>
+                Branded →
+              </a>
             </div>
           </div>
         </div>
@@ -411,9 +447,10 @@ export default function TemplatesGrid() {
               Open <code style={{ color: RED, fontSize: '11px' }}>/ec/brand/haas</code>,{' '}
               <code style={{ color: '#c77', fontSize: '11px' }}>/appealing/brand/haas</code>,{' '}
               <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code>,{' '}
-              <code style={{ color: '#00D4FF', fontSize: '11px' }}>/strong/brand/haas</code>, and{' '}
-              <code style={{ color: RED, fontSize: '11px' }}>/strong-lite/brand/haas</code> in
-              separate tabs to compare the same Sanity content across all five design variants.
+              <code style={{ color: '#00D4FF', fontSize: '11px' }}>/strong/brand/haas</code>,{' '}
+              <code style={{ color: RED, fontSize: '11px' }}>/strong-lite/brand/haas</code>, and{' '}
+              <code style={{ color: BRANDED_GOLD, fontSize: '11px' }}>/branded/brand/haas</code> in
+              separate tabs to compare the same Sanity content across all six design variants.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
@@ -450,6 +487,13 @@ export default function TemplatesGrid() {
             }}>
               Strong-Lite
             </a>
+            <a href="/branded/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: '#fff', textDecoration: 'none', padding: '10px 18px', borderRadius: '4px',
+              background: BRANDED_GOLD,
+            }}>
+              Branded
+            </a>
           </div>
         </div>
       </section>
@@ -466,8 +510,8 @@ export default function TemplatesGrid() {
           >
             Edit content in Sanity Studio →
           </a>
-          <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '420px' }}>
-            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, Strong, and Strong-Lite simultaneously.
+          <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '480px' }}>
+            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, Strong, Strong-Lite, and Branded simultaneously.
           </p>
         </div>
       </footer>

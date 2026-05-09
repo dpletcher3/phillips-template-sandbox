@@ -13,6 +13,7 @@ import seoBlock     from './objects/seoBlock'
 import blockContent from './objects/blockContent'
 import personaPage  from './singletons/personaPage'
 import siteSettings from './singletons/siteSettings'
+import homePage     from './singletons/homePage'
 
 export const schemaTypes = [
   // Documents
@@ -20,5 +21,5 @@ export const schemaTypes = [
   // Objects
   productLine, seoBlock, blockContent,
   // Singletons
-  personaPage, siteSettings,
+  personaPage, siteSettings, homePage,
 ]

@@ -55,6 +55,10 @@ export async function POST(request: NextRequest) {
       case 'classEvent':
         for (const p of prefixes) revalidatePath(`${p}/class-calendar`)
         break
+      case 'homePage':
+        // Branded home is a one-off route, not part of the per-variant prefix set.
+        revalidatePath('/branded')
+        break
       default:
         // Revalidate everything as fallback
         revalidatePath('/', 'layout')

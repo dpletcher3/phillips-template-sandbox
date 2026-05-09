@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phillips Corporation — Mega Nav · Branded Theme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* =====================================================
+     PHILLIPS BRANDED — design tokens (mirror of
+     tailwind.config.ts → colors.branded and globals.css
+     :root --branded-* variables in the app).
+     ===================================================== */
+  :root {
+    --red:      #F9423A;
+    --red-deep: #D6362F;
+    --maroon:   #3F0017;
+    --gold:     #F68B33;
+    --blue:     #00AEEF;
+    --black:    #000000;
+    --white:    #FFFFFF;
+
+    --gray-50:  #F7F9FB;
+    --gray-100: #EDF1F4;
+    --gray-200: #D7DFE3;
+    --gray-300: #BFC8D0;
+    --gray-400: #8A949E;
+    --gray-500: #647883;
+    --gray-600: #4A5260;
+    --gray-700: #2A2F36;
+
+    --r-sm: 6px;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+
+    --shadow-sm:  0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md:  0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+    --shadow-lg:  0 1px 3px rgba(15, 23, 42, 0.05), 0 18px 40px -16px rgba(15, 23, 42, 0.12);
+    --shadow-red: 0 1px 2px rgba(249, 66, 58, 0.10), 0 12px 28px -8px rgba(249, 66, 58, 0.18);
+
+    --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --font-body:    "Montserrat", system-ui, -apple-system, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-700);
+    line-height: 1.6;
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+  /* =====================================================
+     TOP BAR — 32px utility row with country selector
+     ===================================================== */
+  .topbar {
+    background: var(--gray-100);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .topbar .container {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 600; color: var(--gray-600);
+  }
+  .topbar .country {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; border: none; padding: 0;
+    color: inherit; font: inherit; cursor: pointer;
+  }
+  .topbar .chev { font-size: 9px; opacity: 0.5; }
+  .flag-us {
+    width: 20px; height: 14px; border-radius: 1px; flex-shrink: 0;
+    background: linear-gradient(to bottom,
+      #B22234 0 1.077px, #fff 1.077px 2.154px, #B22234 2.154px 3.231px, #fff 3.231px 4.308px,
+      #B22234 4.308px 5.385px, #fff 5.385px 6.462px, #B22234 6.462px 7.539px, #fff 7.539px 8.616px,
+      #B22234 8.616px 9.693px, #fff 9.693px 10.77px, #B22234 10.77px 11.847px, #fff 11.847px 12.924px,
+      #B22234 12.924px 14px);
+    position: relative;
+  }
+  .flag-us::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 9px; height: 7.5px; background: #3C3B6E;
+  }
+
+  /* =====================================================
+     STICKY FROSTED HEADER — 84px
+     ===================================================== */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 84px;
+  }
+  .logo svg { height: 40px; width: auto; display: block; }
+  .header-actions { display: flex; align-items: center; gap: 12px; }
+
+  .search-form { position: relative; display: inline-block; }
+  .search-form svg.search-icon {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    pointer-events: none; width: 18px; height: 18px;
+  }
+  .search {
+    width: 320px; height: 42px;
+    border: 1px solid var(--gray-200);
+    border-radius: 24px;
+    padding: 0 18px 0 42px;
+    font-family: var(--font-body); font-size: 14px;
+    background: var(--gray-50); color: var(--gray-700);
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+  }
+  .search::placeholder { color: var(--gray-400); }
+  .search:focus { outline: none; border-color: var(--red); background-color: var(--white); }
+
+  .icon-btn {
+    width: 42px; height: 42px;
+    border: none; background: transparent;
+    border-radius: var(--r-sm);
+    color: var(--gray-700);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .icon-btn:hover { background: var(--gray-100); color: var(--red); }
+  .icon-btn svg { width: 22px; height: 22px; }
+
+  /* =====================================================
+     STICKY SUB-NAV — 52px below the header
+     ===================================================== */
+  .subnav {
+    position: sticky; top: 84px; z-index: 40;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .subnav-inner {
+    display: flex; align-items: center; gap: 32px;
+    height: 52px; overflow-x: auto; scrollbar-width: none;
+  }
+  .subnav-inner::-webkit-scrollbar { display: none; }
+  .subnav a {
+    font-family: var(--font-body);
+    font-weight: 500; font-size: 13px;
+    color: var(--gray-600);
+    white-space: nowrap; padding: 16px 0;
+    position: relative;
+    transition: color 0.18s ease;
+  }
+  .subnav a:hover { color: var(--red); }
+  .subnav a.active { font-weight: 700; color: var(--black); }
+  .subnav a.active::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 3px; background: var(--red);
+  }
+
+  /* =====================================================
+     SAMPLE BODY (so the prototype isn't empty below the nav)
+     ===================================================== */
+  .progress-bars {
+    display: inline-flex; gap: 6px;
+    transform: skewX(-18deg);
+    margin-bottom: 18px;
+  }
+  .progress-bars span {
+    display: block; width: 8px; height: 36px;
+    background: var(--red);
+  }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 2.5px;
+    font-size: 13px; color: var(--red);
+    display: inline-block; margin-bottom: 14px;
+  }
+
+  .sample-hero { padding: 80px 0 56px; background: var(--white); }
+  .sample-hero h1 {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(40px, 5vw, 64px); line-height: 1;
+    letter-spacing: -1.5px; color: var(--red);
+    margin-bottom: 20px;
+  }
+  .sample-hero p {
+    color: var(--gray-700); font-size: 15px; line-height: 1.75;
+    max-width: 760px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-bottom: 80px;
+  }
+  .demo-card {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    padding: 36px;
+    box-shadow: var(--shadow-md);
+  }
+  .demo-card::before {
+    content: "";
+    position: absolute; top: 36px; left: 36px;
+    width: 48px; height: 4px;
+    background: var(--red); border-radius: 2px;
+  }
+  .demo-card h3 {
+    font-family: var(--font-body); font-weight: 700;
+    font-size: 20px; color: var(--black);
+    margin: 28px 0 12px;
+  }
+  .demo-card p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+  .demo-card code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--gray-100); color: var(--gray-700);
+    padding: 1px 5px; border-radius: 3px; font-size: 12.5px;
+  }
+
+  /* =====================================================
+     BRAND STRIPE + FOOTER
+     ===================================================== */
+  .brand-stripe {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    height: 14px;
+  }
+  .brand-stripe span:nth-child(1) { background: var(--red); }
+  .brand-stripe span:nth-child(2) { background: var(--maroon); }
+  .brand-stripe span:nth-child(3) { background: var(--gold); }
+  .brand-stripe span:nth-child(4) { background: var(--blue); }
+
+  .site-footer {
+    background: var(--black); color: var(--gray-400);
+    padding: 36px 0; text-align: center;
+    font-family: var(--font-body);
+    font-weight: 500; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  /* =====================================================
+     RESPONSIVE
+     ===================================================== */
+  @media (max-width: 1000px) {
+    .container { padding: 0 24px; }
+    .grid-3 { grid-template-columns: 1fr; gap: 20px; }
+    .search { width: 200px; }
+  }
+  @media (max-width: 600px) {
+    .search { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <button class="country" type="button" aria-label="Select country (current: USA)">
+      <span class="flag-us" aria-hidden="true"></span>
+      <span>USA</span>
+      <span class="chev" aria-hidden="true">▼</span>
+    </button>
+  </div>
+</div>
+
+<!-- STICKY FROSTED HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="/" aria-label="Phillips Corporation home">
+      <svg viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0,3) skewX(-22)">
+          <rect x="0"  y="0" width="9" height="40" fill="#F9423A"/>
+          <rect x="14" y="0" width="9" height="40" fill="#F9423A"/>
+          <rect x="28" y="0" width="9" height="40" fill="#F9423A"/>
+        </g>
+        <text x="50" y="36"
+              font-family="Barlow Condensed, sans-serif"
+              font-style="italic" font-weight="900" font-size="44"
+              letter-spacing="-1" fill="#000">Phillips</text>
+        <text x="195" y="14" font-size="11" font-weight="700" fill="#000"
+              font-family="Montserrat, sans-serif">®</text>
+      </svg>
+    </a>
+
+    <div class="header-actions">
+      <form class="search-form" action="" method="get" role="search">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none"
+             stroke="#647883" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input class="search" type="search" name="q" placeholder="Search…" aria-label="Search" />
+      </form>
+
+      <button class="icon-btn" type="button" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- STICKY SUB-NAV -->
+<nav class="subnav" aria-label="Page sections">
+  <div class="container subnav-inner">
+    <a href="#application-support">Application Support</a>
+    <a href="#opto-videos">Opto Videos</a>
+    <a href="#training">Training</a>
+    <a href="#automation" class="active" aria-current="true">Automation &amp; Robotics</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#team">Our Team</a>
+    <a href="#contact">Contact Us</a>
+  </div>
+</nav>
+
+<!-- SAMPLE HERO (lets the modal viewer show real layout below the nav) -->
+<section class="sample-hero">
+  <div class="container">
+    <span class="progress-bars" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </span>
+    <span class="eyebrow">Branded · Mega Nav Prototype</span>
+    <h1>Move your Mountain.</h1>
+    <p>This prototype demonstrates the canonical Branded family chrome. A 32px gray top bar carries the country selector, an 84px sticky frosted header carries the Phillips lockup with search and menu, and a 52px sticky sub-navigation pins beneath the header for in-page jumps. All three layers stack in z-order (50 / 40 / 30) and stay aligned to the 1240px container.</p>
+  </div>
+</section>
+
+<section style="padding: 0 0 80px;">
+  <div class="container">
+    <div class="grid-3">
+      <div class="demo-card">
+        <h3>Top Bar</h3>
+        <p>32px utility row in <code>--gray-100</code> with US flag SVG and country selector. Sits above the main header on every Branded page.</p>
+      </div>
+      <div class="demo-card">
+        <h3>Frosted Header</h3>
+        <p>84px sticky header at z-index 50. Background <code>rgba(255,255,255,0.92)</code> with <code>backdrop-filter: saturate(140%) blur(10px)</code>.</p>
+      </div>
+      <div class="demo-card">
+        <h3>Sticky Sub-Nav</h3>
+        <p>52px secondary navigation at z-index 40, sticky-pinned 84px from the top. The active link gets a 3px red underline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STRIPE + FOOTER -->
+<div class="brand-stripe" aria-hidden="true">
+  <span></span><span></span><span></span><span></span>
+</div>
+<footer class="site-footer">
+  <div class="container">© 2026 Phillips Corporation</div>
+</footer>
+
+</body>
+</html>

@@ -1,3 +1,18 @@
+/**
+ * Family color convention (passed via `color` prop):
+ *   • EyeCatching →  #F9423A   (Phillips red)
+ *   • Appealing   →  #3F0017   (maroon)
+ *   • Simple      →  #000000   (black, white text)
+ *   • Strong      →  #09090B   (near-black w/ cyan #00D4FF text)
+ *   • Branded     →  #F68B33   (gold)
+ *     ↑ picked because it's distinct from the four existing variants,
+ *       sits inside the Phillips brand palette, and doesn't compete
+ *       with the red used heavily in the Branded family's design.
+ *
+ * The component itself is generic — these are the conventions used
+ * across the family clients. See `src/components/sandbox/TemplatesGrid.tsx`
+ * for the matching tab badges.
+ */
 export default function TemplateBadge({
   label = 'EYE CATCHING',
   color = '#F9423A'

@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phillips Corporation — Move Your Mountain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* =====================================================
+     PHILLIPS BRAND DESIGN SYSTEM
+     Per Brand Guidelines One-Sheet (12-2024)
+     ===================================================== */
+  :root {
+    --red: #F9423A;
+    --red-deep: #D6362F;
+    --maroon: #3F0017;
+    --gold: #F68B33;
+    --blue: #00AEEF;
+    --black: #000000;
+    --gray-700: #2A2F36;
+    --gray-600: #4A5260;
+    --gray-500: #647883;
+    --gray-400: #8A949E;
+    --gray-300: #BFC8D0;
+    --gray-200: #D7DFE3;
+    --gray-100: #EDF1F4;
+    --gray-50:  #F7F9FB;
+    --white: #FFFFFF;
+
+    --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --font-body: "Montserrat", system-ui, -apple-system, sans-serif;
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 1px 3px rgba(15, 23, 42, 0.05), 0 18px 40px -16px rgba(15, 23, 42, 0.12);
+    --shadow-red: 0 1px 2px rgba(249, 66, 58, 0.10), 0 12px 28px -8px rgba(249, 66, 58, 0.18);
+
+    --r-sm: 6px;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-700);
+    line-height: 1.6;
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+  /* TYPOGRAPHY */
+  h1.hero-headline {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: clamp(48px, 6.4vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -2px;
+    color: var(--red);
+  }
+  h2.section-heading {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.6px;
+    color: var(--black);
+  }
+  h2.display-heading {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: clamp(40px, 5.2vw, 60px);
+    line-height: 0.95;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+  h2.display-heading .sub {
+    display: block;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--red);
+    letter-spacing: 3.5px;
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 13px;
+    color: var(--red);
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+
+  p { color: var(--gray-600); font-size: 15px; line-height: 1.75; }
+
+  /* BRAND STRIPE */
+  .brand-stripe { display: grid; grid-template-columns: repeat(4, 1fr); height: 14px; }
+  .brand-stripe span:nth-child(1) { background: var(--red); }
+  .brand-stripe span:nth-child(2) { background: var(--maroon); }
+  .brand-stripe span:nth-child(3) { background: var(--gold); }
+  .brand-stripe span:nth-child(4) { background: var(--blue); }
+
+  /* PROGRESS BARS — recurring brand graphic */
+  .progress-bars {
+    display: inline-flex;
+    gap: 6px;
+    transform: skewX(-18deg);
+    margin-bottom: 18px;
+  }
+  .progress-bars span {
+    display: block;
+    width: 8px;
+    height: 36px;
+    background: var(--red);
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    padding: 14px 26px;
+    border-radius: var(--r-sm);
+    border: none;
+    text-transform: uppercase;
+    transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+    box-shadow: var(--shadow-red);
+  }
+  .btn:hover { background: var(--red-deep); }
+  .btn:active { transform: translateY(1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+    box-shadow: none;
+  }
+  .btn-ghost:hover { background: var(--red); color: var(--white); }
+  .btn-light {
+    background: var(--white);
+    color: var(--red);
+    box-shadow: var(--shadow-md);
+  }
+  .btn-light:hover { background: var(--gray-50); }
+  .btn .arr { display: inline-block; transition: transform 0.18s ease; }
+  .btn:hover .arr { transform: translateX(3px); }
+
+  /* HEADER */
+  .topbar {
+    background: var(--gray-100);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .topbar .container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+  }
+  .topbar .country {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .flag-us {
+    width: 20px; height: 14px;
+    border-radius: 1px;
+    background:
+      linear-gradient(to bottom,
+        #B22234 0 1.27px, #fff 1.27px 2.54px, #B22234 2.54px 3.81px, #fff 3.81px 5.08px,
+        #B22234 5.08px 6.35px, #fff 6.35px 7.62px, #B22234 7.62px 8.89px, #fff 8.89px 10.16px,
+        #B22234 10.16px 11.43px, #fff 11.43px 12.7px, #B22234 12.7px 14px);
+    position: relative;
+  }
+  .flag-us::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 9px; height: 7.5px;
+    background: #3C3B6E;
+  }
+  .topbar .chev { font-size: 9px; opacity: 0.5; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 84px;
+  }
+  .logo svg { height: 40px; width: auto; }
+  .header-actions { display: flex; align-items: center; gap: 12px; }
+  .search {
+    width: 320px;
+    height: 42px;
+    border: 1px solid var(--gray-200);
+    border-radius: 24px;
+    padding: 0 18px 0 42px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--gray-50)
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23647883' stroke-width='2' stroke-linecap='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>") no-repeat 14px center;
+    background-size: 18px;
+    color: var(--gray-700);
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+  }
+  .search::placeholder { color: var(--gray-400); }
+  .search:focus { outline: none; border-color: var(--red); background-color: var(--white); }
+  .icon-btn {
+    width: 42px; height: 42px;
+    border: none;
+    background: transparent;
+    border-radius: var(--r-sm);
+    color: var(--gray-700);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .icon-btn:hover { background: var(--gray-100); color: var(--red); }
+  .icon-btn svg { width: 22px; height: 22px; }
+
+  /* =====================================================
+     HERO IMAGE (full-bleed, no overlay text — text below)
+     ===================================================== */
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 5.4;
+    min-height: 320px;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.18) 100%),
+      url("https://images.unsplash.com/photo-1716191300020-b52dec5b70a8?w=1600&h=900&fit=crop&auto=format&q=80") center/cover no-repeat;
+  }
+
+  /* HERO TEXT */
+  .hero-text { padding: 80px 0 96px; background: var(--white); }
+  .hero-text .container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 980px;
+  }
+  .hero-text p.body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--gray-700);
+    max-width: 880px;
+    margin-top: 12px;
+  }
+  .hero-text p.body strong { color: var(--black); font-weight: 700; }
+  .hero-text p.cta {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-top: 4px;
+  }
+
+  /* =====================================================
+     SECTION SCAFFOLDING
+     ===================================================== */
+  section { padding: 112px 0; position: relative; }
+  section.tight { padding: 80px 0; }
+  section.soft { background: var(--gray-50); }
+  section.tinted {
+    background: linear-gradient(180deg, #E9EFF4 0%, #D9E3EB 100%);
+    overflow: hidden;
+  }
+  section.tinted::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(60deg, rgba(255,255,255,0.16) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.16) 75%);
+    background-size: 32px 56px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  section.tinted .container { position: relative; z-index: 1; }
+  section.dark { background: var(--black); color: var(--white); overflow: hidden; }
+  section.dark::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(45deg, rgba(255,255,255,0.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.025) 75%),
+      linear-gradient(-45deg, rgba(255,255,255,0.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.025) 75%);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+  section.dark .container { position: relative; z-index: 1; }
+  section.dark h2 { color: var(--white); }
+  section.dark p { color: #C2C8CF; }
+
+  /* =====================================================
+     INSPIRED BY YOUR INGENUITY
+     ===================================================== */
+  .inspired-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+  .inspired-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    padding: 56px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .inspired-card::before {
+    content: "";
+    position: absolute;
+    top: 56px; left: 56px;
+    width: 48px; height: 4px;
+    background: var(--red);
+    border-radius: 2px;
+  }
+  .inspired-card h2 { margin-top: 28px; margin-bottom: 22px; }
+  .inspired-card p { margin-bottom: 16px; }
+  .inspired-card p .term {
+    color: var(--red);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+  .inspired-photo {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+    background: var(--gray-100);
+  }
+  .inspired-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* =====================================================
+     ADDITIVE HYBRID
+     ===================================================== */
+  .ah-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .ah-lockup { margin-bottom: 28px; }
+  .ah-lockup .row1 { display: flex; align-items: center; gap: 12px; }
+  .ah-lockup .ph-mark { height: 38px; width: auto; }
+  .ah-lockup .row2 { display: flex; align-items: baseline; margin-top: 8px; }
+  .ah-lockup .additive-word {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .ah-lockup .hybrid-word {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1;
+    margin-left: 10px;
+  }
+  .ah-lockup .powered {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-style: italic;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gray-500);
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+  .partner-pills {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .partner-pills .pill {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-sm);
+    padding: 10px 18px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: var(--gray-500);
+    box-shadow: var(--shadow-sm);
+  }
+  .ah-photo {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 5 / 4;
+    box-shadow: var(--shadow-lg);
+    background: var(--gray-100);
+  }
+  .ah-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .ah-content p { margin-bottom: 28px; max-width: 460px; }
+
+  /* =====================================================
+     OPERATIONALIZE
+     ===================================================== */
+  .op-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .op-tile {
+    aspect-ratio: 1;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+  }
+  .op-tile-red {
+    background:
+      linear-gradient(135deg, rgba(249,66,58,0.78), rgba(214,54,47,0.65)),
+      url("https://images.unsplash.com/photo-1740209475472-aa7d280f7452?w=900&h=900&fit=crop&auto=format&q=80") center/cover no-repeat;
+  }
+  .op-tile-blue {
+    background:
+      linear-gradient(135deg, rgba(0,174,239,0.65), rgba(0,135,200,0.55)),
+      url("https://images.unsplash.com/photo-1561471828-96e54774b225?w=900&h=900&fit=crop&auto=format&q=80") center/cover no-repeat;
+  }
+  .op-tile::after {
+    content: "";
+    position: absolute;
+    top: -10%; right: -10%;
+    width: 36%; height: 130%;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,0.16) 0 6px,
+      transparent 6px 14px
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+  }
+
+  .op-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8px;
+  }
+  .op-content p { margin: 18px 0; }
+  .op-content .highlight { font-weight: 700; color: var(--black); }
+
+  /* =====================================================
+     HAAS — Sales Service Support
+     ===================================================== */
+  .haas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .haas-image {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow: var(--shadow-lg);
+    background: var(--gray-100);
+  }
+  .haas-image img { width: 100%; height: 100%; object-fit: cover; }
+  .haas-content h2 { margin-bottom: 22px; }
+  .haas-content p { margin-bottom: 16px; max-width: 540px; }
+  .haas-logos {
+    display: inline-flex;
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-md);
+    padding: 14px 22px;
+    margin: 8px 0 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .haas-logos .haas-mark {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--red);
+    letter-spacing: 1px;
+    line-height: 1;
+    padding-right: 18px;
+    border-right: 1px solid var(--gray-200);
+  }
+  .haas-logos .f1-mark {
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 3px;
+  }
+  .haas-logos .f1-mark .a {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 900;
+    font-size: 17px;
+    color: var(--red);
+  }
+  .haas-logos .f1-mark .b {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--black);
+    letter-spacing: 0.5px;
+  }
+  .haas-logos .f1-mark .c {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 8px;
+    color: var(--gray-500);
+    letter-spacing: 1.5px;
+  }
+
+  /* =====================================================
+     INNOVATIVE SOLUTIONS (BLACK section)
+     ===================================================== */
+  .innov-head { margin-bottom: 56px; max-width: 720px; }
+  .innov-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+  .innov-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: var(--r-lg);
+    padding: 36px 28px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+  .innov-card:hover {
+    background: rgba(249,66,58,0.06);
+    transform: translateY(-2px);
+  }
+  .innov-icon {
+    width: 84px; height: 84px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .innov-icon svg { width: 100%; height: 100%; }
+  .innov-card h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--red);
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .innov-card p {
+    font-size: 13px;
+    color: #C2C8CF;
+    margin-bottom: 26px;
+    line-height: 1.7;
+    flex-grow: 1;
+  }
+
+  /* =====================================================
+     LOCAL & GLOBAL
+     ===================================================== */
+  .lg-head { margin-bottom: 48px; }
+  .lg-wrap { position: relative; }
+  .lg-map {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at center, var(--gray-300) 1px, transparent 1.5px);
+    background-size: 14px 14px;
+    opacity: 0.32;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, #000 30%, transparent 90%);
+            mask-image: radial-gradient(ellipse 75% 60% at 50% 50%, #000 30%, transparent 90%);
+  }
+  .lg-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+  .lg-region h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    color: var(--red);
+    font-size: 15px;
+    letter-spacing: 2.5px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .lg-region .sub-label {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--gray-500);
+    letter-spacing: 1.5px;
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+  }
+  .lg-region ul {
+    list-style: none;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--gray-600);
+  }
+  .lg-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .lg-buttons .btn { min-width: 160px; }
+
+  /* =====================================================
+     IMPACT
+     ===================================================== */
+  .impact-head { margin-bottom: 48px; }
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .impact-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-200);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .impact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+  .impact-photo {
+    aspect-ratio: 16 / 10;
+    background: var(--gray-100);
+    overflow: hidden;
+  }
+  .impact-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .impact-body {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    border-top: 3px solid var(--red);
+  }
+  .impact-card h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--black);
+    line-height: 1.3;
+  }
+  .impact-card .meta {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--gray-500);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .impact-show-more { text-align: center; margin-top: 40px; }
+
+  /* =====================================================
+     MACHINIST APP (red section)
+     ===================================================== */
+  .machinist {
+    background: var(--red);
+    color: var(--white);
+    padding: 112px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .machinist::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -65deg,
+      transparent 0 40px,
+      rgba(255,255,255,0.04) 40px 42px
+    );
+    pointer-events: none;
+  }
+  .machinist .container { position: relative; z-index: 1; }
+  .machinist-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .phones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  .phone {
+    width: 130px;
+    aspect-ratio: 9 / 19;
+    background: #1a1a1a;
+    border-radius: 22px;
+    border: 4px solid #2a2a2a;
+    position: relative;
+    box-shadow: 0 22px 40px rgba(0,0,0,0.32);
+  }
+  .phone::before {
+    content: "";
+    position: absolute;
+    top: 8px; left: 50%; transform: translateX(-50%);
+    width: 42px; height: 5px;
+    background: #444;
+    border-radius: 3px;
+  }
+  .phone-screen {
+    position: absolute;
+    inset: 16px 5px 5px;
+    background: linear-gradient(180deg, #f7f7f8 0%, #e8e8eb 100%);
+    border-radius: 14px;
+    overflow: hidden;
+    font-size: 8px;
+    color: #555;
+    padding: 10px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .phone.center {
+    width: 150px;
+    transform: translateY(-16px);
+    z-index: 2;
+  }
+  .phone.center .phone-screen {
+    background: var(--red);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    padding: 24px;
+    line-height: 1.3;
+  }
+  .machinist-content { padding-left: 8px; }
+  .machinist-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+  .machinist-logo-mark {
+    width: 76px; height: 76px;
+    background: var(--white);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .machinist-logo-mark svg { width: 56px; height: 42px; }
+  .machinist-logo-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.1;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .machinist p { font-size: 15px; line-height: 1.75; margin-bottom: 18px; max-width: 480px; color: rgba(255,255,255,0.94); }
+  .machinist p.highlight { font-weight: 700; color: var(--white); }
+  .qr-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 12px;
+  }
+  .qr-code {
+    width: 100px; height: 100px;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 8px;
+  }
+  .qr-row span {
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* =====================================================
+     WORK TOGETHER
+     ===================================================== */
+  .wt-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+  .wt-card {
+    background: var(--gray-50);
+    padding: 56px;
+    border-radius: var(--r-lg);
+    border-top: 4px solid var(--red);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .wt-card h2 { margin-bottom: 20px; }
+  .wt-card p { margin-bottom: 30px; }
+  .wt-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+  .wt-image {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow-lg);
+    background: var(--gray-100);
+  }
+  .wt-image img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* =====================================================
+     COMMUNITY TAGLINE
+     ===================================================== */
+  .community {
+    padding: 80px 0 0;
+    text-align: center;
+    background: var(--white);
+  }
+  .community h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(20px, 2.4vw, 28px);
+    letter-spacing: 1.5px;
+    color: var(--black);
+    max-width: 1100px;
+    margin: 0 auto 56px;
+    line-height: 1.3;
+  }
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    width: 100%;
+    aspect-ratio: 24 / 5;
+    background: var(--gray-700);
+    overflow: hidden;
+  }
+  .photo-strip .ps {
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--black);
+    color: var(--gray-400);
+    padding: 36px 0;
+    text-align: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .innov-grid { grid-template-columns: repeat(2, 1fr); }
+    .lg-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 1000px) {
+    .container { padding: 0 24px; }
+    section { padding: 72px 0; }
+    .machinist { padding: 72px 0; }
+    .inspired-grid, .ah-grid, .haas-grid,
+    .machinist-grid, .wt-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .op-grid { grid-template-columns: 1fr 1fr; }
+    .op-content { grid-column: 1 / -1; padding-left: 0; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .inspired-card, .wt-card { padding: 36px; }
+    .inspired-card::before { left: 36px; top: 36px; }
+    .inspired-card h2 { margin-top: 22px; }
+    .photo-strip { grid-template-columns: repeat(4, 1fr); }
+    .search { width: 200px; }
+  }
+  @media (max-width: 600px) {
+    .innov-grid, .lg-grid, .op-grid { grid-template-columns: 1fr; }
+    .lg-buttons .btn { flex: 1; min-width: 0; }
+    .photo-strip { grid-template-columns: repeat(3, 1fr); aspect-ratio: 9 / 5; }
+    .search { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <span class="country">
+      <span class="flag-us" aria-hidden="true"></span>USA <span class="chev">▼</span>
+    </span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="phillips-home.html" aria-label="Phillips Corporation">
+      <svg viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0,3) skewX(-22)">
+          <rect x="0"  y="0" width="9" height="40" fill="#F9423A"/>
+          <rect x="14" y="0" width="9" height="40" fill="#F9423A"/>
+          <rect x="28" y="0" width="9" height="40" fill="#F9423A"/>
+        </g>
+        <text x="50" y="36" font-family="Barlow Condensed, sans-serif"
+              font-style="italic" font-weight="900" font-size="44"
+              letter-spacing="-1" fill="#000">Phillips</text>
+        <text x="195" y="14" font-size="11" font-weight="700" fill="#000"
+              font-family="Montserrat, sans-serif">®</text>
+      </svg>
+    </a>
+    <div class="header-actions">
+      <input class="search" type="search" placeholder="Search…" aria-label="Search" />
+      <button class="icon-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO IMAGE -->
+<div class="hero-image" role="img" aria-label="Phillips Corporation manufacturing facility"></div>
+
+<!-- HERO TEXT -->
+<section class="hero-text" style="padding-top: 80px;">
+  <div class="container">
+    <div class="progress-bars" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <h1 class="hero-headline">Move your Mountain.</h1>
+    <p class="body">At Phillips we're passionate in helping customers overcome barriers to success. We deliver customized manufacturing solutions for <strong>machining, additive, automation</strong> and <strong>workforce enrichment.</strong></p>
+    <p class="cta">Make your move. We're ready.</p>
+  </div>
+</section>
+
+<!-- INSPIRED -->
+<section class="soft" style="padding-top: 0;">
+  <div class="container">
+    <div class="inspired-grid">
+      <div class="inspired-card">
+        <h2 class="section-heading">Inspired By Your Ingenuity</h2>
+        <p>We are a global manufacturing solutions and services company, partnering with customers to create legendary value by providing unparalleled expertise, innovative thinking, and solutions for those who shape the future.</p>
+        <p><span class="term">Our Mission:</span>To partner with thought leaders and creators providing the needed know-how and machinery to transform human society in ways that make life immeasurably better.</p>
+        <p><span class="term">Our Vision:</span>To accomplish our mission by being the world's best supplier of manufacturing technology.</p>
+      </div>
+      <div class="inspired-photo">
+        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1000&h=800&fit=crop&auto=format&q=80" alt="Phillips engineers reviewing CNC controls" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADDITIVE HYBRID -->
+<section class="tinted">
+  <div class="container">
+    <div class="ah-grid">
+      <div class="ah-content">
+        <div class="ah-lockup">
+          <div class="row1">
+            <svg class="ph-mark" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(0,2) skewX(-22)">
+                <rect x="0"  y="0" width="8" height="36" fill="#F9423A"/>
+                <rect x="12" y="0" width="8" height="36" fill="#F9423A"/>
+                <rect x="24" y="0" width="8" height="36" fill="#F9423A"/>
+              </g>
+              <text x="44" y="32" font-family="Barlow Condensed, sans-serif" font-style="italic" font-weight="900" font-size="38" letter-spacing="-1" fill="#000">Phillips</text>
+              <text x="180" y="14" font-size="9" font-weight="700" fill="#000" font-family="Montserrat, sans-serif">®</text>
+            </svg>
+          </div>
+          <div class="row2">
+            <span class="additive-word">ADDITIVE</span>
+            <span class="hybrid-word">HYBRID</span>
+          </div>
+          <div class="powered">POWERED BY HAAS</div>
+        </div>
+
+        <div class="partner-pills">
+          <span class="pill">MELTIO</span>
+          <span class="pill">FRONIUS</span>
+          <span class="pill">LASERLINE</span>
+        </div>
+
+        <p>Phillips is transforming manufacturing with a lineup of hybrid additive solutions, combining the power of Fronius Wire Arc, Laserline's powder deposition and Meltio's laser deposition technology systems with trusted Haas CNC machining centers. Now, you can integrate both additive and subtractive capabilities directly into your new or existing Haas machine, allowing for unparalleled flexibility in creating and repairing complex parts all within a single setup.</p>
+
+        <a class="btn" href="#">Learn More <span class="arr">→</span></a>
+      </div>
+      <div class="ah-photo">
+        <img src="https://images.unsplash.com/photo-1666618090858-fbcee636bd3e?w=1100&h=900&fit=crop&auto=format&q=80" alt="Phillips Additive Hybrid machine" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONALIZE -->
+<section>
+  <div class="container">
+    <div class="op-grid">
+      <div class="op-tile op-tile-red" aria-label="Machined precision part"></div>
+      <div class="op-tile op-tile-blue" aria-label="Additive impeller"></div>
+      <div class="op-content">
+        <span class="eyebrow">Advanced Manufacturing</span>
+        <h2 class="display-heading">Operationalize<span class="sub">Advanced Manufacturing Technology</span></h2>
+        <p style="margin-top:24px;"><strong style="color:var(--black); font-weight:700;">Phillips experts are ready to help you transform your ideas into reality.</strong></p>
+        <p>We help our customers operationalize advanced manufacturing technology by providing expertise in technology selection, workforce development, and design for advanced manufacturing life cycle support. Leverage our proven additive expertise to accelerate and solidify your industrial readiness. From concept to completion, we seamlessly convert research projects into scalable parts ready for production.</p>
+        <p class="highlight">Let Phillips' EXPERTISE fuel your success — OPERATIONALIZE and PROPEL your additive business like never before.</p>
+        <div style="margin-top:8px;">
+          <a class="btn" href="phillips-opto.html">Learn More <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HAAS -->
+<section class="soft">
+  <div class="container">
+    <div class="haas-grid">
+      <div class="haas-image">
+        <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=900&h=1100&fit=crop&auto=format&q=80" alt="Phillips Haas service technician" loading="lazy" />
+      </div>
+      <div class="haas-content">
+        <span class="eyebrow">Haas Factory Outlet · 30+ Years</span>
+        <h2 class="section-heading">Haas. Sales. Service. Support. And More.</h2>
+        <div class="haas-logos">
+          <span class="haas-mark">HAAS</span>
+          <span class="f1-mark">
+            <span class="a">Haas</span>
+            <span class="b">F1 Team</span>
+            <span class="c">OFFICIAL MACHINE TOOL</span>
+          </span>
+        </div>
+        <p>We know Haas. For over 30 years, Phillips has been a prominent and proud Haas Factory Outlet — offering sales, service, training, applications support, and Phillips Opto. Our knowledgeable team will help you find the best solution to propel your productivity.</p>
+        <p>With over 30,000 Haas machines installed globally, our Haas experts are ready to support you from install to service and beyond. Let us help you experience manufacturing innovation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INNOVATIVE SOLUTIONS — black section -->
+<section class="dark">
+  <div class="container">
+    <div class="innov-head">
+      <span class="eyebrow">What We Do</span>
+      <h2 class="section-heading">Innovative Solutions To Maximize Your Productivity</h2>
+    </div>
+    <div class="innov-grid">
+
+      <div class="innov-card">
+        <div class="innov-icon">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#F9423A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="14" y="20" width="72" height="58" rx="2"/>
+            <line x1="22" y1="30" x2="78" y2="30"/>
+            <rect x="44" y="30" width="12" height="18"/>
+            <line x1="50" y1="48" x2="50" y2="58"/>
+            <line x1="46" y1="58" x2="54" y2="58"/>
+            <rect x="34" y="62" width="32" height="6"/>
+            <line x1="22" y1="78" x2="22" y2="86"/>
+            <line x1="78" y1="78" x2="78" y2="86"/>
+            <circle cx="76" cy="40" r="2.5"/>
+            <circle cx="76" cy="48" r="2.5"/>
+          </svg>
+        </div>
+        <h3>Machining Solutions</h3>
+        <p>We carry the best machines from the best brands. With Phillips, you get a dedicated team of experts ready to provide everything you need for success — fast service, productivity solutions, training, and more.</p>
+        <a class="btn" href="#">Select Region <span class="arr">→</span></a>
+      </div>
+
+      <div class="innov-card">
+        <div class="innov-icon">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#F9423A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="16" y="14" width="68" height="74" rx="2"/>
+            <line x1="22" y1="24" x2="78" y2="24"/>
+            <line x1="22" y1="38" x2="78" y2="38"/>
+            <rect x="42" y="32" width="16" height="10"/>
+            <line x1="50" y1="42" x2="50" y2="50"/>
+            <path d="M36 72 L36 64 L42 64 L42 58 L48 58 L48 50 L52 50 L52 58 L58 58 L58 64 L64 64 L64 72 Z"/>
+            <line x1="28" y1="74" x2="72" y2="74"/>
+            <line x1="32" y1="74" x2="32" y2="80"/>
+            <line x1="68" y1="74" x2="68" y2="80"/>
+          </svg>
+        </div>
+        <h3>Additive Solutions</h3>
+        <p>As AM enthusiasts, we inspire you to gain confidence to integrate additive into your manufacturing process, understand its potential, and exploit new opportunities to grow your business.</p>
+        <a class="btn" href="#">Select Region <span class="arr">→</span></a>
+      </div>
+
+      <div class="innov-card">
+        <div class="innov-icon">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#F9423A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 82 L18 22"/>
+            <path d="M18 82 L84 82"/>
+            <rect x="26" y="64" width="9" height="18"/>
+            <rect x="40" y="54" width="9" height="28"/>
+            <rect x="54" y="42" width="9" height="40"/>
+            <path d="M28 56 L46 42 L60 30 L74 22"/>
+            <path d="M68 22 L74 22 L74 28"/>
+            <circle cx="80" cy="36" r="6"/>
+          </svg>
+        </div>
+        <h3>Optimization</h3>
+        <p>Our Opto engineers are applications consultants who can help you develop improved processes and maximized profits through reduced cycle times, manufacturing improvements, and new capabilities realized.</p>
+        <a class="btn" href="phillips-opto.html">Select Region <span class="arr">→</span></a>
+      </div>
+
+      <div class="innov-card">
+        <div class="innov-icon">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#F9423A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M30 36 Q30 24 42 24 L58 24 Q70 24 70 36"/>
+            <line x1="28" y1="36" x2="72" y2="36"/>
+            <line x1="50" y1="24" x2="50" y2="32"/>
+            <circle cx="50" cy="46" r="8"/>
+            <path d="M30 80 Q30 60 50 60 Q70 60 70 80"/>
+            <circle cx="78" cy="62" r="6"/>
+            <line x1="78" y1="52" x2="78" y2="56"/>
+            <line x1="78" y1="68" x2="78" y2="72"/>
+            <circle cx="22" cy="62" r="6"/>
+            <line x1="22" y1="52" x2="22" y2="56"/>
+            <line x1="22" y1="68" x2="22" y2="72"/>
+          </svg>
+        </div>
+        <h3>Workforce Training</h3>
+        <p>With our hands-on classes, we'll teach you how to troubleshoot, repair, and maintain your Haas machines on your own. A major "leveling up" of skills that keeps your machines running smoothly.</p>
+        <a class="btn" href="#">Select Region <span class="arr">→</span></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LOCAL & GLOBAL -->
+<section>
+  <div class="container">
+    <div class="lg-head">
+      <span class="eyebrow">Worldwide Footprint</span>
+      <h2 class="section-heading">We're Local And Global</h2>
+    </div>
+    <div class="lg-wrap">
+      <div class="lg-map" aria-hidden="true"></div>
+      <div class="lg-grid">
+        <div class="lg-region">
+          <h3>Americas</h3>
+          <div class="sub-label">Offices and Showrooms</div>
+          <ul>
+            <li>Birmingham, Alabama</li>
+            <li>Little Rock, Arkansas</li>
+            <li>Hanover, Maryland</li>
+            <li>Colfax, North Carolina</li>
+            <li>Bensalem, Pennsylvania</li>
+          </ul>
+          <div class="sub-label">Education Centers</div>
+          <ul>
+            <li>Thaddeus Stevens College, PA</li>
+            <li>Greenville Technical College, SC</li>
+            <li>Midlands Technical College, SC</li>
+            <li>TCAT Smyrna, TN</li>
+          </ul>
+        </div>
+        <div class="lg-region">
+          <h3>Asia · India</h3>
+          <ul>
+            <li>Ahmedabad</li>
+            <li>Bengaluru</li>
+            <li>Chennai</li>
+            <li>Kolhapur</li>
+            <li>Ludhiana</li>
+            <li>Mumbai</li>
+            <li>Nashik</li>
+            <li>Noida</li>
+            <li>Pune</li>
+          </ul>
+        </div>
+        <div class="lg-region">
+          <h3>Southern Asia</h3>
+          <ul>
+            <li>Dhaka, Bangladesh</li>
+            <li>Panadura, Sri Lanka</li>
+          </ul>
+          <h3 style="margin-top:22px;">South-Eastern Asia</h3>
+          <ul><li>Selangor, Malaysia</li></ul>
+          <h3 style="margin-top:22px;">Middle East</h3>
+          <ul>
+            <li>Dammam, Saudi Arabia</li>
+            <li>Sharjah, UAE</li>
+            <li>Cairo, Egypt</li>
+          </ul>
+          <h3 style="margin-top:22px;">China</h3>
+          <ul>
+            <li>Shanghai</li>
+            <li>Suzhou</li>
+            <li>Zhejiang</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="lg-buttons">
+      <a class="btn" href="#">USA</a>
+      <a class="btn" href="#">USA Gov</a>
+      <a class="btn" href="#">India</a>
+      <a class="btn" href="#">Southern Asia</a>
+      <a class="btn" href="#">Malaysia</a>
+      <a class="btn" href="#">Middle East</a>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="soft">
+  <div class="container">
+    <div class="impact-head">
+      <span class="eyebrow">Customer Stories</span>
+      <h2 class="section-heading">Phillips Global Impact On Manufacturing</h2>
+    </div>
+    <div class="impact-grid">
+      <article class="impact-card">
+        <div class="impact-photo">
+          <img src="https://images.unsplash.com/photo-1713371398484-cc4e4f6a262a?w=900&h=600&fit=crop&auto=format&q=80" alt="Manufacturing customer story" loading="lazy" />
+        </div>
+        <div class="impact-body">
+          <span class="meta">Case Study</span>
+          <h3>Headline goes here</h3>
+          <a class="btn" href="#">Read Story <span class="arr">→</span></a>
+        </div>
+      </article>
+      <article class="impact-card">
+        <div class="impact-photo">
+          <img src="https://images.unsplash.com/photo-1711418235334-8895331a6cf9?w=900&h=600&fit=crop&auto=format&q=80" alt="Manufacturing customer story" loading="lazy" />
+        </div>
+        <div class="impact-body">
+          <span class="meta">Case Study</span>
+          <h3>Headline goes here</h3>
+          <a class="btn" href="#">Read Story <span class="arr">→</span></a>
+        </div>
+      </article>
+      <article class="impact-card">
+        <div class="impact-photo">
+          <img src="https://images.unsplash.com/photo-1727292485858-588c7652ad69?w=900&h=600&fit=crop&auto=format&q=80" alt="Manufacturing customer story" loading="lazy" />
+        </div>
+        <div class="impact-body">
+          <span class="meta">Case Study</span>
+          <h3>Headline goes here</h3>
+          <a class="btn" href="#">Read Story <span class="arr">→</span></a>
+        </div>
+      </article>
+    </div>
+    <div class="impact-show-more">
+      <a class="btn btn-ghost" href="#">Show More</a>
+    </div>
+  </div>
+</section>
+
+<!-- MACHINIST APP -->
+<section class="machinist">
+  <div class="container">
+    <div class="machinist-grid">
+      <div class="phones">
+        <div class="phone"><div class="phone-screen">App<br/>screen</div></div>
+        <div class="phone center"><div class="phone-screen">THE<br/>PHILLIPS<br/>MACHINIST</div></div>
+        <div class="phone"><div class="phone-screen">App<br/>screen</div></div>
+      </div>
+      <div class="machinist-content">
+        <div class="machinist-logo-row">
+          <div class="machinist-logo-mark">
+            <svg viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(0,4) skewX(-22)">
+                <rect x="0"  y="0" width="6" height="40" fill="#F9423A"/>
+                <rect x="9"  y="0" width="6" height="40" fill="#F9423A"/>
+                <rect x="18" y="0" width="6" height="40" fill="#F9423A"/>
+              </g>
+              <text x="34" y="38" font-family="Barlow Condensed, sans-serif" font-style="italic" font-weight="900" font-size="42" fill="#000">P</text>
+            </svg>
+          </div>
+          <div class="machinist-logo-text">THE<br/>PHILLIPS<br/>MACHINIST</div>
+        </div>
+        <p>The Phillips Machinist app is an innovative tool designed to assist machinists and manufacturing professionals in improving their daily productivity, staying in touch with industry leaders and trends, and providing opportunities for developing and advancing skill sets.</p>
+        <p class="highlight">Come join our community of machinists — download the Phillips Machinist app for free.</p>
+        <div class="qr-row">
+          <div class="qr-code" aria-label="QR code">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+              <rect width="80" height="80" fill="#fff"/>
+              <g fill="#000">
+                <rect x="6" y="6" width="18" height="18"/>
+                <rect x="56" y="6" width="18" height="18"/>
+                <rect x="6" y="56" width="18" height="18"/>
+                <rect x="10" y="10" width="10" height="10" fill="#fff"/>
+                <rect x="60" y="10" width="10" height="10" fill="#fff"/>
+                <rect x="10" y="60" width="10" height="10" fill="#fff"/>
+                <rect x="13" y="13" width="4" height="4"/>
+                <rect x="63" y="13" width="4" height="4"/>
+                <rect x="13" y="63" width="4" height="4"/>
+                <rect x="30" y="8" width="4" height="4"/><rect x="38" y="8" width="4" height="4"/>
+                <rect x="46" y="14" width="4" height="4"/><rect x="30" y="20" width="4" height="4"/>
+                <rect x="42" y="22" width="4" height="4"/><rect x="30" y="30" width="4" height="4"/>
+                <rect x="36" y="30" width="4" height="4"/><rect x="44" y="30" width="4" height="4"/>
+                <rect x="52" y="30" width="4" height="4"/><rect x="60" y="32" width="4" height="4"/>
+                <rect x="68" y="34" width="4" height="4"/><rect x="8" y="34" width="4" height="4"/>
+                <rect x="14" y="38" width="4" height="4"/><rect x="20" y="42" width="4" height="4"/>
+                <rect x="28" y="40" width="4" height="4"/><rect x="36" y="44" width="4" height="4"/>
+                <rect x="44" y="40" width="4" height="4"/><rect x="52" y="44" width="4" height="4"/>
+                <rect x="60" y="42" width="4" height="4"/><rect x="68" y="46" width="4" height="4"/>
+                <rect x="30" y="52" width="4" height="4"/><rect x="42" y="50" width="4" height="4"/>
+                <rect x="50" y="56" width="4" height="4"/><rect x="58" y="60" width="4" height="4"/>
+                <rect x="64" y="64" width="4" height="4"/><rect x="40" y="60" width="4" height="4"/>
+                <rect x="32" y="64" width="4" height="4"/><rect x="44" y="68" width="4" height="4"/>
+                <rect x="56" y="72" width="4" height="4"/><rect x="68" y="68" width="4" height="4"/>
+              </g>
+            </svg>
+          </div>
+          <span>Scan to download<br/>on iOS &amp; Android</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK TOGETHER -->
+<section>
+  <div class="container">
+    <div class="wt-grid">
+      <div class="wt-card">
+        <span class="eyebrow">Careers at Phillips</span>
+        <h2 class="section-heading">Let's Work Together.</h2>
+        <p>When you join the Phillips community, you'll enhance your career, creativity, and intellectual growth while being part of a company committed to becoming the best supplier of manufacturing technology and expertise. Apply for opportunities at Corporate, as well as our Performance Centers including Phillips Commercial, Federal, &amp; Phillips Machine Tools India.</p>
+        <div class="wt-buttons">
+          <a class="btn" href="#">Careers</a>
+          <a class="btn btn-ghost" href="#">Our Story</a>
+          <a class="btn btn-ghost" href="#">Our Culture</a>
+        </div>
+      </div>
+      <div class="wt-image">
+        <img src="https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=1100&h=900&fit=crop&auto=format&q=80" alt="Phillips Corporation team member" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY TAGLINE -->
+<section class="community">
+  <div class="container">
+    <h2>We are a community of manufacturing experts dedicated to delivering the best solutions</h2>
+  </div>
+  <div class="photo-strip" aria-hidden="true">
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580894732930-0babd100d356?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581089789966-df27db014448?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580983230786-ce385a434707?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581091224003-01e7c2e69f6f?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+  </div>
+  <div class="brand-stripe" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">© 2026 Phillips Corporation</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Opto for Haas — Phillips Corporation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  /* =====================================================
+     PHILLIPS BRAND DESIGN SYSTEM
+     ===================================================== */
+  :root {
+    --red: #F9423A;
+    --red-deep: #D6362F;
+    --maroon: #3F0017;
+    --gold: #F68B33;
+    --blue: #00AEEF;
+    --black: #000000;
+    --gray-700: #2A2F36;
+    --gray-600: #4A5260;
+    --gray-500: #647883;
+    --gray-400: #8A949E;
+    --gray-300: #BFC8D0;
+    --gray-200: #D7DFE3;
+    --gray-100: #EDF1F4;
+    --gray-50:  #F7F9FB;
+    --white: #FFFFFF;
+
+    --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --font-body: "Montserrat", system-ui, -apple-system, sans-serif;
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 1px 3px rgba(15, 23, 42, 0.05), 0 18px 40px -16px rgba(15, 23, 42, 0.12);
+    --shadow-red: 0 1px 2px rgba(249, 66, 58, 0.10), 0 12px 28px -8px rgba(249, 66, 58, 0.18);
+
+    --r-sm: 6px;
+    --r-md: 12px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-700);
+    line-height: 1.6;
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+
+  .container { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+  /* TYPOGRAPHY */
+  h1.opto-headline {
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: clamp(48px, 6.4vw, 84px);
+    line-height: 0.96;
+    letter-spacing: -2px;
+    color: var(--white);
+  }
+  h2.section-heading {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.6px;
+    color: var(--black);
+  }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 13px;
+    color: var(--red);
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+  p { color: var(--gray-600); font-size: 15px; line-height: 1.75; }
+
+  /* BRAND STRIPE */
+  .brand-stripe { display: grid; grid-template-columns: repeat(4, 1fr); height: 14px; }
+  .brand-stripe span:nth-child(1) { background: var(--red); }
+  .brand-stripe span:nth-child(2) { background: var(--maroon); }
+  .brand-stripe span:nth-child(3) { background: var(--gold); }
+  .brand-stripe span:nth-child(4) { background: var(--blue); }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--red);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.6px;
+    padding: 14px 26px;
+    border-radius: var(--r-sm);
+    border: none;
+    text-transform: uppercase;
+    transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+    box-shadow: var(--shadow-red);
+  }
+  .btn:hover { background: var(--red-deep); }
+  .btn:active { transform: translateY(1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--red);
+    border: 1.5px solid var(--red);
+    box-shadow: none;
+  }
+  .btn-ghost:hover { background: var(--red); color: var(--white); }
+  .btn .arr { display: inline-block; transition: transform 0.18s ease; }
+  .btn:hover .arr { transform: translateX(3px); }
+
+  /* HEADER */
+  .topbar {
+    background: var(--gray-100);
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .topbar .container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+  }
+  .topbar .country {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .flag-us {
+    width: 20px; height: 14px;
+    border-radius: 1px;
+    background:
+      linear-gradient(to bottom,
+        #B22234 0 1.27px, #fff 1.27px 2.54px, #B22234 2.54px 3.81px, #fff 3.81px 5.08px,
+        #B22234 5.08px 6.35px, #fff 6.35px 7.62px, #B22234 7.62px 8.89px, #fff 8.89px 10.16px,
+        #B22234 10.16px 11.43px, #fff 11.43px 12.7px, #B22234 12.7px 14px);
+    position: relative;
+  }
+  .flag-us::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 9px; height: 7.5px;
+    background: #3C3B6E;
+  }
+  .topbar .chev { font-size: 9px; opacity: 0.5; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 84px;
+  }
+  .logo svg { height: 40px; width: auto; }
+  .header-actions { display: flex; align-items: center; gap: 12px; }
+  .search {
+    width: 320px;
+    height: 42px;
+    border: 1px solid var(--gray-200);
+    border-radius: 24px;
+    padding: 0 18px 0 42px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: var(--gray-50)
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23647883' stroke-width='2' stroke-linecap='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>") no-repeat 14px center;
+    background-size: 18px;
+    color: var(--gray-700);
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+  }
+  .search::placeholder { color: var(--gray-400); }
+  .search:focus { outline: none; border-color: var(--red); background-color: var(--white); }
+  .icon-btn {
+    width: 42px; height: 42px;
+    border: none;
+    background: transparent;
+    border-radius: var(--r-sm);
+    color: var(--gray-700);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .icon-btn:hover { background: var(--gray-100); color: var(--red); }
+  .icon-btn svg { width: 22px; height: 22px; }
+
+  /* SUB-NAVIGATION */
+  .subnav {
+    position: sticky;
+    top: 84px;
+    z-index: 40;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .subnav-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 52px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .subnav-inner::-webkit-scrollbar { display: none; }
+  .subnav a {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--gray-600);
+    white-space: nowrap;
+    padding: 16px 0;
+    position: relative;
+    transition: color 0.18s ease;
+  }
+  .subnav a:hover { color: var(--red); }
+  .subnav a.active {
+    font-weight: 700;
+    color: var(--black);
+  }
+  .subnav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: var(--red);
+  }
+
+  /* =====================================================
+     OPTO HERO
+     ===================================================== */
+  .opto-hero {
+    width: 100%;
+    aspect-ratio: 16 / 6.4;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .opto-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(95deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.40) 40%, rgba(0,0,0,0.10) 75%, rgba(0,0,0,0.0) 100%),
+      url("https://images.unsplash.com/photo-1717386255773-a456c611dc4e?w=1600&h=900&fit=crop&auto=format&q=80") center/cover no-repeat;
+  }
+  .opto-hero .container { position: relative; z-index: 2; color: var(--white); }
+
+  .opto-hero-lockup {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .opto-hero-mark {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 8px 22px -6px rgba(249,66,58,0.55);
+  }
+  .opto-hero-mark::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    border-top-color: transparent;
+    transform: rotate(-45deg);
+  }
+  .opto-hero-mark::after {
+    content: "";
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--white);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .opto-hero-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .opto-hero-text .opto { font-size: 32px; display: block; letter-spacing: 2px; }
+  .opto-hero-text .for-haas { font-size: 14px; display: block; letter-spacing: 4px; margin-top: 5px; opacity: 0.85; }
+
+  /* =====================================================
+     SECTION SCAFFOLDING
+     ===================================================== */
+  section { padding: 112px 0; position: relative; }
+  section.tight { padding: 80px 0; }
+  section.soft { background: var(--gray-50); }
+  section.dark { background: var(--black); color: var(--white); overflow: hidden; }
+  section.dark::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(45deg, rgba(255,255,255,0.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.025) 75%),
+      linear-gradient(-45deg, rgba(255,255,255,0.025) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.025) 75%);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+  section.dark .container { position: relative; z-index: 1; }
+  section.dark h2 { color: var(--white); }
+
+  /* =====================================================
+     AMPLIFY YOUR EFFICIENCY (red-block frame portrait)
+     ===================================================== */
+  .amplify-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.8fr) 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .amplify-photo-wrap { display: flex; justify-content: center; }
+
+  .red-block-frame {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 4 / 5;
+  }
+  .red-block-frame::before {
+    content: "";
+    position: absolute;
+    top: 28px; left: 28px; right: 0; bottom: 0;
+    background: var(--red);
+    border-radius: var(--r-md);
+  }
+  .red-block-frame .frame-photo {
+    position: absolute;
+    inset: 0 28px 28px 0;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--gray-100);
+  }
+  .red-block-frame .frame-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  .amplify-content h2 { margin-bottom: 22px; }
+  .amplify-content p { margin-bottom: 16px; max-width: 620px; }
+
+  /* =====================================================
+     APPLICATION SUPPORT
+     ===================================================== */
+  .as-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+  .as-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    padding: 56px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .as-card::before {
+    content: "";
+    position: absolute;
+    top: 56px; left: 56px;
+    width: 48px; height: 4px;
+    background: var(--red);
+    border-radius: 2px;
+  }
+  .as-card h2 { margin-top: 28px; margin-bottom: 18px; }
+  .as-card > p {
+    font-size: 15px; color: var(--gray-600);
+    line-height: 1.75; margin-bottom: 28px;
+  }
+  .accordion {
+    border-top: 1px solid var(--gray-200);
+    margin-bottom: 28px;
+  }
+  .accordion details {
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .accordion summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+    transition: color 0.18s ease;
+  }
+  .accordion summary:hover { color: var(--red); }
+  .accordion summary::-webkit-details-marker { display: none; }
+  .accordion summary::after {
+    content: "+";
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--red);
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+  .accordion details[open] summary::after { content: "−"; }
+  .accordion .body {
+    padding: 0 0 20px;
+    font-size: 14px;
+    color: var(--gray-600);
+    line-height: 1.75;
+  }
+  .as-card .btn { align-self: flex-start; }
+
+  .as-photo {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow-lg);
+    background: var(--gray-100);
+  }
+  .as-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* =====================================================
+     SUCCESS STORIES
+     ===================================================== */
+  .success-head {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .success-grid {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 40px;
+    align-items: stretch;
+  }
+  .featured-story {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .featured-story .story-photo {
+    aspect-ratio: 16 / 9;
+    background: var(--gray-100);
+    overflow: hidden;
+  }
+  .featured-story .story-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .featured-story .story-body { padding: 32px 36px 36px; }
+  .featured-story .story-body .meta {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  .featured-story h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: var(--black);
+    line-height: 1.3;
+  }
+  .featured-story p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
+  .next-up {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-left: 3px solid var(--red);
+    border-radius: var(--r-lg);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .next-up .label {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .next-up a {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--black);
+    transition: color 0.18s ease;
+    margin-bottom: 22px;
+  }
+  .next-up a:hover { color: var(--red); }
+  .next-up .arrow {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+    transition: background 0.18s ease, color 0.18s ease;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  .next-up .arrow:hover { background: var(--red); color: var(--white); }
+  .next-up .arrow svg { width: 16px; height: 16px; }
+
+  /* =====================================================
+     AUTOMATION & ROBOTICS
+     ===================================================== */
+  .automation .inner {
+    background: linear-gradient(135deg, #ECF1F4 0%, #D9E3EB 100%);
+    border-radius: var(--r-xl);
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .automation .inner::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(60deg, rgba(255,255,255,0.18) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.18) 75%);
+    background-size: 32px 56px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .automation .inner > * { position: relative; z-index: 1; }
+  .automation .photo {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 16 / 11;
+    box-shadow: var(--shadow-lg);
+    background: var(--gray-200);
+  }
+  .automation .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .automation .content h2 { margin-bottom: 18px; }
+  .automation .content > p {
+    font-size: 14px; color: var(--gray-600);
+    line-height: 1.75; margin-bottom: 24px;
+    max-width: 480px;
+  }
+  .automation .item {
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--gray-600);
+    max-width: 480px;
+  }
+  .automation .item strong {
+    display: block;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  .automation .btn { margin-top: 18px; }
+
+  /* =====================================================
+     TRAINING
+     ===================================================== */
+  .training-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+  .training-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--r-lg);
+    padding: 56px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+  .training-card::before {
+    content: "";
+    position: absolute;
+    top: 56px; left: 56px;
+    width: 48px; height: 4px;
+    background: var(--red);
+    border-radius: 2px;
+  }
+  .training-card h2 { margin-top: 28px; margin-bottom: 18px; }
+  .training-card > p {
+    font-size: 15px; color: var(--gray-600);
+    line-height: 1.75; margin-bottom: 28px;
+  }
+  .training-list { margin-bottom: 28px; }
+  .training-list .item {
+    margin-bottom: 18px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--gray-600);
+  }
+  .training-list .item strong {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+    margin-bottom: 3px;
+  }
+  .training-photo {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow: var(--shadow-lg);
+    background: var(--gray-100);
+    height: 100%;
+  }
+  .training-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* =====================================================
+     OPTO IN ACTION (testimonials, BLACK section)
+     ===================================================== */
+  .testimonials-head { text-align: center; margin-bottom: 56px; }
+  .testimonials-head h2 { color: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .testimonial-card {
+    background: var(--white);
+    color: var(--black);
+    padding: 44px 32px 32px;
+    border-radius: var(--r-lg);
+    position: relative;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.20);
+  }
+  .testimonial-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 28px;
+    width: 36px; height: 38px;
+    background: var(--red);
+    border-radius: 0 0 4px 4px;
+  }
+  .testimonial-card::after {
+    content: "\201C";
+    position: absolute;
+    top: -2px; left: 32px;
+    font-family: Georgia, serif;
+    font-size: 46px;
+    color: var(--white);
+    line-height: 1;
+    font-weight: 700;
+  }
+  .testimonial-card .quote {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    color: var(--black);
+    font-weight: 600;
+  }
+  .testimonial-card .person {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.5;
+  }
+  .testimonial-card .person strong {
+    display: block;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 2px;
+    font-size: 14px;
+  }
+  .testimonial-card .more {
+    margin-top: 14px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .testimonial-card .more:hover { color: var(--red-deep); }
+
+  /* =====================================================
+     MEET YOUR TEAM
+     ===================================================== */
+  .team { text-align: center; }
+  .team-head { margin-bottom: 56px; }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .team-member { display: flex; flex-direction: column; align-items: center; }
+  .team-photo {
+    width: 152px; height: 152px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 18px;
+    border: 1px solid var(--gray-200);
+    background: var(--gray-100);
+    box-shadow: var(--shadow-md);
+  }
+  .team-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.3s ease;
+  }
+  .team-member:hover .team-photo img { filter: grayscale(0) contrast(1); }
+  .team-member .name {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+  .team-member .role {
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin: 32px 0 40px;
+  }
+  .carousel-dots span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    cursor: pointer;
+    transition: background 0.18s ease;
+  }
+  .carousel-dots span.active { background: var(--red); }
+  .carousel-dots span:hover { background: var(--gray-400); }
+
+  /* COMMUNITY TAGLINE */
+  .community {
+    padding: 80px 0 0;
+    text-align: center;
+    background: var(--white);
+  }
+  .community h2 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(20px, 2.4vw, 28px);
+    letter-spacing: 1.5px;
+    color: var(--black);
+    max-width: 1100px;
+    margin: 0 auto 56px;
+    line-height: 1.3;
+  }
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    width: 100%;
+    aspect-ratio: 24 / 5;
+    background: var(--gray-700);
+    overflow: hidden;
+  }
+  .photo-strip .ps {
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(1) contrast(1.05);
+  }
+
+  /* FOOTER */
+  .site-footer {
+    background: var(--black);
+    color: var(--gray-400);
+    padding: 36px 0;
+    text-align: center;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 1000px) {
+    .container { padding: 0 24px; }
+    section { padding: 72px 0; }
+    .amplify-grid, .as-grid, .success-grid, .training-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .automation .inner { grid-template-columns: 1fr; padding: 36px; }
+    .as-card, .training-card { padding: 36px; }
+    .as-card::before, .training-card::before { left: 36px; top: 36px; }
+    .as-card h2, .training-card h2 { margin-top: 22px; }
+    .photo-strip { grid-template-columns: repeat(4, 1fr); }
+    .search { width: 200px; }
+  }
+  @media (max-width: 600px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: repeat(3, 1fr); aspect-ratio: 9 / 5; }
+    .search { display: none; }
+    .opto-hero-text .opto { font-size: 24px; }
+    .opto-hero-text .for-haas { font-size: 12px; }
+    .opto-hero-mark { width: 60px; height: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <span class="country">
+      <span class="flag-us" aria-hidden="true"></span>USA <span class="chev">▼</span>
+    </span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="phillips-home.html" aria-label="Phillips Corporation">
+      <svg viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(0,3) skewX(-22)">
+          <rect x="0"  y="0" width="9" height="40" fill="#F9423A"/>
+          <rect x="14" y="0" width="9" height="40" fill="#F9423A"/>
+          <rect x="28" y="0" width="9" height="40" fill="#F9423A"/>
+        </g>
+        <text x="50" y="36" font-family="Barlow Condensed, sans-serif"
+              font-style="italic" font-weight="900" font-size="44"
+              letter-spacing="-1" fill="#000">Phillips</text>
+        <text x="195" y="14" font-size="11" font-weight="700" fill="#000"
+              font-family="Montserrat, sans-serif">®</text>
+      </svg>
+    </a>
+    <div class="header-actions">
+      <input class="search" type="search" placeholder="Search…" aria-label="Search" />
+      <button class="icon-btn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- SUB-NAV -->
+<nav class="subnav" aria-label="Opto for Haas sections">
+  <div class="container subnav-inner">
+    <a href="#application-support">Application Support</a>
+    <a href="#opto-videos">Opto Videos</a>
+    <a href="#training">Training</a>
+    <a href="#automation" class="active">Automation &amp; Robotics</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#team">Our Team</a>
+    <a href="#contact">Contact Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="opto-hero">
+  <div class="opto-hero-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="opto-hero-lockup">
+      <div class="opto-hero-mark" aria-hidden="true"></div>
+      <div class="opto-hero-text">
+        <span class="opto">OPTO</span>
+        <span class="for-haas">FOR HAAS</span>
+      </div>
+    </div>
+    <h1 class="opto-headline">Stop Making.<br/>Start Scaling.</h1>
+  </div>
+</section>
+
+<!-- AMPLIFY YOUR EFFICIENCY -->
+<section>
+  <div class="container amplify-grid">
+    <div class="amplify-photo-wrap">
+      <div class="red-block-frame">
+        <div class="frame-photo">
+          <img src="https://images.unsplash.com/photo-1581089789966-df27db014448?w=720&h=900&fit=crop&auto=format&q=80" alt="Phillips Opto engineer portrait" loading="lazy" />
+        </div>
+      </div>
+    </div>
+    <div class="amplify-content">
+      <span class="eyebrow">Opto Engineers</span>
+      <h2 class="section-heading">Amplify Your Efficiency</h2>
+      <p>Experience, expertise, and engagement — that's what you get when an "OPTOmization" engineer steps on your shop floor.</p>
+      <p>OPTO engineers are applications consultants who can help you develop optimized processes and maximized profits through reduced cycle times, manufacturing improvements, and new capabilities realized.</p>
+      <p>Our Haas machine optimization services include training, tooling, applications support, robot installation &amp; integration, and process improvement. OPTO engineers are the competitive edge your business needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATION SUPPORT -->
+<section class="soft" id="application-support">
+  <div class="container">
+    <div class="as-grid">
+      <div class="as-card">
+        <h2 class="section-heading">Application Support</h2>
+        <p>Unlock your Haas machine's full potential and boost your ROI with Phillips' comprehensive application support services. Our experts provide:</p>
+        <div class="accordion">
+          <details open>
+            <summary>Optimized Machine Performance</summary>
+            <div class="body">
+              Customized programming solutions (including offline simulation) and precise tooling/cutting parameter recommendations to maximize your Haas machine's performance for complex parts and enhance part quality while reducing tooling costs.
+            </div>
+          </details>
+          <details>
+            <summary>Enhanced Production Efficiency</summary>
+            <div class="body">
+              Streamline production with proven workflows, fixturing strategies, and macro-driven automation to compress cycle times and increase throughput.
+            </div>
+          </details>
+          <details>
+            <summary>Quality and Validation Support</summary>
+            <div class="body">
+              On-machine probing strategies, first-article inspection workflows, and process capability validation to ensure consistent, repeatable parts.
+            </div>
+          </details>
+        </div>
+        <a class="btn" href="#contact">Contact Our Team <span class="arr">→</span></a>
+      </div>
+      <div class="as-photo">
+        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1100&h=900&fit=crop&auto=format&q=80" alt="Application engineers at Haas control" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCCESS STORIES -->
+<section>
+  <div class="container">
+    <div class="success-head">
+      <span class="eyebrow">Customer Outcomes</span>
+      <h2 class="section-heading">Success Stories.</h2>
+    </div>
+    <div class="success-grid">
+      <article class="featured-story">
+        <div class="story-photo">
+          <img src="https://images.unsplash.com/photo-1716191299980-a6e8827ba10b?w=1400&h=800&fit=crop&auto=format&q=80" alt="Allied Cycle Works case study" loading="lazy" />
+        </div>
+        <div class="story-body">
+          <span class="meta">Featured Case Study</span>
+          <h3>Allied Cycle Works — From Design to Programming</h3>
+          <p>Phillips Opto assists new parts production from design to programming for Allied Cycle Works.</p>
+        </div>
+      </article>
+      <aside class="next-up">
+        <span class="label">Next Up</span>
+        <a href="#">Streamlining the Production Process at Ziehl-Abegg with Phillips Opto</a>
+        <span class="arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </span>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATION & ROBOTICS -->
+<section class="automation" id="automation">
+  <div class="container">
+    <div class="inner">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1647427060118-4911c9821b82?w=1200&h=900&fit=crop&auto=format&q=80" alt="Automation engineer with robot cell" loading="lazy" />
+      </div>
+      <div class="content">
+        <span class="eyebrow">Automation &amp; Robotics</span>
+        <h2 class="section-heading">Robots That Work With You.</h2>
+        <p>Complement your existing workforce and quickly increase capacity while freeing up your staff to focus on more value-added activities.</p>
+
+        <div class="item">
+          <strong>Custom Robotic Automation Solutions</strong>
+          We provide customizable robotic automation solutions tailored to meet the specific needs of your company, leveraging industry-leading robot brands and the expertise of our dedicated robotic automation engineers.
+        </div>
+        <div class="item">
+          <strong>Installation and Integration Assistance</strong>
+          Expert support for seamless robotic system integration, from cell design through commissioning.
+        </div>
+        <div class="item">
+          <strong>Beginner and Advanced Robot Programming</strong>
+          Comprehensive robot programming training, from foundational concepts to advanced techniques.
+        </div>
+
+        <a class="btn" href="phillips-robotics.html">Learn More <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="soft" id="training">
+  <div class="container">
+    <div class="training-grid">
+      <div class="training-card">
+        <h2 class="section-heading">Training</h2>
+        <p>Put our industry-leading know-how to work and gain cutting-edge skills with our training programs.</p>
+        <div class="training-list">
+          <div class="item">
+            <strong>Introduction to Macros Training</strong>
+            Foundational knowledge for utilizing macros to automate and streamline machine operations.
+          </div>
+          <div class="item">
+            <strong>Multi-Axis Training</strong>
+            Learn to program and operate multi-axis machines for complex part manufacturing.
+          </div>
+          <div class="item">
+            <strong>Advanced Lathe Training</strong>
+            Master advanced techniques for lathe programming and operation to maximize efficiency and precision.
+          </div>
+          <div class="item">
+            <strong>Advanced Mill Training</strong>
+            Develop expertise in advanced milling strategies and techniques for complex part production.
+          </div>
+          <div class="item">
+            <strong>Advanced Probe Training</strong>
+            Gain proficiency in utilizing probing systems for precise part measurement and in-process adjustments.
+          </div>
+          <div class="item">
+            <strong>Advanced Macros Training</strong>
+            Explore advanced macro programming for complex automation and process control.
+          </div>
+        </div>
+        <a class="btn" href="#">Learn More <span class="arr">→</span></a>
+      </div>
+      <div class="training-photo">
+        <img src="https://images.unsplash.com/photo-1580983230786-ce385a434707?w=900&h=1100&fit=crop&auto=format&q=80" alt="Engineers reviewing training program" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTO IN ACTION -->
+<section class="dark" id="testimonials">
+  <div class="container">
+    <div class="testimonials-head">
+      <span class="eyebrow">Customer Voices</span>
+      <h2 class="section-heading">Opto In Action.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="quote">This wasn't just about productivity. It was also about sustainability.</p>
+        <p class="person">
+          <strong>Nathan Hoagland</strong>
+          Quality and Maintenance Supervisor for Gerdau
+        </p>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">If you think you know everything, you're not going anywhere. You've got to be willing to reach out and learn — and Phillips has a lot to teach.</p>
+        <p class="person">
+          <strong>Stan Wright</strong>
+          Machine Shop Manager for Nighthawk
+        </p>
+      </div>
+      <div class="testimonial-card">
+        <p class="quote">I rarely do this, but I highly recommend Ben. You just don't see this kind of technical skill very often.</p>
+        <p class="person">
+          <strong>Dave Myers</strong>
+          Senior Manufacturing Engineer
+        </p>
+        <a class="more" href="#">More <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET YOUR TEAM -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="team-head">
+      <span class="eyebrow">Our People</span>
+      <h2 class="section-heading">Meet Your Team</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1581091224003-01e7c2e69f6f?w=400&h=400&fit=crop&auto=format&q=80" alt="Joe Sommers" loading="lazy" />
+        </div>
+        <div class="name">Joe Sommers</div>
+        <div class="role">General Manager</div>
+      </div>
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=400&h=400&fit=crop&auto=format&q=80" alt="Ben VandeHoef" loading="lazy" />
+        </div>
+        <div class="name">Ben VandeHoef</div>
+        <div class="role">Sr. Applications Engineer</div>
+      </div>
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1580894732930-0babd100d356?w=400&h=400&fit=crop&auto=format&q=80" alt="Jonathan Hopkins" loading="lazy" />
+        </div>
+        <div class="name">Jonathan Hopkins</div>
+        <div class="role">Sr. Applications Engineer</div>
+      </div>
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=400&h=400&fit=crop&auto=format&q=80" alt="Dave Cirilo" loading="lazy" />
+        </div>
+        <div class="name">Dave Cirilo</div>
+        <div class="role">Sr. Applications Engineer</div>
+      </div>
+    </div>
+    <div class="carousel-dots" aria-hidden="true">
+      <span class="active"></span><span></span><span></span>
+    </div>
+    <div id="contact">
+      <a class="btn" href="#">Contact Us <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY TAGLINE -->
+<section class="community">
+  <div class="container">
+    <h2>We are a community of manufacturing experts dedicated to delivering the best solutions</h2>
+  </div>
+  <div class="photo-strip" aria-hidden="true">
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580894732930-0babd100d356?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581089789966-df27db014448?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1580983230786-ce385a434707?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581091224003-01e7c2e69f6f?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+    <div class="ps" style="background-image:url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=400&h=500&fit=crop&auto=format&q=70');"></div>
+  </div>
+  <div class="brand-stripe" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">© 2026 Phillips Corporation</div>
+</footer>
+
+</body>
+</html>

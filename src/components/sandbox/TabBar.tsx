@@ -9,9 +9,13 @@ export default function TabBar() {
   const router = useRouter()
   const active: TopTab = searchParams.get('tab') === 'nav' ? 'nav' : 'templates'
 
+  // Templates count = sum across all 6 family tabs in TemplatesGrid:
+  //   EyeCatching 11 + Appealing 11 + Simple 11 + Strong 12 + Strong-Lite 12 + Branded 12 = 69.
+  // Nav Samples count = number of standalone HTML prototypes in
+  //   public/nav-samples (simple, strong, branded).
   const tabs: { key: TopTab; label: string; count: number; badgeBg: string; badgeColor: string }[] = [
-    { key: 'templates', label: 'Templates', count: 12, badgeBg: 'rgba(255,255,255,0.06)', badgeColor: 'rgba(255,255,255,0.45)' },
-    { key: 'nav', label: 'Nav Samples', count: 2, badgeBg: 'rgba(249,66,58,0.15)', badgeColor: '#F9423A' },
+    { key: 'templates', label: 'Templates', count: 69, badgeBg: 'rgba(255,255,255,0.06)', badgeColor: 'rgba(255,255,255,0.45)' },
+    { key: 'nav', label: 'Nav Samples', count: 3, badgeBg: 'rgba(249,66,58,0.15)', badgeColor: '#F9423A' },
   ]
 
   return (

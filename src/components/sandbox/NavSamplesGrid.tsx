@@ -66,6 +66,13 @@ export default function NavSamplesGrid() {
             iframeSrc="/nav-samples/simple.html"
             accentColor="#000000"
           />
+          <NavSampleCard
+            title="Branded"
+            description="Phillips brand-standard chrome — 32px gray topbar with country selector, 84px frosted white header with logo + search + hamburger, and a sticky sub-nav with red active underline."
+            theme="Frosted white · Montserrat 800 + Barlow Cond. italic · Red active states"
+            iframeSrc="/nav-samples/branded.html"
+            accentColor="#F9423A"
+          />
         </div>
 
       </div>

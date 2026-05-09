@@ -130,3 +130,35 @@ export const brandProductLinesQuery = `*[_type == "brand" && slug.current == $sl
     tagline, type, keySpecs, modelDetails
   }
 }`
+
+// ---- Branded Home Page (singleton) ----
+// Powers /branded. Picks the first homePage doc; if none exists the route
+// falls back to FALLBACK_HOME defined in src/components/templates-branded/branded-home-fallback.ts.
+export const homePageQuery = `*[_type == "homePage"][0]{
+  // Hero
+  heroImage, progressBarsAccent, headline, bodyText, ctaText,
+  // Inspired
+  inspiredHeading, inspiredBody, inspiredImage,
+  // Hybrid
+  hybridHeading, hybridSubheading, partnerPills, hybridBody, hybridImage, hybridCta,
+  // Operationalize
+  opEyebrow, opHeading, opSubheading, opBody, opTileImages, opCta,
+  // Haas
+  haasEyebrow, haasHeading, haasBody, haasImage,
+  // Innovative Solutions
+  innovHeading, innovCards,
+  // Local & Global
+  lgHeading, lgRegions, lgRegionButtons,
+  // Impact (dereferenced case studies)
+  impactEyebrow, impactHeading,
+  "impactCards": impactCards[]->{
+    title, slug, heroImage, summary, kickerTags
+  },
+  // Machinist
+  machinistHeading, machinistBody, machinistHighlight, qrImage,
+  // Work Together
+  wtEyebrow, wtHeading, wtBody, wtCtas, wtImage,
+  // Community
+  communityTagline, communityPhotos,
+  seo
+}`
