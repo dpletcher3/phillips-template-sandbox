@@ -8,6 +8,7 @@
 - **CMS**: Sanity v3.99 (with `next-sanity` 9.12)
 - **Styling**: Tailwind CSS 3.4 + styled-components 6.3
 - **Image handling**: `@sanity/image-url`, Next.js `Image` with remote patterns for Unsplash + Sanity CDN
+- **Portable Text rendering** (added session 5a): `@portabletext/react` 6.2 + `@portabletext/types` 4.0 — shared renderer at [src/components/PortableText.tsx](../src/components/PortableText.tsx); india-specific components map at [src/components/india/portableText.ts](../src/components/india/portableText.ts)
 - **Hosting target**: Vercel (image remote patterns, cache headers configured for `/studio`)
 - **Build commands**: `next dev | next build | next start | next lint`
 - **API**: `/api/revalidate/route.ts` for on-demand Sanity webhook revalidation
@@ -73,6 +74,10 @@ Total: **48 template variants** (12 page types × 4 families) plus EyeCatching v
 - `SanityImage.tsx` — Sanity URL-optimized image wrapper
 - `SimpleBreadcrumb.tsx` — breadcrumb (Simple family)
 - `TemplateBadge.tsx` — fixed top-right badge marking active template variant (red/maroon/white/cyan)
+- `PortableText.tsx` (added session 5a) — shared Portable Text renderer wrapping `@portabletext/react`; merges a passed `components` map over project defaults; consumed by family-specific overrides
+
+### India family (`src/components/india/`) — added session 5a
+- `portableText.ts` — india-specific `PortableTextComponents` map; currently overrides only `listItem.bullet` with the red-tick treatment from design system §3 / §5.4. Other india primitives (Hero, Tabs, etc.) land in session 5b.
 
 ### Navigation (`src/components/nav/`)
 - `SimpleNav.tsx` — minimal black bar; logo + 4 menu items + red "Get a Quote" CTA
@@ -110,28 +115,44 @@ Total: **48 template variants** (12 page types × 4 families) plus EyeCatching v
 
 ## 5. Sanity Schema
 
-Located in `sanity/schemas/`. Total = **10 documents + 3 objects + 2 singletons**.
+Located in `sanity/schemas/`. Total = **10 documents + 6 objects + 3 singletons** (objects updated session 5a; singleton count corrected — was previously listed as 2). <!-- TBD: verify template-variant total below; original "48 variants" claim predates Branded and india families -->
+
+**Session 5a additions:**
+- `callouts: callout[]` added (optional) to **Brand** and **Solution** documents
+- `intent: 'awareness' | 'consideration' | 'conversion'` added (optional) to 10 documents + personaPage (11 schemas total). Per docs/india-design-system.md §10 item 5; ProductLines intentionally excluded (it's an embedded `productLine[]` object on Brand, not a top-level document; Brand's intent covers it transitively)
+- 3 new shared object types: `leadForm`, `photoTabSet`, `callout` (see Objects section below)
+- Guide's `callouts` field migrated from anonymous inline `{ label, body: text }` to shared `callout` type (data migration: 0 documents touched — no production Guides had callouts)
 
 ### Documents
-1. **Brand** — name, slug, logo, heroImage, category[], tagline, description, productLines[], stats (max 3), taglineBarText, about{Title,Body,Stats}, marqueeItems[], caseStudiesIntro, seo
-2. **Solution** — name, slug, offering, heroImage, shortDesc, description (blockContent), relatedBrands[], bgNumber, typePills[], specStripe[], specBars[], spec/cta sections, seo
-3. **Case Study** — title, slug, customer, industry, isFederal, heroImage, summary, body, relatedBrands[], results[{metric,value}], pullQuote+attribution, kickerTags[], byline, seo
-4. **Post** — title, slug, publishedAt, author→teamMember, categories[], mainImage, excerpt, body, readTime, heroImageCaption, pullQuote, tableOfContents[], seo
-5. **Guide** — title, slug, topic, heroImage, intro, body, docNumber, readTime, level (Beginner/Intermediate/Advanced), tableOfContents[], callouts[{type,title,body}], seo
-6. **Webinar** — title, slug, scheduledAt, status (Upcoming/Live/On-Demand), registrationUrl, recordingUrl, description, relatedBrands[], speakers[], agenda[{time,topic}], formTitle, seo
-7. **Course** — title, slug, track (CNC/AM/Software/Automation), audience (Professional/Workforce/Federal), duration, description, relatedBrands[], modules[{number,name,duration}], prerequisites[], machineLabel, seo
-8. **Class Event** — name, date, location, seats, instructors[ref], registrationUrl, description, seo
-9. **Team Member** — name, slug, title, department, photo, bio, linkedinUrl, email, expertise[], seo
-10. **Location** — name, slug, address, city/state/zip, country, phone, hours, heroImage, description, services[], seo
+1. **Brand** — name, slug, **intent**, logo, heroImage, category[], tagline, description, productLines[], stats (max 3), taglineBarText, about{Title,Body,Stats}, marqueeItems[], caseStudiesIntro, **callouts: callout[]**, seo
+2. **Solution** — name, slug, **intent**, offering, heroImage, shortDesc, description (blockContent), relatedBrands[], bgNumber, typePills[], specStripe[], specBars[], spec/cta sections, **callouts: callout[]**, seo
+3. **Case Study** — title, slug, **intent**, customer, industry, isFederal, heroImage, summary, body, relatedBrands[], results[{metric,value}], pullQuote+attribution, kickerTags[], byline, seo
+4. **Post** — title, slug, **intent**, publishedAt, author→teamMember, categories[], mainImage, excerpt, body, readTime, heroImageCaption, pullQuote, tableOfContents[], seo
+5. **Guide** — title, slug, **intent**, topic, heroImage, intro, body, docNumber, readTime, level (Beginner/Intermediate/Advanced), tableOfContents[], **callouts: callout[]** (migrated session 5a from inline `{label,body:text}` to shared `callout` type), seo
+6. **Webinar** — title, slug, **intent**, scheduledAt, status (Upcoming/Live/On-Demand), registrationUrl, recordingUrl, description, relatedBrands[], speakers[], agenda[{time,topic}], formTitle, seo
+7. **Course** — title, slug, **intent**, track (CNC/AM/Software/Automation), audience (Professional/Workforce/Federal), duration, description, relatedBrands[], modules[{number,name,duration}], prerequisites[], machineLabel, seo
+8. **Class Event** — **intent**, name, date, location, seats, instructors[ref], registrationUrl, description, seo
+9. **Team Member** — name, **intent**, slug, title, department, photo, bio, linkedinUrl, email, expertise[], seo
+10. **Location** — name, slug, **intent**, address, city/state/zip, country, phone, hours, heroImage, description, services[], seo
 
 ### Objects
 - **blockContent** — Portable Text (paragraphs, h2–h4, lists, images, code, custom blocks)
 - **productLine** — name, seriesLabel, models[], description, image, xTravel, spindleSpeed, tableLoad, axes, bestFor, brochureUrl, tagline, type, keySpecs[], modelDetails[]
 - **seoBlock** — metaTitle, metaDescription, ogImage, keywords[], canonicalUrl
+- **leadForm** (session 5a) — title, subtitle, fields: leadFormField[{name, type ('text'|'email'|'tel'|'select'|'textarea'), required, options[]}], submitLabel, destinationId, regionScope. Per design system §10 item 3
+- **photoTabSet** (session 5a) — tabs: photoTab[{image, label, body (blockContent), ctaUrl?}]. Per design system §10 item 3
+- **callout** (session 5a) — type ('note'|'tip'|'protips'|'warning'|'callout'), title, body (blockContent), chipLabel?. Per design system §10 item 3; consumed by `IndiaProTipsCallout` (session 5b)
 
 ### Singletons
-- **personaPage** — persona (Manufacturer/Federal-DoD/Machinist/Researcher/Partner-Distributor), headline, heroImage, description, featuredSolutions[], featuredBrands[], cta, forLabel, stats (max 3), filterTabs[{id,label,solutions[],brands[]}], seo
+- **personaPage** — persona (Manufacturer/Federal-DoD/Machinist/Researcher/Partner-Distributor), **intent**, headline, heroImage, description, featuredSolutions[], featuredBrands[], cta, forLabel, stats (max 3), filterTabs[{id,label,solutions[],brands[]}], seo
 - **siteSettings** — siteName, siteDescription, navigationMenu[], footerLinks[], socialLinks, contactInfo
+<!-- TBD: verify — homePage singleton also exists (sanity/schemas/singletons/homePage.ts) but is not documented here. Predates session 5a. -->
+
+### Migrations (added session 5a)
+- [migrations/2026-05-13-guide-callouts-to-shared-type.mjs](../migrations/2026-05-13-guide-callouts-to-shared-type.mjs) — Guide `callouts` inline → shared type. Idempotent; supports `--dry-run`.
+- [migrations/rollback-2026-05-13-guide-callouts-to-shared-type.mjs](../migrations/rollback-2026-05-13-guide-callouts-to-shared-type.mjs) — inverse. Safety net.
+
+Run with `node --env-file=.env.local migrations/<script>.mjs [--dry-run]`. Live runs require `SANITY_API_TOKEN` in `.env.local`.
 
 ### GROQ queries (`src/lib/queries.ts`)
 Per document type: `<type>Query` (single by slug, joins) + `all<Type>SlugsQuery` (for static generation).
