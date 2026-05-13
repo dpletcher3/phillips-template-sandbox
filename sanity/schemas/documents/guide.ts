@@ -34,6 +34,10 @@ export default defineType({
       type: 'array',
       of: [{ type: 'callout' }],
       description: 'Editorial callouts (notes, tips, warnings). Migrated from the previous inline { label, body: text } shape. See india design system §5.4.',
+      validation: Rule => Rule.custom(callouts => {
+        if (!callouts || (Array.isArray(callouts) && callouts.length === 0)) return true
+        return 'Guide page templates currently read callouts in legacy shape; new authored callouts will not render correctly. See NOTES.md.'
+      }).warning(),
     }),
     defineField({ name: 'seo',       title: 'SEO',        type: 'seoBlock' }),
   ],

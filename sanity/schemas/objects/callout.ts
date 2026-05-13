@@ -4,6 +4,7 @@ export default defineType({
   name: 'callout',
   title: 'Callout',
   type: 'object',
+  description: "Editorial callout block. ⚠️ Guide page templates currently read this in legacy shape — do NOT add callouts to Guide documents until the Guide client sites are adapted (see NOTES.md). Safe to use on Brand and Solution.",
   fields: [
     defineField({
       name: 'type',
