@@ -102,7 +102,16 @@ export default function IndiaGlasseyTabs({
                 onClick={() => setActiveIndex(i)}
                 className={`india-tab-card${isActive ? ' india-tab-card-active' : ''}`}
               >
-                <SanityImage image={tab.image} alt={tab.label} fill />
+                {typeof tab.image === 'string' ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={tab.image}
+                    alt={tab.label}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <SanityImage image={tab.image} alt={tab.label} fill />
+                )}
                 <span
                   aria-hidden="true"
                   style={{
@@ -168,7 +177,16 @@ export default function IndiaGlasseyTabs({
                 aspectRatio: '16 / 9',
               }}
             >
-              <SanityImage image={tab.image} alt={tab.label} fill />
+              {typeof tab.image === 'string' ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={tab.image}
+                  alt={tab.label}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <SanityImage image={tab.image} alt={tab.label} fill />
+              )}
               <span
                 aria-hidden="true"
                 style={{
