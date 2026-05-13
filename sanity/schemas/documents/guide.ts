@@ -28,7 +28,13 @@ export default defineType({
     defineField({ name: 'readTime',  title: 'Read Time',  type: 'string' }),
     defineField({ name: 'level',     title: 'Level',      type: 'string', options: { list: ['Foundational', 'Intermediate', 'Advanced'] } }),
     defineField({ name: 'tableOfContents', title: 'Table of Contents', type: 'array', of: [{ type: 'object', fields: [{ name: 'sectionNumber', type: 'string', title: 'Section Number' }, { name: 'title', type: 'string', title: 'Title' }, { name: 'subsections', type: 'array', title: 'Subsections', of: [{ type: 'string' }] }] }] }),
-    defineField({ name: 'callouts',  title: 'Callouts',   type: 'array', of: [{ type: 'object', fields: [{ name: 'label', type: 'string', title: 'Label' }, { name: 'body', type: 'text', title: 'Body' }] }] }),
+    defineField({
+      name: 'callouts',
+      title: 'Callouts',
+      type: 'array',
+      of: [{ type: 'callout' }],
+      description: 'Editorial callouts (notes, tips, warnings). Migrated from the previous inline { label, body: text } shape. See india design system §5.4.',
+    }),
     defineField({ name: 'seo',       title: 'SEO',        type: 'seoBlock' }),
   ],
   preview: {
