@@ -6,6 +6,19 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({ name: 'persona',     title: 'Persona', type: 'string', options: { list: ['Manufacturer','Federal/DoD','Machinist','Researcher','Partner/Distributor'] }, validation: r => r.required() }),
+    defineField({
+      name: 'intent',
+      title: 'Intent',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Awareness', value: 'awareness' },
+          { title: 'Consideration', value: 'consideration' },
+          { title: 'Conversion', value: 'conversion' },
+        ],
+      },
+      description: 'Authoring intent for india-family templates. Unset = awareness. Controls lead-form placement density. See india design system §10 item 5.',
+    }),
     defineField({ name: 'headline',    title: 'Headline',    type: 'string'   }),
     defineField({ name: 'heroImage',   title: 'Hero Image',  type: 'image'    }),
     defineField({ name: 'description', title: 'Description', type: 'text'     }),

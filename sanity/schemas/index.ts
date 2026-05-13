@@ -11,6 +11,9 @@ import location     from './documents/location'
 import productLine  from './objects/productLine'
 import seoBlock     from './objects/seoBlock'
 import blockContent from './objects/blockContent'
+import leadForm     from './objects/leadForm'
+import photoTabSet  from './objects/photoTabSet'
+import callout      from './objects/callout'
 import personaPage  from './singletons/personaPage'
 import siteSettings from './singletons/siteSettings'
 import homePage     from './singletons/homePage'
@@ -19,7 +22,7 @@ export const schemaTypes = [
   // Documents
   brand, solution, caseStudy, post, guide, webinar, course, classEvent, teamMember, location,
   // Objects
-  productLine, seoBlock, blockContent,
+  productLine, seoBlock, blockContent, leadForm, photoTabSet, callout,
   // Singletons
   personaPage, siteSettings, homePage,
 ]

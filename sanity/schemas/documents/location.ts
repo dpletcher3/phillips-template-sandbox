@@ -7,6 +7,19 @@ export default defineType({
   fields: [
     defineField({ name: 'name',     title: 'Name',     type: 'string', validation: r => r.required() }),
     defineField({ name: 'slug',     title: 'Slug',     type: 'slug',   options: { source: 'name' }, validation: r => r.required() }),
+    defineField({
+      name: 'intent',
+      title: 'Intent',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Awareness', value: 'awareness' },
+          { title: 'Consideration', value: 'consideration' },
+          { title: 'Conversion', value: 'conversion' },
+        ],
+      },
+      description: 'Authoring intent for india-family templates. Unset = awareness. Controls lead-form placement density. See india design system §10 item 5.',
+    }),
     defineField({ name: 'region',   title: 'Region',   type: 'string', options: { list: ['Northeast', 'Mid-Atlantic', 'Southeast', 'Midwest', 'Southwest', 'Federal'] } }),
     defineField({ name: 'address',  title: 'Address',  type: 'text'    }),
     defineField({ name: 'phone',    title: 'Phone',    type: 'string'  }),

@@ -7,6 +7,19 @@ export default defineType({
   fields: [
     defineField({ name: 'name',            title: 'Name',              type: 'string',  validation: r => r.required() }),
     defineField({ name: 'slug',            title: 'Slug',              type: 'slug',    options: { source: 'name' } }),
+    defineField({
+      name: 'intent',
+      title: 'Intent',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Awareness', value: 'awareness' },
+          { title: 'Consideration', value: 'consideration' },
+          { title: 'Conversion', value: 'conversion' },
+        ],
+      },
+      description: 'Authoring intent for india-family templates. Unset = awareness. Controls lead-form placement density. See india design system §10 item 5.',
+    }),
     defineField({ name: 'offering',        title: 'Offering Category', type: 'string',  options: { list: [
       { title: 'CNC Machining', value: 'cnc machining' },
       { title: 'Additive Manufacturing', value: 'additive manufacturing' },
@@ -28,6 +41,13 @@ export default defineType({
     defineField({ name: 'ctaDescription',   title: 'CTA Description',    type: 'text' }),
     defineField({ name: 'ctaPrimaryLabel',  title: 'CTA Primary Label',  type: 'string' }),
     defineField({ name: 'ctaSecondaryLabel', title: 'CTA Secondary Label', type: 'string' }),
+    defineField({
+      name: 'callouts',
+      title: 'Callouts',
+      type: 'array',
+      of: [{ type: 'callout' }],
+      description: 'Optional editorial callouts (notes, tips, warnings). See india design system §5.4.',
+    }),
     defineField({ name: 'seo',             title: 'SEO',               type: 'seoBlock' }),
   ],
 })
