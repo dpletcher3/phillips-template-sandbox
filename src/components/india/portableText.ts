@@ -1,5 +1,7 @@
 import type { PortableTextComponents } from '@portabletext/react'
 import { createElement } from 'react'
+import SanityImage from '@/components/SanityImage'
+import IndiaH2 from './atoms/IndiaH2'
 
 // India-specific PortableText overrides.
 //
@@ -8,12 +10,9 @@ import { createElement } from 'react'
 // to <PortableText> at the call site:
 //
 //   <PortableText value={...} components={indiaPortableTextComponents} />
-//
-// Only listItem.bullet is overridden at this stage — that's the red-tick
-// list-item treatment from §3 / §5.4 / §5.8. All other rendering inherits
-// the shared defaults from src/components/PortableText.tsx.
 
 const RED = '#F9423A'
+const GREY = '#647883'
 
 // TBD-verify: §3 names the "red-tick" motif as a 48px × 3px red rectangle
 // in its H2-underline context. The list-item context is not explicitly
@@ -21,9 +20,61 @@ const RED = '#F9423A'
 // red rectangle (12px × 3px) to keep the same motif language. §5.8
 // (IndiaTickCheckList) separately describes a "check-tick" which may
 // imply a ✓ glyph — that is a different component, not this PortableText
-// override. Confirm during session 5b component build that this matches
+// override. Confirm during session 5c component build that this matches
 // the design intent for callout body lists.
+
+// TBD-verify: marks.link renders with persistent underline + india-red.
+// The §5b brief specified "no underline, hover underline" but achieving
+// the hover-only variant requires either a CSS module, a globals.css
+// addition (excluded by session 5b constraints), or per-link injected
+// <style> tags. Session 5c can move this to a CSS module if the always-
+// underlined treatment reads wrong against the screenshots.
+
 export const indiaPortableTextComponents: PortableTextComponents = {
+  block: {
+    h2: ({ children }) => createElement(IndiaH2, null, children),
+    h3: ({ children }) =>
+      createElement(
+        'h3',
+        {
+          style: {
+            fontFamily: 'var(--font-barlow-condensed), sans-serif',
+            fontWeight: 700,
+            fontStyle: 'italic',
+            textTransform: 'uppercase',
+            fontSize: 20,
+            lineHeight: 1.2,
+            letterSpacing: 1,
+            margin: '24px 0 12px',
+          },
+        },
+        children,
+      ),
+    normal: ({ children }) =>
+      createElement(
+        'p',
+        {
+          style: {
+            fontFamily: 'var(--font-barlow-condensed), sans-serif',
+            fontSize: 14,
+            lineHeight: 1.85,
+            margin: '0 0 16px',
+            color: GREY,
+          },
+        },
+        children,
+      ),
+  },
+  list: {
+    bullet: ({ children }) =>
+      createElement(
+        'ul',
+        {
+          style: { listStyle: 'none', padding: 0, margin: '0 0 16px' },
+        },
+        children,
+      ),
+  },
   listItem: {
     bullet: ({ children }) =>
       createElement(
@@ -51,5 +102,32 @@ export const indiaPortableTextComponents: PortableTextComponents = {
         }),
         children,
       ),
+  },
+  marks: {
+    strong: ({ children }) => createElement('strong', null, children),
+    em: ({ children }) => createElement('em', null, children),
+    link: ({ value, children }) => {
+      const href: string = value?.href ?? '#'
+      const isExternal = /^https?:\/\//.test(href) && !href.includes('phillipscorp.com')
+      return createElement(
+        'a',
+        {
+          href,
+          ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+          style: { color: RED, textDecoration: 'underline' },
+        },
+        children,
+      )
+    },
+  },
+  types: {
+    image: ({ value }) =>
+      createElement(SanityImage, {
+        image: value,
+        alt: (value?.alt as string) ?? '',
+        width: 800,
+        height: 600,
+        style: { margin: '16px 0', maxWidth: '100%', height: 'auto' },
+      }),
   },
 }

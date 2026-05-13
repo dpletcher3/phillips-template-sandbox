@@ -38,4 +38,4 @@ src/components/india/
 - Session 5b — atoms + 4 simple components + primitives preview page (commits D–E)
 - Session 5c+ — composite components and real india routes
 
-The developer preview page lives at [/india/_primitives](../../app/india/_primitives/page.tsx) (noindex; not part of the production navigation system).
+The developer preview page lives at [/india/primitives-preview](../../app/india/primitives-preview/page.tsx) (noindex; not part of the production navigation system). The brief originally specified `_primitives`, but Next.js App Router treats underscore-prefixed folders as private and excludes them from routing — `primitives-preview` is the renamed equivalent.
