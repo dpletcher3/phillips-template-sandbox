@@ -4,26 +4,33 @@ The **india family** is the lead-generation aesthetic of the sandbox — a sales
 
 **Canonical spec:** [docs/india-design-system.md](../../../docs/india-design-system.md). When this README and the spec diverge, the spec wins.
 
-## Files in this folder (as of session 5b)
+## Files in this folder (as of session 5c)
 
 ```
 src/components/india/
-├── README.md                   ← this file
-├── portableText.ts             ← india-specific PortableTextComponents map; consumers pass it explicitly to <PortableText> at the call site
+├── README.md                       ← this file
+├── types.ts                        ← shared TS shapes (LeadForm, PhotoTab, Callout) mirroring 5a Sanity object schemas
+├── portableText.ts                 ← india-specific PortableTextComponents map; consumers pass it explicitly at the call site
 ├── atoms/
-│   ├── index.ts                ← re-exports all atoms
-│   ├── IndiaH2.tsx             ← H2 with red-tick underline; alignable; can render as h3 semantically
-│   ├── IndiaCtaButton.tsx      ← variant-bound CTA: 'hero' (orange) | 'body' (red). No free color escape hatch.
-│   ├── IndiaGlassCard.tsx      ← translucent blue panel with intensity prop ('light' | 'medium' | 'heavy')
-│   └── IndiaCaptionPill.tsx    ← translucent dark label for overlaying photo tiles; absolutely positioned
-├── index.ts                    ← re-exports atoms + simple components
-├── IndiaSectionBreak.tsx       ← pure-typography section-break band ("TRANSFORM YOUR MANUFACTURING PROCESS"); optional portrait inset
-├── IndiaTickCheckList.tsx      ← red-tick bullet list for advantages/capabilities
-├── IndiaLogoCarousel.tsx       ← customer-logo trust-bar; CSS-only infinite marquee with hover pause
-└── IndiaPhotoGrid.tsx          ← N-up photo grid with caption pills; uses IndiaCaptionPill
+│   ├── index.ts                    ← re-exports all atoms
+│   ├── IndiaH2.tsx                 ← H2 with red-tick underline; alignable; can render as h3 semantically
+│   ├── IndiaCtaButton.tsx          ← variant-bound CTA: 'hero' (orange) | 'body' (red). No free color escape hatch.
+│   ├── IndiaGlassCard.tsx          ← translucent blue panel with intensity prop ('light' | 'medium' | 'heavy')
+│   └── IndiaCaptionPill.tsx        ← translucent dark label for overlaying photo tiles; absolutely positioned
+├── index.ts                        ← re-exports atoms + simple + composites + types
+├── IndiaSectionBreak.tsx           ← (5b) pure-typography section-break band ("TRANSFORM YOUR MANUFACTURING PROCESS"); optional portrait inset
+├── IndiaTickCheckList.tsx          ← (5b) red-tick bullet list for advantages/capabilities
+├── IndiaLogoCarousel.tsx           ← (5b) customer-logo trust-bar; CSS-only infinite marquee with hover pause
+├── IndiaPhotoGrid.tsx              ← (5b) N-up photo grid with caption pills
+├── IndiaHeroWithForm.tsx           ← (5c) hero with right-rail lead-gen form; tap-to-reveal form on mobile; composes IndiaRepeatableLeadForm
+├── IndiaPortfolioRow.tsx           ← (5c) alternating-side image+narrative row; body accepts string or PortableTextBlock[]
+├── IndiaProTipsCallout.tsx         ← (5c) bordered red-outline editorial callout; consumes the shared `callout` Sanity type
+├── IndiaGlasseyTabs.tsx            ← (5c) photo-tab strip with red-gradient overlays; <details> accordion on mobile
+├── IndiaDarkCategoryCard.tsx       ← (5c) black card with red top edge; sm/md/lg size variants
+└── IndiaRepeatableLeadForm.tsx     ← (5c) mid-page form repeat; inline or card variant; placement-aware padding/background
 ```
 
-**Not yet built (session 5c+):** `IndiaHeroWithForm`, `IndiaPortfolioRow`, `IndiaProTipsCallout`, `IndiaGlasseyTabs`, `IndiaDarkCategoryCard`, `IndiaRepeatableLeadForm`. See [docs/india-design-system.md §5](../../../docs/india-design-system.md) for specs.
+**Not yet built (session 5d+):** Real india page-type clients (`IndiaBrandClient`, `IndiaSolutionClient`, etc.) consuming the composites above, plus the `/india/*` routes. See [docs/india-design-system.md §8](../../../docs/india-design-system.md) for the page-type × component matrix.
 
 ## Conventions
 
@@ -36,6 +43,9 @@ src/components/india/
 
 - Session 5a — schema additions, Guide callouts migration, shared PortableText renderer (commits A–C)
 - Session 5b — atoms + 4 simple components + primitives preview page (commits D–E)
-- Session 5c+ — composite components and real india routes
+- Session 5c — 6 composite components + composites preview page (commits F–G)
+- Session 5d+ — real india page-type clients and `/india/*` production routes
 
-The developer preview page lives at [/india/primitives-preview](../../app/india/primitives-preview/page.tsx) (noindex; not part of the production navigation system). The brief originally specified `_primitives`, but Next.js App Router treats underscore-prefixed folders as private and excludes them from routing — `primitives-preview` is the renamed equivalent.
+Developer preview pages (both noindex; not part of production navigation):
+- [/india/primitives-preview](../../app/india/primitives-preview/page.tsx) — atoms + simple components
+- [/india/composites-preview](../../app/india/composites-preview/page.tsx) — composites + an assembled mini-page

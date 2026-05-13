@@ -23,13 +23,6 @@ const GREY = '#647883'
 // override. Confirm during session 5c component build that this matches
 // the design intent for callout body lists.
 
-// TBD-verify: marks.link renders with persistent underline + india-red.
-// The §5b brief specified "no underline, hover underline" but achieving
-// the hover-only variant requires either a CSS module, a globals.css
-// addition (excluded by session 5b constraints), or per-link injected
-// <style> tags. Session 5c can move this to a CSS module if the always-
-// underlined treatment reads wrong against the screenshots.
-
 export const indiaPortableTextComponents: PortableTextComponents = {
   block: {
     h2: ({ children }) => createElement(IndiaH2, null, children),
@@ -109,12 +102,14 @@ export const indiaPortableTextComponents: PortableTextComponents = {
     link: ({ value, children }) => {
       const href: string = value?.href ?? '#'
       const isExternal = /^https?:\/\//.test(href) && !href.includes('phillipscorp.com')
+      // Tailwind utilities: no-underline by default, underline on hover.
+      // Color stays india-red via arbitrary value class.
       return createElement(
         'a',
         {
           href,
           ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
-          style: { color: RED, textDecoration: 'underline' },
+          className: 'text-[#F9423A] no-underline hover:underline',
         },
         children,
       )
