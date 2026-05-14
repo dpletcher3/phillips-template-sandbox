@@ -136,26 +136,26 @@ Matches the existing sandbox convention seen in [AppealingBrandClient](../src/co
 
 ## 5. Component inventory — new components
 
-All components below live under `src/components/india/`, named with the `India` prefix. None exist yet — these are the build queue for session 5+.
+All components below live under `src/components/india/`, named with the `India` prefix.
+
+> Prop sketches reflect the shipped 5b/5c implementations; refer to the actual TS types in [src/components/india/types.ts](../src/components/india/types.ts) and individual component files for canonical signatures.
 
 ### 5.1 `IndiaHeroWithForm`
 
 - **Path:** `src/components/india/IndiaHeroWithForm.tsx`
 - **Visual:** Full-bleed photographic background with a dark left-to-right gradient overlay. Left side: a `IndiaGlassCard` (blue translucent panel) containing the headline H1, optional sub-list check items, body copy, and a single orange `IndiaCtaButton variant="hero"`. Right side: a 4–6 field lead-gen form panel on a flat `india-blue` surface with white labels and a red submit button.
 - **Reference:** [docs/inspiration/metal-forming/desktop.png](inspiration/metal-forming/desktop.png) (top 540px), also identical structure on all four reference pages.
-- **Props sketch:** The `form` prop uses the same `LeadForm` type defined in §5.10; the hero composes `IndiaRepeatableLeadForm` internally with `placement='hero'`. **The hero always renders the form** — there is no formless variant. If a page needs a formless hero, use a different hero component (TBD; not part of the §5 inventory).
+- **Props sketch (as shipped in 5c):** The `form` prop uses the `LeadForm` type from `src/components/india/types.ts`; the hero composes `IndiaRepeatableLeadForm` internally with `placement='hero'` and an internal `__internalFromHero` flag that suppresses the soft guardrail warning. **The hero always renders the form** — there is no formless variant. If a page needs a formless hero, use a different hero component (TBD; not part of the §5 inventory).
   ```ts
-  import type { LeadForm } from './IndiaRepeatableLeadForm'  // re-export from §5.10
+  import type { LeadForm } from '@/components/india'
 
   type IndiaHeroWithFormProps = {
-    backgroundImage: string                                  // hero photo URL
-    eyebrow?: string                                         // "PHILLIPS" red text above headline
-    headline: string                                         // main H1
-    bullets?: string[]                                       // optional sub-category check-list (medical-industry pattern)
-    body?: string                                            // short paragraph under headline
-    cta: { label: string; href: string }                     // single hero-zone CTA (orange)
-    form: LeadForm                                           // shape mirrors the leadForm Sanity object
-    overlayOpacity?: number                                  // default 0.45
+    eyebrow?: string
+    title: string
+    subtitle?: string
+    backgroundImage: string | { src: string; alt: string }
+    primaryCta?: { label: string; href: string }
+    form: LeadForm
   }
   ```
 - **Mobile:** Glass card and form stack vertically. Photo becomes a 16:9 banner. Form moves below the glass card; CTA stays above the form for fold-priority.
@@ -167,20 +167,21 @@ All components below live under `src/components/india/`, named with the `India` 
 - **Path:** `src/components/india/IndiaPortfolioRow.tsx`
 - **Visual:** A single horizontal row split image / narrative. Image (~40% width) shows a product photo; narrative side (~55% width) shows a small brand logo, an H3 row title, descriptive paragraph, and a red `IndiaCtaButton variant="body"`. Row sides alternate by index.
 - **Reference:** [docs/inspiration/5-axis-machining/desktop.png](inspiration/5-axis-machining/desktop.png) — the five-row HAAS → APEC → HERMLE → Reichenbacher → Kitamura strip is the canonical example. [docs/inspiration/metal-forming/desktop.png](inspiration/metal-forming/desktop.png) has the three-row variant.
-- **Props sketch:**
+- **Props sketch (as shipped in 5c):**
   ```ts
-  interface IndiaPortfolioRowProps {
-    index: number;              // determines image-left vs copy-left
-    image: string;
-    logo?: string;              // small brand mark above title
-    title: string;              // H3
-    body: string;
-    cta?: { label: string; href: string };
+  type IndiaPortfolioRowProps = {
+    index: number                                   // even = image left, odd = image right (desktop/tablet only)
+    image: string | { src: string; alt: string }
+    brandLabel?: string                             // small uppercase brand or partner name above the title
+    title: string
+    body: string | PortableTextBlock[]              // plain text → <p>; blocks → routed via shared PortableText + india components
+    subActions?: Array<{ label: string; href: string }>  // chevron-prefixed text links under the body
+    primaryCta?: { label: string; href: string }    // IndiaCtaButton variant='body'
   }
   ```
 - **Mobile:** Always stacks image-above-copy regardless of `index`. The alternation rule is desktop/tablet only.
-- **Tokens consumed:** `india-white` (background), `india-black` (title), `india-gray` (body), `india-red` (CTA).
-- **Dependencies:** `IndiaCtaButton`.
+- **Tokens consumed:** `india-white` (background), `india-black` (title), `india-gray` (body), `india-red` (CTA + subAction chevrons).
+- **Dependencies:** `IndiaCtaButton`, `PortableText` (when `body` is blocks).
 
 ### 5.3 `IndiaSectionBreak`
 
@@ -324,18 +325,18 @@ If `chipLabel` is explicitly set on the callout, it overrides the mapping. If th
 - **Path:** `src/components/india/IndiaDarkCategoryCard.tsx`
 - **Visual:** A deep-black card with a thin red top edge (2–3px). Contains a faint background machine product photo (low opacity), a small label/eyebrow, an H3 title in white italic uppercase, and an optional secondary line. Hover state: red top edge thickens, photo opacity steps up. Cards composed in a 3-up grid.
 - **Reference:** [docs/inspiration/medical-industry/desktop.png](inspiration/medical-industry/desktop.png) — "MACHINES & TECHNOLOGY" section.
-- **Props sketch:**
+- **Props sketch (as shipped in 5c):**
   ```ts
-  interface IndiaDarkCategoryCardProps {
-    image: string;              // background machine photo (low opacity)
-    eyebrow?: string;
-    title: string;              // H3
-    secondary?: string;
-    href?: string;
+  type IndiaDarkCategoryCardProps = {
+    image: string | { src: string; alt: string }
+    title: string
+    description?: string
+    href?: string
+    size?: 'sm' | 'md' | 'lg'           // controls padding + image height + title size
   }
   ```
-- **Mobile:** Cards stack to single column; aspect ratio compresses from 4:3 to 3:2.
-- **Tokens consumed:** `india-black` (background), `india-red` (top edge), `india-white` (type), `india-gray` (eyebrow).
+- **Mobile:** Cards stack to single column; image scales with the size prop.
+- **Tokens consumed:** `india-black` (background), `india-red` (top edge), `india-white` (type), white-translucent (description).
 - **Dependencies:** none.
 
 ### 5.10 `IndiaRepeatableLeadForm`

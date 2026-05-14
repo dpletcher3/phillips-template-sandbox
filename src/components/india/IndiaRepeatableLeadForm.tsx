@@ -11,6 +11,18 @@ export type IndiaRepeatableLeadFormProps = {
   variant?: 'inline' | 'card'
 }
 
+/**
+ * Internal-use prop. Set by IndiaHeroWithForm to suppress the soft
+ * placement='hero' guardrail warning during legitimate hero composition.
+ * **Do not use from outside the india family.** Not re-exported from
+ * the barrel; not part of the public API.
+ *
+ * @internal
+ */
+type IndiaRepeatableLeadFormInternalProps = IndiaRepeatableLeadFormProps & {
+  __internalFromHero?: boolean
+}
+
 // Humanize a fieldName like 'fullName' or 'phone_number' into 'Full Name'.
 function labelFor(field: LeadFormField): string {
   return field.name
@@ -34,17 +46,19 @@ export default function IndiaRepeatableLeadForm({
   form,
   placement,
   variant = 'inline',
-}: IndiaRepeatableLeadFormProps) {
+  __internalFromHero,
+}: IndiaRepeatableLeadFormInternalProps) {
   useEffect(() => {
-    if (placement === 'hero') {
+    if (placement === 'hero' && !__internalFromHero) {
       // Soft guardrail — not an error. The hero composes this with placement='hero'
-      // internally; this warning catches accidental direct usage by consumers.
+      // internally (and sets __internalFromHero=true to silence this warning);
+      // this warning catches accidental direct usage by consumers.
       // eslint-disable-next-line no-console
       console.warn(
         "IndiaRepeatableLeadForm used with placement='hero' — consider IndiaHeroWithForm instead."
       )
     }
-  }, [placement])
+  }, [placement, __internalFromHero])
 
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(form.fields.map(f => [f.name, '']))

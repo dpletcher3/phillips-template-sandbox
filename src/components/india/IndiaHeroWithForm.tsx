@@ -24,9 +24,10 @@ export type IndiaHeroWithFormProps = {
  *   Tablet  (760–1023): stacks vertically, full-width
  *   Mobile  (<760):  tap-to-reveal form via a "Get in Touch" button
  *
- * Composes IndiaRepeatableLeadForm internally with placement='hero'.
- * (The console.warn inside RepeatableLeadForm will fire once on mount
- * for that internal usage — expected, harmless.)
+ * Composes IndiaRepeatableLeadForm internally with placement='hero'
+ * and __internalFromHero=true (which silences the soft guardrail
+ * warning RepeatableLeadForm fires when consumers use placement='hero'
+ * directly).
  */
 export default function IndiaHeroWithForm({
   eyebrow,
@@ -182,7 +183,15 @@ export default function IndiaHeroWithForm({
             } as React.CSSProperties
           }
         >
-          <IndiaRepeatableLeadForm form={form} placement="hero" variant="card" />
+          <IndiaRepeatableLeadForm
+            form={form}
+            placement="hero"
+            variant="card"
+            // Suppresses the soft placement='hero' guardrail warning during
+            // legitimate hero composition. See IndiaRepeatableLeadForm for
+            // the internal-use rationale.
+            __internalFromHero
+          />
         </div>
       </div>
     </section>
