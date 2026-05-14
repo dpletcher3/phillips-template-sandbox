@@ -14,6 +14,7 @@ export { default as IndiaPhotoGrid } from './IndiaPhotoGrid'
 
 // Composite components (session 5c)
 export { default as IndiaHeroWithForm } from './IndiaHeroWithForm'
+export { default as IndiaContentHero } from './IndiaContentHero'
 export { default as IndiaPortfolioRow } from './IndiaPortfolioRow'
 export { default as IndiaProTipsCallout } from './IndiaProTipsCallout'
 export { default as IndiaGlasseyTabs } from './IndiaGlasseyTabs'

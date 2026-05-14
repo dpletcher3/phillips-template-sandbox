@@ -162,6 +162,27 @@ All components below live under `src/components/india/`, named with the `India` 
 - **Tokens consumed:** `india-blue` (glass + form panel), `india-white` (type), `india-orange` (CTA via `IndiaCtaButton variant="hero"`), `india-red` (form submit button via the form's own internal styling).
 - **Dependencies:** `IndiaGlassCard`, `IndiaCtaButton`, `IndiaRepeatableLeadForm`, `IndiaTickCheckList` (when `bullets` is provided).
 
+### 5.1.1 `IndiaContentHero`
+
+- **Path:** `src/components/india/IndiaContentHero.tsx`
+- **Visual:** Full-bleed photographic background with a red→maroon diagonal gradient overlay (overlayOpacity default 0.55). Centered eyebrow (small uppercase Barlow Condensed) → `IndiaH2` (title with red-tick underline) → subtitle (Barlow Condensed Light). Optional metadata strip at the bottom edge: horizontal row of label/value pairs separated by thin vertical dividers.
+- **Reference:** No direct reference in `docs/inspiration/` — those screenshots are Group A landing pages. This hero was designed for Groups B/C/D (long-form content, events, reference templates) where a lead-gen form in the hero is inappropriate.
+- **Used by:** Group B (`IndiaCaseStudyClient`, `IndiaPostClient`, `IndiaGuideClient`), Group C (`IndiaWebinarClient`, `IndiaCourseClient`, `IndiaClassEventClient`), Group D (`IndiaLocationClient`). `IndiaTeamMemberClient` uses an inline profile-hero pattern instead. Group A uses `IndiaHeroWithForm` exclusively.
+- **Props sketch (as shipped in 5e):**
+  ```ts
+  type IndiaContentHeroProps = {
+    eyebrow?: string                                       // e.g. "CASE STUDY", "GUIDE: Beginner", "WEBINAR — Upcoming"
+    title: string
+    subtitle?: string
+    backgroundImage: string | { src: string; alt: string }
+    metadata?: Array<{ label: string; value: string }>     // bottom strip
+    overlayOpacity?: number                                // 0–1, default 0.55
+  }
+  ```
+- **Mobile:** Vertical stack, tighter padding (56px 20px). Metadata strip wraps to a two-column grid with thin horizontal dividers replacing the vertical ones.
+- **Tokens consumed:** `india-red` + `india-maroon` (gradient overlay), `india-white` (type, dividers), `india-black` (fallback background while image loads).
+- **Dependencies:** `IndiaH2`. No form composition — intentionally formless.
+
 ### 5.2 `IndiaPortfolioRow`
 
 - **Path:** `src/components/india/IndiaPortfolioRow.tsx`
