@@ -75,13 +75,18 @@ const STRONG_LITE_TEMPLATES = [
 ]
 
 const INDIA_TEMPLATES = [
-  { name: 'Brand',         href: '/india/brand/haas',                   desc: 'Brand deep-dive — hero with right-rail form · alternating brand-portfolio rows · ProTips · FAQ',  theme: 'Hot Lead-Gen' },
-  { name: 'Solution',      href: '/india/solution/vertical-milling',    desc: 'Solution directory — hero+form · 3-row brand portfolio · industrial applications · FAQ',         theme: 'Directory Funnel' },
-  { name: 'Product Lines', href: '/india/product-lines/haas',           desc: 'Single-product spotlight — hero · product + key specs · advantages · parts + applications grids', theme: 'Spotlight Sell' },
-  { name: 'Persona',       href: '/india/persona/manufacturer',         desc: 'Vertical-market — hero · GlasseyTabs · logo trust-bar · dark-card grid · FAQ',                   theme: 'Vertical Market' },
-  // 12 page types pending for india family — Group A (4) shipped in session 5d.
-  // Group B/C/D (Case Study, Post, Guide, Webinar, Course, ClassEvent,
-  // TeamMember, Location) land in session 5e+.
+  { name: 'Brand',         href: '/india/brand/haas',                       desc: 'Brand deep-dive — hero with right-rail form · alternating brand-portfolio rows · ProTips · FAQ',  theme: 'Hot Lead-Gen' },
+  { name: 'Solution',      href: '/india/solution/vertical-milling',        desc: 'Solution directory — hero+form · 3-row brand portfolio · industrial applications · FAQ',         theme: 'Directory Funnel' },
+  { name: 'Product Lines', href: '/india/product-lines/haas',               desc: 'Single-product spotlight — hero · product + key specs · advantages · parts + applications grids', theme: 'Spotlight Sell' },
+  { name: 'Persona',       href: '/india/persona/manufacturer',             desc: 'Vertical-market — hero · GlasseyTabs · logo trust-bar · dark-card grid · FAQ',                   theme: 'Vertical Market' },
+  { name: 'Case Study',    href: '/india/case-study/navair-cycle-time',     desc: 'Magazine-style — ContentHero · results stat strip · pull quote · body · related strip',         theme: 'Stat Strip' },
+  { name: 'Blog Post',     href: '/india/post/metal-am-naval',              desc: 'Two-column article — ContentHero · TOC · body · author sidebar · related',                      theme: 'TOC + Author' },
+  { name: 'Guide',         href: '/india/guide/what-is-a-vmc',              desc: 'How-to — ContentHero · TOC · body with inline callouts (ProTips/Warning/Note)',                  theme: 'Inline Callouts' },
+  { name: 'Webinar',       href: '/india/webinar/metal-am-defense',         desc: 'Event — ContentHero · status CTA · agenda timeline · speakers · registration form',              theme: 'Agenda Timeline' },
+  { name: 'Course',        href: '/india/course/5-axis-programming',        desc: 'Training — ContentHero · numbered modules · prerequisites · registration',                       theme: 'Module Spine' },
+  { name: 'Class Event',   href: '/india/class-event/sample',               desc: 'Class instance — ContentHero · seats remaining bar · instructors · register CTA',                theme: 'Seats Counter' },
+  { name: 'Team Member',   href: '/india/team-member/alan-phillips',        desc: 'People profile — split portrait/intro · bio · expertise checklist · contact CTAs',               theme: 'Portrait Profile' },
+  { name: 'Location',      href: '/india/location/charlotte-nc',            desc: 'Facility — ContentHero · address + hours · services cards · map placeholder',                    theme: 'Visit + Services' },
 ]
 
 const BRANDED_TEMPLATES = [

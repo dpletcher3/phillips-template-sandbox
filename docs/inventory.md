@@ -64,7 +64,7 @@ Every family covers the same 12 page types: **Brand, Solution, Product Lines, Ca
 | **Simple** | `/simple/*/[slug]` | Clean, minimal, light-themed corporate/docs | Sanity |
 | **Strong** | `/strong/*` | Dark HUD/industrial, monospace HUD labels | Sanity |
 | **Branded** | `/branded/*/[slug]` | Hybrid Montserrat+Barlow Condensed, frosted hero, top-edge accents | Sanity |
-| **India** (Group A, session 5d) | `/india/*/[slug]` | Lead-gen / sales-document feel: hero with right-rail form, alternating brand-portfolio rows, intent-driven form repeats. 4 of 12 page types shipped so far. | Sanity |
+| **India** (sessions 5d + 5e) | `/india/*/[slug]` | Lead-gen / sales-document feel: hero with right-rail form, alternating brand-portfolio rows, intent-driven form repeats. All 12 page types shipped. | Sanity |
 
 **Strong has extra showcase routes**: `/strong/`, `/strong/catalog`, `/strong/class-event`, `/strong/product-line`.
 
@@ -84,18 +84,36 @@ Total: **48 template variants** (12 page types × 4 families) plus EyeCatching v
 - `atoms/` — IndiaH2, IndiaCtaButton, IndiaGlassCard, IndiaCaptionPill (session 5b).
 - 4 simple components: IndiaSectionBreak, IndiaTickCheckList, IndiaLogoCarousel, IndiaPhotoGrid (session 5b).
 - 6 composite components: IndiaHeroWithForm, IndiaPortfolioRow, IndiaProTipsCallout, IndiaGlasseyTabs, IndiaDarkCategoryCard, IndiaRepeatableLeadForm (session 5c).
+- IndiaContentHero (session 5e) — formless hero used by Groups B/C/D long-form/event/reference templates.
 
-### India family page-type Clients (`src/components/templates-india/`) — added session 5d
-Group A (4 of 12 page types) shipped this session, anchored to the four reference pages captured in session 3:
+### India family page-type Clients (`src/components/templates-india/`) — sessions 5d + 5e
+All 12 page types shipped. Group A (5d) is anchored to the 4 reference pages captured in session 3; Group B/C/D (5e) have no reference screenshots and translate the india visual language onto each content rhythm.
+
+**Group A — landing/marketing (session 5d):**
 - `brand/IndiaBrandClient.tsx`               → 5-axis-machining (deep-dive: 5-row portfolio + ProTips)
 - `solution/IndiaSolutionClient.tsx`         → metal-forming (directory: 3-row portfolio + FAQ)
 - `product-lines/IndiaProductLinesClient.tsx` → fiber-laser-cutting (single-product spotlight + advantages)
 - `persona/IndiaPersonaClient.tsx`            → medical-industry (vertical market: GlasseyTabs + DarkCategoryCard + logo carousel)
-- `_shared/helpers.ts`                       → sanityImageUrl, SAMPLE_LEAD_FORM (TBD-verify, hardcoded), readIntent
-- `_shared/IndiaFAQ.tsx`                     → FAQ accordion per §7 re-skin
 
-Routes: `/india/brand/[slug]`, `/india/solution/[slug]`, `/india/product-lines/[slug]`, `/india/persona/[persona]`.
-Group B/C/D (8 remaining page types: Case Study, Post, Guide, Webinar, Course, ClassEvent, TeamMember, Location) ship in session 5e+.
+**Group B — long-form content (session 5e):**
+- `case-study/IndiaCaseStudyClient.tsx`      → ContentHero + results stat strip + pull quote + body + related strip
+- `post/IndiaPostClient.tsx`                  → ContentHero + 2-col (TOC + body / author + quote + related)
+- `guide/IndiaGuideClient.tsx`                → ContentHero + 2-col (TOC + body / first callout) + inline remaining callouts
+
+**Group C — events/education (session 5e):**
+- `webinar/IndiaWebinarClient.tsx`           → ContentHero + status CTA + agenda timeline + speakers + always-on registration
+- `course/IndiaCourseClient.tsx`              → ContentHero + numbered modules + prerequisites + always-on registration
+- `class-event/IndiaClassEventClient.tsx`    → ContentHero + seats-remaining bar + instructor cards + register CTA
+
+**Group D — reference (session 5e):**
+- `team-member/IndiaTeamMemberClient.tsx`    → split portrait/intro profile + bio + expertise + contact CTAs (no form)
+- `location/IndiaLocationClient.tsx`         → ContentHero + address/hours 2-col + services cards + map placeholder
+
+**Shared (`templates-india/_shared/`):**
+- `helpers.ts` — sanityImageUrl, SAMPLE_LEAD_FORM (TBD-verify, hardcoded), readIntent
+- `IndiaFAQ.tsx` — FAQ accordion per §7 re-skin
+
+Routes: 12 total under `/india/*` (Group A `[slug]` patterns; ClassEvent uses doc `_id` as `[slug]` because schema lacks a slug field). Known gaps and TBD-verifies tracked in [docs/india-cleanup-queue.md](./india-cleanup-queue.md).
 
 ### Navigation (`src/components/nav/`)
 - `SimpleNav.tsx` — minimal black bar; logo + 4 menu items + red "Get a Quote" CTA
