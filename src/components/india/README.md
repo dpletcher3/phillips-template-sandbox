@@ -4,6 +4,10 @@ The **india family** is the lead-generation aesthetic of the sandbox — a sales
 
 **Canonical spec:** [docs/india-design-system.md](../../../docs/india-design-system.md). When this README and the spec diverge, the spec wins.
 
+## Cleanup queue
+
+Known gaps, schema additions, projection updates, and stylistic deltas vs reference are tracked in [docs/india-cleanup-queue.md](../../../docs/india-cleanup-queue.md). Items get addressed in a dedicated cleanup pass after the full 12-page-type family ships.
+
 ## Files in this folder (as of session 5c)
 
 ```
@@ -30,7 +34,7 @@ src/components/india/
 └── IndiaRepeatableLeadForm.tsx     ← (5c) mid-page form repeat; inline or card variant; placement-aware padding/background
 ```
 
-**Not yet built (session 5d+):** Real india page-type clients (`IndiaBrandClient`, `IndiaSolutionClient`, etc.) consuming the composites above, plus the `/india/*` routes. See [docs/india-design-system.md §8](../../../docs/india-design-system.md) for the page-type × component matrix.
+**Where page-type Clients live:** Real india page-type Clients (`IndiaBrandClient`, `IndiaSolutionClient`, `IndiaCaseStudyClient`, etc.) live under [src/components/templates-india/](../templates-india/), NOT this folder. This folder (`src/components/india/`) is for family-shared atoms, simple components, and composites — the visual-language primitives. The `templates-india/` folder is for page-type Clients that compose those primitives into full pages. Group A Clients shipped in session 5d; Group B/C/D Clients shipped in session 5e. See [docs/india-design-system.md §8](../../../docs/india-design-system.md) for the page-type × component matrix.
 
 ## Conventions
 

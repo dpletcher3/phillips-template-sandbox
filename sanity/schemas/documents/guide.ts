@@ -36,7 +36,7 @@ export default defineType({
       description: 'Editorial callouts (notes, tips, warnings). Migrated from the previous inline { label, body: text } shape. See india design system §5.4.',
       validation: Rule => Rule.custom(callouts => {
         if (!callouts || (Array.isArray(callouts) && callouts.length === 0)) return true
-        return 'Guide page templates currently read callouts in legacy shape; new authored callouts will not render correctly. See NOTES.md.'
+        return 'Callouts authored here render correctly in the india family Guide template. Other families (Simple, EC, Appealing, Branded) still read the legacy shape and will not render these correctly until their Guide Clients are adapted. See docs/india-cleanup-queue.md §7.'
       }).warning(),
     }),
     defineField({ name: 'seo',       title: 'SEO',        type: 'seoBlock' }),

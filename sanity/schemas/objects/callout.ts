@@ -4,7 +4,7 @@ export default defineType({
   name: 'callout',
   title: 'Callout',
   type: 'object',
-  description: "Editorial callout block. ⚠️ Guide page templates currently read this in legacy shape — do NOT add callouts to Guide documents until the Guide client sites are adapted (see NOTES.md). Safe to use on Brand and Solution.",
+  description: "Editorial callout block. Renders in india family Brand, Solution, and Guide templates. Other template families (Simple, EC, Appealing, Branded) read legacy shapes and will not render new callouts until adapted — see docs/india-cleanup-queue.md §7.",
   fields: [
     defineField({
       name: 'type',
