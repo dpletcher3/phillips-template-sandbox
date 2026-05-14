@@ -74,6 +74,16 @@ const STRONG_LITE_TEMPLATES = [
   { name: 'Persona',        href: '/strong-lite/persona/manufacturer',           desc: 'Dark hero · light filter tabs + cards',                      theme: 'Filter Lite' },
 ]
 
+const INDIA_TEMPLATES = [
+  { name: 'Brand',         href: '/india/brand/haas',                   desc: 'Brand deep-dive — hero with right-rail form · alternating brand-portfolio rows · ProTips · FAQ',  theme: 'Hot Lead-Gen' },
+  { name: 'Solution',      href: '/india/solution/vertical-milling',    desc: 'Solution directory — hero+form · 3-row brand portfolio · industrial applications · FAQ',         theme: 'Directory Funnel' },
+  { name: 'Product Lines', href: '/india/product-lines/haas',           desc: 'Single-product spotlight — hero · product + key specs · advantages · parts + applications grids', theme: 'Spotlight Sell' },
+  { name: 'Persona',       href: '/india/persona/manufacturer',         desc: 'Vertical-market — hero · GlasseyTabs · logo trust-bar · dark-card grid · FAQ',                   theme: 'Vertical Market' },
+  // 12 page types pending for india family — Group A (4) shipped in session 5d.
+  // Group B/C/D (Case Study, Post, Guide, Webinar, Course, ClassEvent,
+  // TeamMember, Location) land in session 5e+.
+]
+
 const BRANDED_TEMPLATES = [
   { name: 'Home',           href: '/branded',                                  desc: 'Singleton home — additive hybrid, innovation grid, machinist app, photo strip',     theme: 'Editorial Brand' },
   { name: 'Brand',          href: '/branded/brand/haas',                       desc: 'Brand detail — dark hero · Inspired card · product lines · stats · case studies',    theme: 'Frosted Hero' },
@@ -98,6 +108,10 @@ const STRONG_LITE_BG = '#F2F4F6'
 // already in `BrandStripe` without competing with the red used heavily in
 // the family's hero treatments.
 const BRANDED_GOLD = '#F68B33'
+// India family badge color — Phillips Blue, the family's signature "glass /
+// form" color per docs/india-design-system.md §2. Distinct from red/maroon/
+// gold and visually reads as the "lead-gen" identity of the family.
+const INDIA_BLUE = '#00AEEF'
 
 const TAB_CONFIG = {
   ec:            { label: 'EYE CATCHING', underline: RED,           badge: RED,             themeColor: RED,                    hoverBorder: 'rgba(249,66,58,.35)' },
@@ -106,6 +120,7 @@ const TAB_CONFIG = {
   strong:        { label: 'STRONG',       underline: STRONG_BG,     badge: STRONG_BG,       themeColor: '#00D4FF',              hoverBorder: 'rgba(0,212,255,.3)' },
   'strong-lite': { label: 'STRONG-LITE',  underline: RED,           badge: STRONG_LITE_BG,  themeColor: '#F9423A',              hoverBorder: 'rgba(249,66,58,.25)' },
   branded:       { label: 'BRANDED',      underline: BRANDED_GOLD,  badge: BRANDED_GOLD,    themeColor: BRANDED_GOLD,           hoverBorder: 'rgba(246,139,51,.45)' },
+  india:         { label: 'INDIA',        underline: INDIA_BLUE,    badge: INDIA_BLUE,      themeColor: INDIA_BLUE,             hoverBorder: 'rgba(0,174,239,.40)' },
 } as const
 
 type TabKey = keyof typeof TAB_CONFIG
@@ -117,6 +132,7 @@ const TEMPLATE_MAP: Record<TabKey, typeof EC_TEMPLATES> = {
   strong: STRONG_TEMPLATES,
   'strong-lite': STRONG_LITE_TEMPLATES,
   branded: BRANDED_TEMPLATES,
+  india: INDIA_TEMPLATES,
 }
 
 export default function TemplatesGrid() {
@@ -182,6 +198,13 @@ export default function TemplatesGrid() {
               fontFamily: '"Barlow Condensed", sans-serif',
             }}>
               Branded
+            </span>
+            <span style={{
+              fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              padding: '5px 12px', borderRadius: '3px', background: INDIA_BLUE, color: '#fff',
+              fontFamily: '"Barlow Condensed", sans-serif',
+            }}>
+              India
             </span>
           </div>
         </div>
@@ -424,6 +447,13 @@ export default function TemplatesGrid() {
               }}>
                 Branded →
               </a>
+              <a href="/india/persona/manufacturer" style={{
+                fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+                color: '#fff', textDecoration: 'none',
+                padding: '8px 16px', borderRadius: '4px', background: INDIA_BLUE,
+              }}>
+                India →
+              </a>
             </div>
           </div>
         </div>
@@ -449,8 +479,9 @@ export default function TemplatesGrid() {
               <code style={{ color: 'rgba(255,255,255,.6)', fontSize: '11px' }}>/simple/brand/haas</code>,{' '}
               <code style={{ color: '#00D4FF', fontSize: '11px' }}>/strong/brand/haas</code>,{' '}
               <code style={{ color: RED, fontSize: '11px' }}>/strong-lite/brand/haas</code>, and{' '}
-              <code style={{ color: BRANDED_GOLD, fontSize: '11px' }}>/branded/brand/haas</code> in
-              separate tabs to compare the same Sanity content across all six design variants.
+              <code style={{ color: BRANDED_GOLD, fontSize: '11px' }}>/branded/brand/haas</code>, and{' '}
+              <code style={{ color: INDIA_BLUE, fontSize: '11px' }}>/india/brand/haas</code> in
+              separate tabs to compare the same Sanity content across all seven design variants.
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
@@ -494,6 +525,13 @@ export default function TemplatesGrid() {
             }}>
               Branded
             </a>
+            <a href="/india/brand/haas" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase',
+              color: '#fff', textDecoration: 'none', padding: '10px 18px', borderRadius: '4px',
+              background: INDIA_BLUE,
+            }}>
+              India
+            </a>
           </div>
         </div>
       </section>
@@ -511,7 +549,7 @@ export default function TemplatesGrid() {
             Edit content in Sanity Studio →
           </a>
           <p style={{ color: 'rgba(255,255,255,.25)', fontSize: '11px', margin: 0, textAlign: 'right', maxWidth: '480px' }}>
-            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, Strong, Strong-Lite, and Branded simultaneously.
+            All templates share the same Sanity dataset. Changes in Studio appear on EyeCatching, Appealing, Simple, Strong, Strong-Lite, Branded, and India simultaneously.
           </p>
         </div>
       </footer>

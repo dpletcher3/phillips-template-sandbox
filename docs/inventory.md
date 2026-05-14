@@ -63,6 +63,8 @@ Every family covers the same 12 page types: **Brand, Solution, Product Lines, Ca
 | **Appealing** | `/appealing/*/[slug]` | Rich, animated, interactive (gradients, 3D cards, timelines, flip cards, carousels) | Sanity |
 | **Simple** | `/simple/*/[slug]` | Clean, minimal, light-themed corporate/docs | Sanity |
 | **Strong** | `/strong/*` | Dark HUD/industrial, monospace HUD labels | Sanity |
+| **Branded** | `/branded/*/[slug]` | Hybrid Montserrat+Barlow Condensed, frosted hero, top-edge accents | Sanity |
+| **India** (Group A, session 5d) | `/india/*/[slug]` | Lead-gen / sales-document feel: hero with right-rail form, alternating brand-portfolio rows, intent-driven form repeats. 4 of 12 page types shipped so far. | Sanity |
 
 **Strong has extra showcase routes**: `/strong/`, `/strong/catalog`, `/strong/class-event`, `/strong/product-line`.
 
@@ -77,7 +79,23 @@ Total: **48 template variants** (12 page types × 4 families) plus EyeCatching v
 - `PortableText.tsx` (added session 5a) — shared Portable Text renderer wrapping `@portabletext/react`; merges a passed `components` map over project defaults; consumed by family-specific overrides
 
 ### India family (`src/components/india/`) — added session 5a
-- `portableText.ts` — india-specific `PortableTextComponents` map; currently overrides only `listItem.bullet` with the red-tick treatment from design system §3 / §5.4. Other india primitives (Hero, Tabs, etc.) land in session 5b.
+- `portableText.ts` — india-specific `PortableTextComponents` map; overrides `block.h2/h3/normal`, `list.bullet`, `listItem.bullet` (with red-tick), `marks.strong/em/link`, `types.image`. Consumers pass it explicitly to `<PortableText>` at the call site.
+- `types.ts` — shared TS shapes (LeadForm, PhotoTab, Callout) mirroring the 5a Sanity object schemas.
+- `atoms/` — IndiaH2, IndiaCtaButton, IndiaGlassCard, IndiaCaptionPill (session 5b).
+- 4 simple components: IndiaSectionBreak, IndiaTickCheckList, IndiaLogoCarousel, IndiaPhotoGrid (session 5b).
+- 6 composite components: IndiaHeroWithForm, IndiaPortfolioRow, IndiaProTipsCallout, IndiaGlasseyTabs, IndiaDarkCategoryCard, IndiaRepeatableLeadForm (session 5c).
+
+### India family page-type Clients (`src/components/templates-india/`) — added session 5d
+Group A (4 of 12 page types) shipped this session, anchored to the four reference pages captured in session 3:
+- `brand/IndiaBrandClient.tsx`               → 5-axis-machining (deep-dive: 5-row portfolio + ProTips)
+- `solution/IndiaSolutionClient.tsx`         → metal-forming (directory: 3-row portfolio + FAQ)
+- `product-lines/IndiaProductLinesClient.tsx` → fiber-laser-cutting (single-product spotlight + advantages)
+- `persona/IndiaPersonaClient.tsx`            → medical-industry (vertical market: GlasseyTabs + DarkCategoryCard + logo carousel)
+- `_shared/helpers.ts`                       → sanityImageUrl, SAMPLE_LEAD_FORM (TBD-verify, hardcoded), readIntent
+- `_shared/IndiaFAQ.tsx`                     → FAQ accordion per §7 re-skin
+
+Routes: `/india/brand/[slug]`, `/india/solution/[slug]`, `/india/product-lines/[slug]`, `/india/persona/[persona]`.
+Group B/C/D (8 remaining page types: Case Study, Post, Guide, Webinar, Course, ClassEvent, TeamMember, Location) ship in session 5e+.
 
 ### Navigation (`src/components/nav/`)
 - `SimpleNav.tsx` — minimal black bar; logo + 4 menu items + red "Get a Quote" CTA
